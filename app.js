@@ -63,52 +63,44 @@ var initDemo = function() {
         return;
     }
 
-    // Create buffer
-    var triangleVertices = [
-            // X, Y, Z           R,   G,   B
-            0.0, 0.5, 0.0,       1.0, 1.0, 0.0,
-            -0.5, -0.5, 0.0,     0.7, 0.0, 1.0,
-            0.5, -0.5, 0.0,      0.1, 1.0, 0.6
-    ];
-
     var cubeVertices = [
-        // X     Y     Z          U  V
+        // X     Y     Z       U  V
 
         // Top
-           -1.0,  1.0, -1.0,      0, 0,
-           -1.0,  1.0,  1.0,      0, 1,
-            1.0,  1.0,  1.0,      1, 1,
-            1.0,  1.0, -1.0,      1, 0,
+           -1.0,  1.0, -1.0,   0, 0,
+           -1.0,  1.0,  1.0,   0, 1,
+            1.0,  1.0,  1.0,   1, 1,
+            1.0,  1.0, -1.0,   1, 0,
 
         // Left
-           -1.0,  1.0,  1.0,      0, 0,
-           -1.0, -1.0,  1.0,      1, 0,
-           -1.0, -1.0, -1.0,      1, 1,
-           -1.0,  1.0, -1.0,      0, 1,
+           -1.0,  1.0,  1.0,   0, 0,
+           -1.0, -1.0,  1.0,   1, 0,
+           -1.0, -1.0, -1.0,   1, 1,
+           -1.0,  1.0, -1.0,   0, 1,
 
         // Right
-            1.0,  1.0,  1.0,      1, 1,
-            1.0, -1.0,  1.0,      0, 1,
-            1.0, -1.0, -1.0,      0, 0,
-            1.0,  1.0, -1.0,      1, 0,
+            1.0,  1.0,  1.0,   1, 1,
+            1.0, -1.0,  1.0,   0, 1,
+            1.0, -1.0, -1.0,   0, 0,
+            1.0,  1.0, -1.0,   1, 0,
 
         // Front
-            1.0,  1.0,  1.0,      1, 1,
-            1.0, -1.0,  1.0,      1, 0,
-           -1.0, -1.0,  1.0,      0, 0,
-           -1.0,  1.0,  1.0,      0, 1,
+            1.0,  1.0,  1.0,   1, 1,
+            1.0, -1.0,  1.0,   1, 0,
+           -1.0, -1.0,  1.0,   0, 0,
+           -1.0,  1.0,  1.0,   0, 1,
 
         // Back
-            1.0,  1.0, -1.0,      0, 0,
-            1.0, -1.0, -1.0,      0, 1,
-           -1.0, -1.0, -1.0,      1, 1,
-           -1.0,  1.0, -1.0,      1, 0,
+            1.0,  1.0, -1.0,   0, 0,
+            1.0, -1.0, -1.0,   0, 1,
+           -1.0, -1.0, -1.0,   1, 1,
+           -1.0,  1.0, -1.0,   1, 0,
 
         // Bottom
-           -1.0, -1.0, -1.0,      1, 1,
-           -1.0, -1.0,  1.0,      1, 0,
-            1.0, -1.0,  1.0,      0, 0,
-            1.0, -1.0, -1.0,      0, 1,
+           -1.0, -1.0, -1.0,   1, 1,
+           -1.0, -1.0,  1.0,   1, 0,
+            1.0, -1.0,  1.0,   0, 0,
+            1.0, -1.0, -1.0,   0, 1,
     ]
 
     var cubeIndices = [
@@ -147,21 +139,21 @@ var initDemo = function() {
 
     var positionAttributeLocation = gl.getAttribLocation(program, "vertPosition");
     gl.vertexAttribPointer(
-        positionAttributeLocation, // Attribute location
-        3, // Number of elements per attribute
-        gl.FLOAT, // Type of elements
-        gl.FALSE,
+        positionAttributeLocation,          // Attribute location
+        3,                                  // Number of elements per attribute
+        gl.FLOAT,                           // Type of elements
+        gl.FALSE,                           // Some OpenGL thing
         5 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
-        0 // Offset from the beginning of a single vertex to this attribute
+        0                                   // Offset from the beginning of a single vertex to this attribute
     );
     var texCoordAttributeLocation = gl.getAttribLocation(program, "vertTexCoord");
     gl.vertexAttribPointer(
-        texCoordAttributeLocation, // Attribute location
-        2, // Number of elements per attribute,
-        gl.FLOAT, // Type of elements
-        gl.FALSE,
+        texCoordAttributeLocation,          // Attribute location
+        2,                                  // Number of elements per attribute,
+        gl.FLOAT,                           // Type of elements
+        gl.FALSE,                           // Some OpenGL thing
         5 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
-        3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
+        3 * Float32Array.BYTES_PER_ELEMENT  // Offset from the beginning of a single vertex to this attribute
     );
 
     gl.enableVertexAttribArray(positionAttributeLocation);
@@ -215,6 +207,8 @@ var initDemo = function() {
     var loop = function() {
         // One full rotation every six seconds
         angle = performance.now() / 1000 / 6 * 2 * Math.PI;
+
+        // Set the cube spinning on the X and Y axes
         mat4.rotate(yRotationMatrix, identityMatrix, angle, [0, 1, 0]);
         mat4.rotate(xRotationMatrix, identityMatrix, angle / 4, [1, 0, 0]);
         mat4.mul(worldMatrix, yRotationMatrix, xRotationMatrix);
@@ -231,8 +225,5 @@ var initDemo = function() {
         requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);
-
-
-
 
 };
