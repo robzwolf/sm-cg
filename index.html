@@ -7,6 +7,9 @@
                 margin: 0;
                 overflow: hidden;
             }
+            img {
+                display: none;
+            }
         </style>
     </head>
     <body onload="initDemo();">
@@ -15,6 +18,7 @@
         </canvas>
         <br />
         <i>Demo is above this text.</i>
+        <img src="crate-front.png" id="crate" />
         <script src="gl-matrix.js"></script>
         <script type="text/javascript" src="vertexShaderText.js"></script>
         <script type="text/javascript" src="fragmentShaderText.js"></script>
