@@ -190,8 +190,8 @@ var initDemo = function() {
     var viewMatrix = new Float32Array(16);
     var projMatrix = new Float32Array(16);
     mat4.identity(worldMatrix);
-    mat4.lookAt(viewMatrix, [0, 0, -8], [0, 0, 0], [0, 1, 0]);
-    verticalFOV = 45;
+    mat4.lookAt(viewMatrix, [0, 0, -4], [0, 0, 0], [0, 1, 0]);
+    verticalFOV = 60;
     mat4.perspective(projMatrix, glMatrix.toRadian(verticalFOV), canvas.width / canvas.height, 0.1, 1000.0);
 
     gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, worldMatrix);
