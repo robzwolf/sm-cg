@@ -72,43 +72,43 @@ var initDemo = function() {
     ];
 
     var cubeVertices = [
-        // X     Y     Z          R     G     B
+        // X     Y     Z          U  V
 
         // Top
-           -1.0,  1.0, -1.0,      0.5,  0.5,  0.5,
-           -1.0,  1.0,  1.0,      0.5,  0.5,  0.5,
-            1.0,  1.0,  1.0,      0.5,  0.5,  0.5,
-            1.0,  1.0, -1.0,      0.5,  0.5,  0.5,
+           -1.0,  1.0, -1.0,      0, 0,
+           -1.0,  1.0,  1.0,      0, 1,
+            1.0,  1.0,  1.0,      1, 1,
+            1.0,  1.0, -1.0,      1, 0,
 
         // Left
-           -1.0,  1.0,  1.0,      0.75, 0.25, 0.5,
-           -1.0, -1.0,  1.0,      0.75, 0.25, 0.5,
-           -1.0, -1.0, -1.0,      0.75, 0.25, 0.5,
-           -1.0,  1.0, -1.0,      0.75, 0.25, 0.5,
+           -1.0,  1.0,  1.0,      0, 0,
+           -1.0, -1.0,  1.0,      1, 0,
+           -1.0, -1.0, -1.0,      1, 1,
+           -1.0,  1.0, -1.0,      0, 1,
 
         // Right
-            1.0,  1.0,  1.0,      0.25, 0.25, 0.75,
-            1.0, -1.0,  1.0,      0.25, 0.25, 0.75,
-            1.0, -1.0, -1.0,      0.25, 0.25, 0.75,
-            1.0,  1.0, -1.0,      0.25, 0.25, 0.75,
+            1.0,  1.0,  1.0,      1, 1,
+            1.0, -1.0,  1.0,      0, 1,
+            1.0, -1.0, -1.0,      0, 0,
+            1.0,  1.0, -1.0,      1, 0,
 
         // Front
-            1.0,  1.0,  1.0,      1.0,  0.0,  0.15,
-            1.0, -1.0,  1.0,      1.0,  0.0,  0.15,
-           -1.0, -1.0,  1.0,      1.0,  0.0,  0.15,
-           -1.0,  1.0,  1.0,      1.0,  0.0,  0.15,
+            1.0,  1.0,  1.0,      1, 1,
+            1.0, -1.0,  1.0,      1, 0,
+           -1.0, -1.0,  1.0,      0, 0,
+           -1.0,  1.0,  1.0,      0, 1,
 
         // Back
-            1.0,  1.0, -1.0,      0.0,  1.0,  0.15,
-            1.0, -1.0, -1.0,      0.0,  1.0,  0.15,
-           -1.0, -1.0, -1.0,      0.0,  1.0,  0.15,
-           -1.0,  1.0, -1.0,      0.0,  1.0,  0.15,
+            1.0,  1.0, -1.0,      0, 0,
+            1.0, -1.0, -1.0,      0, 1,
+           -1.0, -1.0, -1.0,      1, 1,
+           -1.0,  1.0, -1.0,      1, 0,
 
         // Bottom
-           -1.0, -1.0, -1.0,      0.5,  0.5,  1.0,
-           -1.0, -1.0,  1.0,      0.5,  0.5,  1.0,
-            1.0, -1.0,  1.0,      0.5,  0.5,  1.0,
-            1.0, -1.0, -1.0,      0.5,  0.5,  1.0
+           -1.0, -1.0, -1.0,      1, 1,
+           -1.0, -1.0,  1.0,      1, 0,
+            1.0, -1.0,  1.0,      0, 0,
+            1.0, -1.0, -1.0,      0, 1,
     ]
 
     var cubeIndices = [
@@ -151,21 +151,39 @@ var initDemo = function() {
         3, // Number of elements per attribute
         gl.FLOAT, // Type of elements
         gl.FALSE,
-        6 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
+        5 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
         0 // Offset from the beginning of a single vertex to this attribute
     );
-    var colorAttributeLocation = gl.getAttribLocation(program, "vertColor");
+    var texCoordAttributeLocation = gl.getAttribLocation(program, "vertTexCoord");
     gl.vertexAttribPointer(
-        colorAttributeLocation, // Attribute location
-        3, // Number of elements per attribute,
+        texCoordAttributeLocation, // Attribute location
+        2, // Number of elements per attribute,
         gl.FLOAT, // Type of elements
         gl.FALSE,
-        6 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
+        5 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
         3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
     );
 
     gl.enableVertexAttribArray(positionAttributeLocation);
-    gl.enableVertexAttribArray(colorAttributeLocation);
+    gl.enableVertexAttribArray(texCoordAttributeLocation);
+
+    // Create texture
+    var cubeTexture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, cubeTexture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+
+    gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        document.getElementById("crate"));
+
+    gl.bindTexture(gl.TEXTURE_2D, null);
 
     // Tell OpenGL state machine which program should be active
     gl.useProgram(program);
@@ -202,6 +220,9 @@ var initDemo = function() {
 
         gl.clearColor(.75, .85, .8, 1.0);
         gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT);
+
+        gl.bindTexture(gl.TEXTURE_2D, cubeTexture);
+        gl.activeTexture(gl.TEXTURE0);
 
         gl.drawElements(gl.TRIANGLES, cubeIndices.length, gl.UNSIGNED_SHORT, 0);
 
