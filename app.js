@@ -163,7 +163,7 @@ var initDemo = function() {
         5 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
         3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
     );
-    
+
     gl.enableVertexAttribArray(positionAttributeLocation);
     gl.enableVertexAttribArray(texCoordAttributeLocation);
 
@@ -235,4 +235,4 @@ var initDemo = function() {
 
 
 
-}
+};
