@@ -163,7 +163,7 @@ var initDemo = function() {
         5 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
         3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
     );
-
+    
     gl.enableVertexAttribArray(positionAttributeLocation);
     gl.enableVertexAttribArray(texCoordAttributeLocation);
 
@@ -175,13 +175,15 @@ var initDemo = function() {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
+    textureElem = document.getElementById("grunge-01");
+
     gl.texImage2D(
         gl.TEXTURE_2D,
         0,
         gl.RGBA,
         gl.RGBA,
         gl.UNSIGNED_BYTE,
-        document.getElementById("crate"));
+        textureElem);
 
     gl.bindTexture(gl.TEXTURE_2D, null);
 
