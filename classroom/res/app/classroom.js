@@ -399,7 +399,11 @@ CG.changeCameraView = function(e) {
 
 // Updates the camera's position + orientation
 CG.updateCameraDirection = function() {
-    CG.cameraOrientation = [Math.cos(CG.yAxisRot)*Math.sin(CG.xAxisRot), Math.cos(CG.xAxisRot), Math.sin(CG.yAxisRot)*Math.sin(CG.xAxisRot)];
+    CG.cameraOrientation = [
+        Math.cos(CG.yAxisRot)*Math.sin(CG.xAxisRot),
+        Math.cos(CG.xAxisRot),
+        Math.sin(CG.yAxisRot)*Math.sin(CG.xAxisRot)
+    ];
 }
 
 // /*========================= Audio ========================= */
@@ -563,23 +567,23 @@ CG.blindSize = 20;
 CG.blindMove = setInterval(function () {CG.closeBlinds()}, 50);
 
 CG.openBlinds = function() {
-    CG.blindSize -=0.1
+    CG.blindSize -= 0.1
     if(CG.blindSize < 0.1) {
-        CG.blindSize = 0
+        CG.blindSize = 0;
         clearInterval(CG.blindMove);
     }
-    CG.ambLight +=0.003
+    CG.ambLight += 0.003
     if (CG.ambLight >= 0.4) {
         CG.ambLight = 0.4;
     }
 }
 CG.closeBlinds = function() {
-    CG.blindSize +=0.1
+    CG.blindSize += 0.1;
     if(CG.blindSize > 20){
         CG.blindSize = 20
         clearInterval(CG.blindMove);
     };
-    CG.ambLight -=0.003
+    CG.ambLight -= 0.003;
     if (CG.ambLight <= 0){
         CG.ambLight = 0;
     };
@@ -610,20 +614,21 @@ CG.closeBlinds = function() {
 
 CG.setupLights = function() {
     CG.yAxisRot += 0.4;
-    setTimeout(function() { CG.toggleSpecificLights([ 1,  2,  3,  4]); }, 5000);
-    setTimeout(function() { CG.toggleSpecificLights([ 5,  6,  7,  8]); }, 4000);
-    setTimeout(function() { CG.toggleSpecificLights([ 9, 10, 11, 12]); }, 3000);
-    setTimeout(function() { CG.toggleSpecificLights([13, 14, 15, 16]); }, 2000);
-    setTimeout(function() { CG.toggleSpecificLights([17, 18, 19, 20]); }, 1000);
+    setTimeout(function() { CG.toggleSpecificLights([ 1,  2,  3,  4]); }, 1000);
+    setTimeout(function() { CG.toggleSpecificLights([ 5,  6,  7,  8]); },  800);
+    setTimeout(function() { CG.toggleSpecificLights([ 9, 10, 11, 12]); },  600);
+    setTimeout(function() { CG.toggleSpecificLights([13, 14, 15, 16]); },  400);
+    setTimeout(function() { CG.toggleSpecificLights([17, 18, 19, 20]); },  200);
 }
 
 // Disco Light functionality
 CG.discoLights = function() {
     console.log("Disco lights");
-    CG.redMod =  Math.random() * (2 - 0) - 1;
-    CG.greenMod =  Math.random() * (2 - 0) - 1;
-    CG.blueMod =  Math.random() * (2 - 0) - 1;
+    CG.redMod   =  CG.randomIntFromInterval(-1, 1);//Math.random() * (2 - 0) - 1;
+    CG.greenMod =  CG.randomIntFromInterval(-1, 1);//Math.random() * (2 - 0) - 1;
+    CG.blueMod  =  CG.randomIntFromInterval(-1, 1);//Math.random() * (2 - 0) - 1;
 }
+
 CG.normalLights = function() {
     console.log("norm");
     CG.redMod   =  0.05;
@@ -667,7 +672,7 @@ CG.normalLights = function() {
 
 /*========================= Cube handling (coloured and textured) ========================= */
 CG.makeCube = function(gl) {
-    // Coordinates（Cube which length of one side is 1 with the origin on the center of the bottom)
+    // Coordinates (Cube which length of one side is 1 with the origin on the center of the bottom)
     var c = {};
     var vertices = new Float32Array([
          0.5,  1.0,  0.5,    -0.5,  1.0,  0.5,    -0.5,  0.0,  0.5,     0.5,  0.0,  0.5,  // V0 V1 V2 V3 Front
@@ -751,13 +756,13 @@ CG.texturedCube = function(gl, imagePath) {
         20, 21, 22,   20, 22, 23     // Back
     ]);
 
-    t.vertexBuffer = CG.initArrayBufferForLaterUse(gl, vertices, 3, gl.FLOAT);
-    t.normalBuffer = CG.initArrayBufferForLaterUse(gl, normals, 3, gl.FLOAT);
+    t.vertexBuffer   = CG.initArrayBufferForLaterUse(gl, vertices, 3, gl.FLOAT);
+    t.normalBuffer   = CG.initArrayBufferForLaterUse(gl, normals, 3, gl.FLOAT);
     t.texCoordBuffer = CG.initArrayBufferForLaterUse(gl, texCoords, 2, gl.FLOAT);
-    t.indexBuffer = CG.initElementArrayBufferForLaterUse(gl, indices, gl.UNSIGNED_BYTE);
-    t.texture = CG.initTextures(gl, imagePath)
-    t.numIndices = indices.length;
-    t.isTextured = true;
+    t.indexBuffer    = CG.initElementArrayBufferForLaterUse(gl, indices, gl.UNSIGNED_BYTE);
+    t.texture        = CG.initTextures(gl, imagePath)
+    t.numIndices     = indices.length;
+    t.isTextured     = true;
 
     if (!t.vertexBuffer || !t.texCoordBuffer || !t.indexBuffer || !t.normalBuffer) {
         return null;
@@ -1185,4 +1190,9 @@ CG.initTextures = function(gl, imagePath) {
     // Tell the browser to load an Image
     img.src = imagePath;
     return tex;
+}
+
+CG.randomIntFromInterval = function(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
 }
