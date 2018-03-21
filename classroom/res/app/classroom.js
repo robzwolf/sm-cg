@@ -723,9 +723,9 @@ CG.makeCube = function(gl) {
         16, 17, 18,   16, 18, 19,    // Down
         20, 21, 22,   20, 22, 23     // Back
     ]);
-    c.vertexBuffer = initArrayBufferForLaterUse(gl, vertices, 3, gl.FLOAT);
-    c.normalBuffer = initArrayBufferForLaterUse(gl, normals, 3, gl.FLOAT);
-    c.indexBuffer = initElementArrayBufferForLaterUse(gl, indices, gl.UNSIGNED_BYTE);
+    c.vertexBuffer = CG.initArrayBufferForLaterUse(gl, vertices, 3, gl.FLOAT);
+    c.normalBuffer = CG.initArrayBufferForLaterUse(gl, normals, 3, gl.FLOAT);
+    c.indexBuffer = CG.initElementArrayBufferForLaterUse(gl, indices, gl.UNSIGNED_BYTE);
     c.numIndices = indices.length;
     c.isTextured = false;
 
@@ -777,11 +777,11 @@ CG.texturedCube = function(gl, imagePath) {
         20, 21, 22,   20, 22, 23     // Back
     ]);
 
-    t.vertexBuffer = initArrayBufferForLaterUse(gl, vertices, 3, gl.FLOAT);
-    t.normalBuffer = initArrayBufferForLaterUse(gl, normals, 3, gl.FLOAT);
-    t.texCoordBuffer = initArrayBufferForLaterUse(gl, texCoords, 2, gl.FLOAT);
-    t.indexBuffer = initElementArrayBufferForLaterUse(gl, indices, gl.UNSIGNED_BYTE);
-    t.texture = initTextures(gl, imagePath)
+    t.vertexBuffer = CG.initArrayBufferForLaterUse(gl, vertices, 3, gl.FLOAT);
+    t.normalBuffer = CG.initArrayBufferForLaterUse(gl, normals, 3, gl.FLOAT);
+    t.texCoordBuffer = CG.initArrayBufferForLaterUse(gl, texCoords, 2, gl.FLOAT);
+    t.indexBuffer = CG.initElementArrayBufferForLaterUse(gl, indices, gl.UNSIGNED_BYTE);
+    t.texture = CG.initTextures(gl, imagePath)
     t.numIndices = indices.length;
     t.isTextured = true;
 
@@ -1104,9 +1104,9 @@ CG.g_normalMatrix = new Matrix4();
 CG.drawBox = function(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     CG.pushMatrix(g_modelMatrix);   // Save the model matrix
     // console.log("g_MM is ", g_modelMatrix);
-    initAttributeVariable(gl, CG.a_Position, n.vertexBuffer);    // Vertex coordinates
+    CG.initAttributeVariable(gl, CG.a_Position, n.vertexBuffer);    // Vertex coordinates
     // console.log("n is ", n);
-    initAttributeVariable(gl, CG.a_Normal, n.normalBuffer);  // Texture coordinates
+    CG.initAttributeVariable(gl, CG.a_Normal, n.normalBuffer);  // Texture coordinates
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, n.indexBuffer);
     // Scale a cube and draw
     g_modelMatrix.scale(width, height, depth);
@@ -1125,7 +1125,7 @@ CG.drawBox = function(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, 
 
     if (n.isTextured != false){
         gl.uniform1i(CG.u_IsTexture, true);
-        initAttributeVariable(gl, CG.a_TexCoord, n.texCoordBuffer);
+        CG.initAttributeVariable(gl, CG.a_TexCoord, n.texCoordBuffer);
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, n.texture);
         gl.drawElements(gl.TRIANGLES, n.numIndices, n.indexBuffer.type, 0);
@@ -1137,7 +1137,7 @@ CG.drawBox = function(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, 
     g_modelMatrix = CG.popMatrix();   // Retrieve the model matrix
 }
 /*========================= Init Arrays ========================= */
-function initArrayBufferForLaterUse(gl, data, num, type) {
+CG.initArrayBufferForLaterUse = function(gl, data, num, type) {
     // Create a buffer object
     var buffer = gl.createBuffer();
     if (!buffer) {
@@ -1154,30 +1154,30 @@ function initArrayBufferForLaterUse(gl, data, num, type) {
     return buffer;
 }
 
-function initElementArrayBufferForLaterUse(gl, data, type) {
+CG.initElementArrayBufferForLaterUse = function(gl, data, type) {
     // Create a buffer object
-    var buffer = gl.createBuffer();
-    if (!buffer) {
-        console.error("Failed to create the buffer object");
+    var buf = gl.createBuffer();
+    if (!buf) {
+        console.error("Failed to create the buf object");
         return null;
     }
-    // Write date into the buffer object
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffer);
+    // Write date into the buf object
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buf);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, data, gl.STATIC_DRAW);
-    buffer.type = type;
+    buf.type = type;
 
-    return buffer;
+    return buf;
 }
 
-function initAttributeVariable(gl, a_attribute, buffer) {
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.vertexAttribPointer(a_attribute, buffer.num, buffer.type, false, 0, 0);
+CG.initAttributeVariable = function(gl, a_attribute, buf) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.vertexAttribPointer(a_attribute, buf.num, buf.type, false, 0, 0);
     gl.enableVertexAttribArray(a_attribute);
 }
 
-function initTextures(gl, imagePath) {
-    var texture = gl.createTexture();   // Create a texture object
-    if (!texture) {
+CG.initTextures = function(gl, imagePath) {
+    var tex = gl.createTexture();   // Create a tex object
+    if (!tex) {
         console.error("Failed to create the Texture object");
         return null;
     }
@@ -1185,30 +1185,30 @@ function initTextures(gl, imagePath) {
     //   console.error("Failed to get the storage location of CG.u_Sampler");
     //   return null;
     // }
-    var image = new Image();  // Create image object
-    if (!image) {
+    var img = new Image();  // Create img object
+    if (!img) {
         console.error("Failed to create the Image object");
         return null;
     }
-    // Register the event handler to be called when image loading is completed
-    image.onload = function() {
-        // Write image data to texture object
-        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);  // Flip the image Y coordinate
+    // Register the event handler to be called when img loading is completed
+    img.onload = function() {
+        // Write img data to tex object
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);  // Flip the img Y coordinate
         //gl.activeTexture(gl.TEXTURE0)
-        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.bindTexture(gl.TEXTURE_2D, tex);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
-        // Pass the texture unit 0 to CG.u_Sampler
+        // Pass the tex unit 0 to CG.u_Sampler
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
         gl.generateMipmap(gl.TEXTURE_2D);
         gl.uniform1i(CG.u_Sampler, 0);
-        gl.bindTexture(gl.TEXTURE_2D, null); // Unbind the texture object
+        gl.bindTexture(gl.TEXTURE_2D, null); // Unbind the tex object
     };
 
     // Tell the browser to load an Image
-    image.src = imagePath;
-    return texture;
+    img.src = imagePath;
+    return tex;
 }
