@@ -1,11 +1,11 @@
 // classroom.js
 
+window.canvas = document.getElementById("classroom");
+
+window.gl = canvas.getContext("webgl", false);
+
 function main() {
-    console.log("Doc ready");
-
-    window.canvas = document.getElementById("classroom");
-
-    window.gl = canvas.getContext("webgl");
+    console.log("main() called");
 
     if (!gl) {
         console.error("canvas WebGL context not found, falling back on experimental-webgl");
@@ -32,6 +32,7 @@ function main() {
         console.error("Failed to initialise shaders.");
         return;
     }
+    console.log("Initialised shaders");
 
     // Set the clear canvas colour, enable the depth test
     gl.clearColor(COLORS.sky[0], COLORS.sky[1], COLORS.sky[2], 0.7);
@@ -43,26 +44,26 @@ function main() {
     var u_NormalMatrix = gl.getUniformLocation(gl.program, "u_NormalMatrix");
 
     // Light colours
-    var u_LightColor   = get.getUniformLocation(gl.program, "u_LightColor");
-    var u_LightColor2  = get.getUniformLocation(gl.program, "u_LightColor2");
-    var u_LightColor3  = get.getUniformLocation(gl.program, "u_LightColor3");
-    var u_LightColor4  = get.getUniformLocation(gl.program, "u_LightColor4");
-    var u_LightColor5  = get.getUniformLocation(gl.program, "u_LightColor5");
-    var u_LightColor6  = get.getUniformLocation(gl.program, "u_LightColor6");
-    var u_LightColor7  = get.getUniformLocation(gl.program, "u_LightColor7");
-    var u_LightColor8  = get.getUniformLocation(gl.program, "u_LightColor8");
-    var u_LightColor9  = get.getUniformLocation(gl.program, "u_LightColor9");
-    var u_LightColor10 = get.getUniformLocation(gl.program, "u_LightColor10");
-    var u_LightColor11 = get.getUniformLocation(gl.program, "u_LightColor11");
-    var u_LightColor12 = get.getUniformLocation(gl.program, "u_LightColor12");
-    var u_LightColor13 = get.getUniformLocation(gl.program, "u_LightColor13");
-    var u_LightColor14 = get.getUniformLocation(gl.program, "u_LightColor14");
-    var u_LightColor15 = get.getUniformLocation(gl.program, "u_LightColor15");
-    var u_LightColor16 = get.getUniformLocation(gl.program, "u_LightColor16");
-    var u_LightColor17 = get.getUniformLocation(gl.program, "u_LightColor17");
-    var u_LightColor18 = get.getUniformLocation(gl.program, "u_LightColor18");
-    var u_LightColor19 = get.getUniformLocation(gl.program, "u_LightColor19");
-    var u_LightColor20 = get.getUniformLocation(gl.program, "u_LightColor20");
+    var u_LightColor   = gl.getUniformLocation(gl.program, "u_LightColor");
+    var u_LightColor2  = gl.getUniformLocation(gl.program, "u_LightColor2");
+    var u_LightColor3  = gl.getUniformLocation(gl.program, "u_LightColor3");
+    var u_LightColor4  = gl.getUniformLocation(gl.program, "u_LightColor4");
+    var u_LightColor5  = gl.getUniformLocation(gl.program, "u_LightColor5");
+    var u_LightColor6  = gl.getUniformLocation(gl.program, "u_LightColor6");
+    var u_LightColor7  = gl.getUniformLocation(gl.program, "u_LightColor7");
+    var u_LightColor8  = gl.getUniformLocation(gl.program, "u_LightColor8");
+    var u_LightColor9  = gl.getUniformLocation(gl.program, "u_LightColor9");
+    var u_LightColor10 = gl.getUniformLocation(gl.program, "u_LightColor10");
+    var u_LightColor11 = gl.getUniformLocation(gl.program, "u_LightColor11");
+    var u_LightColor12 = gl.getUniformLocation(gl.program, "u_LightColor12");
+    var u_LightColor13 = gl.getUniformLocation(gl.program, "u_LightColor13");
+    var u_LightColor14 = gl.getUniformLocation(gl.program, "u_LightColor14");
+    var u_LightColor15 = gl.getUniformLocation(gl.program, "u_LightColor15");
+    var u_LightColor16 = gl.getUniformLocation(gl.program, "u_LightColor16");
+    var u_LightColor17 = gl.getUniformLocation(gl.program, "u_LightColor17");
+    var u_LightColor18 = gl.getUniformLocation(gl.program, "u_LightColor18");
+    var u_LightColor19 = gl.getUniformLocation(gl.program, "u_LightColor19");
+    var u_LightColor20 = gl.getUniformLocation(gl.program, "u_LightColor20");
 
     // Light positions
     var u_LightPos   = gl.getUniformLocation(gl.program,  "u_LightPos");
@@ -93,14 +94,14 @@ function main() {
     a_Position  = gl.getAttribLocation(gl.program,  "a_Position");
     a_Normal    = gl.getAttribLocation(gl.program,  "a_Normal");
     a_TexCoord  = gl.getAttribLocation(gl.program,  "a_TexCoord");
-    u_Sampler   = gl.getAttribLocation(gl.program,  "u_Sampler");
-    u_scale     = gl.getAttribLocation(gl.program,  "u_scale");
+    u_Sampler   = gl.getUniformLocation(gl.program, "u_Sampler");
+    u_scale     = gl.getUniformLocation(gl.program, "u_scale");
 
     gl.uniform1i(u_isTexture, false);
     gl.uniform1f(u_scale, 1.0);
 
-    if (!u_ModelMatrix || !u_MvpMatrix || !u_NormalMatrix || !u_LightColour || !u_LightPos || !u_LightPos2
-        || !u_LightPos3 || !u_LightPos4 || !u_LightPos5 || !u_LightPos6 || !u_AmbientLight) {
+    if (!u_ModelMatrix || !u_MvpMatrix || !u_NormalMatrix || !u_LightColor || !u_LightPos || !u_LightPos2
+        || !u_LightPos3 || !u_LightPos4 || !u_LightPos5 || !u_LightPos6 || !u_LightPos7 || !u_AmbientLight) {
         console.error("Failed to get a storage location.");
         return;
     }
@@ -190,34 +191,34 @@ function main() {
     }
 
     // Set the light direction in the world co-ordinates
-    gl.uniform3f(u_LightPos,    -20, 45,  -15);
-    gl.uniform3f(u_LightPos2,   -20, 45,  -55);
-    gl.uniform3f(u_LightPos3,   -20, 45,  -95);
-    gl.uniform3f(u_LightPos4,   -20, 45, -135);
-    gl.uniform3f(u_LightPos5,   -60, 45,  -15);
-    gl.uniform3f(u_LightPos6,   -60, 45,  -55);
-    gl.uniform3f(u_LightPos7,   -60, 45,  -95);
-    gl.uniform3f(u_LightPos8,   -60, 45, -135);
-    gl.uniform3f(u_LightPos9,  -100, 45,  -15);
-    gl.uniform3f(u_LightPos10, -100, 45,  -55);
-    gl.uniform3f(u_LightPos11, -100, 45,  -95);
-    gl.uniform3f(u_LightPos12, -100, 45, -135);
-    gl.uniform3f(u_LightPos13, -140, 45,  -15);
-    gl.uniform3f(u_LightPos14, -140, 45,  -55);
-    gl.uniform3f(u_LightPos15, -140, 45,  -95);
-    gl.uniform3f(u_LightPos16, -140, 45, -135);
-    gl.uniform3f(u_LightPos17, -180, 45,  -15);
-    gl.uniform3f(u_LightPos18, -180, 45,  -55);
-    gl.uniform3f(u_LightPos19, -180, 45,  -95);
-    gl.uniform3f(u_LightPos20, -180, 45, -135);
+    gl.uniform3f(u_LightPos,    -20.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPos2,   -20.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPos3,   -20.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPos4,   -20.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPos5,   -60.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPos6,   -60.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPos7,   -60.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPos8,   -60.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPos9,  -100.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPos10, -100.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPos11, -100.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPos12, -100.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPos13, -140.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPos14, -140.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPos15, -140.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPos16, -140.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPos17, -180.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPos18, -180.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPos19, -180.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPos20, -180.0, 45.0, -135.0);
 
     // Set the ambient light level
     gl.uniform3f(u_AmbientLight, ambLight, ambLight, ambLight - 0.2);
 
     n = makeCube(gl);
-    texCube = texturedCube(gl, "textures/durham.png");
-    texCube2 = texturedCube(gl, "textures/board.png");
-    texCube3 = texturedCube(gl, "textures/slender.jpg");
+    texCube = texturedCube(gl, "res/tex/durham.png");
+    texCube2 = texturedCube(gl, "res/tex/board.png");
+    // texCube3 = texturedCube(gl, "res/tex/slender.jpg");
     if (n < 0) {
         console.error("Failed to set the vertex information.");
         return;
@@ -242,6 +243,7 @@ function main() {
     updateCanvas();
 
     function updateCanvas() {
+        // console.log("n in updateCanvas() is ", n);
         requestAnimFrame(updateCanvas);
         findFps();
 
@@ -264,13 +266,12 @@ function main() {
         draw(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
         checkKeys(keys);
-        // checkSlender();
     }
 
 }
 
 /* LIGHTING */
-// Colour variable definitions
+// Color variable definitions
 window.COLORS = {
     "green"     : [0.30, 0.80, 0.50],
     "greyGreen" : [0.23, 0.60, 0.40],
@@ -281,18 +282,15 @@ window.COLORS = {
     "purple"    : [0.60, 0.30, 0.60],
     "brown"     : [0.80, 0.60, 0.43],
     "lightBrown": [0.66, 0.50, 0.30],
-    "sky"       : [0.40, 0.90, 0.95]
+    "sky"       : [0.40, 0.90, 0.95],
+    "white"     : [1.00, 1.00, 1.00]
 }
-var green = [0.3, 0.8, 0.5];
-var greyGreen = [0.23, 0.6, 0.4];
-
 
 // Light states
 window.LIGHT_ON = [null]
 for (var i = 1; i <= 20; i++) {
     LIGHT_ON.push(false);
 }
-console.log(LIGHT_ON);
 
 // Light/colour modifiers
 var redMod         =  0.05;
@@ -300,26 +298,26 @@ var greenMod       =  0.00;
 var blueMod        = -0.10;
 var ambLight       =  0.00;
 var lightIntensity =  0.50;
-var lightColour    = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour2   = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour3   = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour4   = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour5   = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour6   = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour7   = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour8   = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour9   = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour10  = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour11  = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour12  = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour13  = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour14  = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour15  = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour16  = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour17  = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour18  = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour19  = [lightIntensity, lightIntensity, lightIntensity];
-var lightColour20  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor    = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor2   = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor3   = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor4   = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor5   = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor6   = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor7   = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor8   = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor9   = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor10  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor11  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor12  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor13  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor14  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor15  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor16  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor17  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor18  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor19  = [lightIntensity, lightIntensity, lightIntensity];
+var lightColor20  = [lightIntensity, lightIntensity, lightIntensity];
 
 
 /* FPS CHECKING */
@@ -349,7 +347,7 @@ window.requestAnimFrame = (function() {
 /* CAMERA HANDLING */
 // Camera
 var yAxisRot          = -Math.PI;
-var xAxisRot          = MATH.PI/2;
+var xAxisRot          = Math.PI/2;
 var lookSpeed         = 1;
 var cameraPosition    = [-10.0, 30.0, -10.0];
 var cameraOrientation = [  0.0,  0.0,   0.0];
@@ -552,6 +550,9 @@ function closeDoor() {
 }
 
 // Open/close blinds
+var blindSize = 20;
+blindMove = setInterval(closeBlinds, 50);
+
 function openBlinds() {
     // Adjust blind height
     blindSize       -= 0.1;
@@ -613,23 +614,27 @@ function normalLights() {
 /* CUBE HANDLING (coloured and textured) */
 function makeCube(gl) {
     // Coordinates (cube, side length 1, origin on centre of bottom)
-    var c = {};
+    var c = new Object();
+
     var vertices = new Float32Array([
-         0.5,  1.0,  0.5,    -0.5,  1.0,  0.5,    -0.5,  0.0,  0.5,     0.5,  0.0,  0.5, // v0 v1 v2 v3 Front
-         0.5,  1.0,  0.5,     0.5,  0.0,  0.5,     0.5,  0.0, -0.5,     0.5,  1.0, -0.5, // v0 v3 v4 v5 Right
-         0.5,  1.0,  0.5,     0.5,  1.0, -0.5,    -0.5,  1.0, -0.5,    -0.5,  1.0,  0.5, // v0 v5 v6 v1 Top
-        -0.5,  1.0,  0.5,    -0.5,  1.0, -0.5,    -0.5,  0.0, -0.5,    -0.5,  0.0,  0.5, // v1 v6 v7 v2 Left
-        -0.5,  0.0, -0.5,     0.5,  0.0, -0.5,     0.5,  0.0,  0.5,    -0.5,  0.0,  0.5, // v7 v4 v3 v2 Bottom
-         0.5,  0.0, -0.5,    -0.5,  0.0, -0.5,    -0.5,  1.0, -0.5,     0.5,  1.0, -0.5  // v4 v7 v6 v5 Back
+         0.5,  1.0,  0.5,    -0.5,  1.0,  0.5,    -0.5,  0.0,  0.5,     0.5,  0.0,  0.5,   // V0 V1 V2 V3 Front
+         0.5,  1.0,  0.5,     0.5,  0.0,  0.5,     0.5,  0.0, -0.5,     0.5,  1.0, -0.5,   // V0 V3 V4 V5 Right
+         0.5,  1.0,  0.5,     0.5,  1.0, -0.5,    -0.5,  1.0, -0.5,    -0.5,  1.0,  0.5,   // V0 V5 V6 V1 Top
+        -0.5,  1.0,  0.5,    -0.5,  1.0, -0.5,    -0.5,  0.0, -0.5,    -0.5,  0.0,  0.5,   // V1 V6 V7 V2 Left
+        -0.5,  0.0, -0.5,     0.5,  0.0, -0.5,     0.5,  0.0,  0.5,    -0.5,  0.0,  0.5,   // V7 V4 V3 V2 Bottom
+         0.5,  0.0, -0.5,    -0.5,  0.0, -0.5,    -0.5,  1.0, -0.5,     0.5,  1.0, -0.5    // V4 V7 V6 V5 Back
     ]);
+
     var normals = new Float32Array([
-         0.0,  0.0,  1.0,     0.0,  0.0,  1.0,     0.0,  0.0,  1.0,     0.0,  0.0,  1.0, // v0 v1 v2 v3 Front
-         1.0,  0.0,  0.0,     1.0,  0.0,  0.0,     1.0,  0.0,  0.0,     1.0,  0.0,  0.0, // v0 v3 v4 v5 Right
-         0.0,  1.0,  0.0,     0.0,  1.0,  0.0,     0.0,  1.0,  0.0,     0.0,  1.0,  0.0, // v0 v5 v6 v1 Top
-        -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0, // v1 v6 v7 v2 Left
-         0.0, -1.0,  0.0,     0.0, -1.0,  0.0,     0.0, -1.0,  0.0,     0.0, -1.0,  0.0, // v7 v4 v3 v2 Bottom
-         0.0,  0.0, -1.0,     0.0,  0.0, -1.0,     0.0,  0.0, -1.0,     0.0,  0.0, -1.0  // v4 v7 v6 v5 Back
+         0.0,  0.0,  1.0,     0.0,  0.0,  1.0,     0.0,  0.0,  1.0,     0.0,  0.0,  1.0,   // V0 V1 V2 V3 Front
+         1.0,  0.0,  0.0,     1.0,  0.0,  0.0,     1.0,  0.0,  0.0,     1.0,  0.0,  0.0,   // V0 V3 V4 V5 Right
+         0.0,  1.0,  0.0,     0.0,  1.0,  0.0,     0.0,  1.0,  0.0,     0.0,  1.0,  0.0,   // V0 V5 V6 V1 Top
+        -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0,   // V1 V6 V7 V2 Left
+         0.0, -1.0,  0.0,     0.0, -1.0,  0.0,     0.0, -1.0,  0.0,     0.0, -1.0,  0.0,   // V7 V4 V3 V2 Bottom
+         0.0,  0.0, -1.0,     0.0,  0.0, -1.0,     0.0,  0.0, -1.0,     0.0,  0.0, -1.0    // V4 V7 V6 V5 Back
     ]);
+
+    // Indices of the vertices
     var indices = new Uint8Array([
          0,  1,  2,     0,  2,  3,    // Front
          4,  5,  6,     4,  6,  7,    // Right
@@ -645,37 +650,38 @@ function makeCube(gl) {
     c.isTextured   = false;
 
     if (!c.vertexBuffer || !c.indexBuffer || !c.normalBuffer) {
+        console.error("Some buffer broke in makeCube()");
         return null;
     }
     return c;
 }
 
 function texturedCube(gl, imagePath) {
-    var t = {};
+    var t = new Object();
     // Coordinates (cube, side length 1, origin on centre of bottom)
     var vertices = new Float32Array([
-         0.5,  1.0,  0.5,    -0.5,  1.0,  0.5,    -0.5,  0.0,  0.5,     0.5,  0.0,  0.5, // v0 v1 v2 v3 Front
-         0.5,  1.0,  0.5,     0.5,  0.0,  0.5,     0.5,  0.0, -0.5,     0.5,  1.0, -0.5, // v0 v3 v4 v5 Right
-         0.5,  1.0,  0.5,     0.5,  1.0, -0.5,    -0.5,  1.0, -0.5,    -0.5,  1.0,  0.5, // v0 v5 v6 v1 Top
-        -0.5,  1.0,  0.5,    -0.5,  1.0, -0.5,    -0.5,  0.0, -0.5,    -0.5,  0.0,  0.5, // v1 v6 v7 v2 Left
-        -0.5,  0.0, -0.5,     0.5,  0.0, -0.5,     0.5,  0.0,  0.5,    -0.5,  0.0,  0.5, // v7 v4 v3 v2 Bottom
-         0.5,  0.0, -0.5,    -0.5,  0.0, -0.5,    -0.5,  1.0, -0.5,     0.5,  1.0, -0.5  // v4 v7 v6 v5 Back
+         0.5,  1.0,  0.5,    -0.5,  1.0,  0.5,    -0.5,  0.0,  0.5,     0.5,  0.0,  0.5,   // V0 V1 V2 V3 Front
+         0.5,  1.0,  0.5,     0.5,  0.0,  0.5,     0.5,  0.0, -0.5,     0.5,  1.0, -0.5,   // V0 V3 V4 V5 Right
+         0.5,  1.0,  0.5,     0.5,  1.0, -0.5,    -0.5,  1.0, -0.5,    -0.5,  1.0,  0.5,   // V0 V5 V6 V1 Top
+        -0.5,  1.0,  0.5,    -0.5,  1.0, -0.5,    -0.5,  0.0, -0.5,    -0.5,  0.0,  0.5,   // V1 V6 V7 V2 Left
+        -0.5,  0.0, -0.5,     0.5,  0.0, -0.5,     0.5,  0.0,  0.5,    -0.5,  0.0,  0.5,   // V7 V4 V3 V2 Bottom
+         0.5,  0.0, -0.5,    -0.5,  0.0, -0.5,    -0.5,  1.0, -0.5,     0.5,  1.0, -0.5    // V4 V7 V6 V5 Back
     ]);
     var normals = new Float32Array([
-         0.0,  0.0,  1.0,     0.0,  0.0,  1.0,     0.0,  0.0,  1.0,     0.0,  0.0,  1.0, // v0 v1 v2 v3 Front
-         1.0,  0.0,  0.0,     1.0,  0.0,  0.0,     1.0,  0.0,  0.0,     1.0,  0.0,  0.0, // v0 v3 v4 v5 Right
-         0.0,  1.0,  0.0,     0.0,  1.0,  0.0,     0.0,  1.0,  0.0,     0.0,  1.0,  0.0, // v0 v5 v6 v1 Top
-        -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0, // v1 v6 v7 v2 Left
-         0.0, -1.0,  0.0,     0.0, -1.0,  0.0,     0.0, -1.0,  0.0,     0.0, -1.0,  0.0, // v7 v4 v3 v2 Bottom
-         0.0,  0.0, -1.0,     0.0,  0.0, -1.0,     0.0,  0.0, -1.0,     0.0,  0.0, -1.0  // v4 v7 v6 v5 Back
+         0.0,  0.0,  1.0,     0.0,  0.0,  1.0,     0.0,  0.0,  1.0,     0.0,  0.0,  1.0,   // V0 V1 V2 V3 Front
+         1.0,  0.0,  0.0,     1.0,  0.0,  0.0,     1.0,  0.0,  0.0,     1.0,  0.0,  0.0,   // V0 V3 V4 V5 Right
+         0.0,  1.0,  0.0,     0.0,  1.0,  0.0,     0.0,  1.0,  0.0,     0.0,  1.0,  0.0,   // V0 V5 V6 V1 Top
+        -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0,    -1.0,  0.0,  0.0,   // V1 V6 V7 V2 Left
+         0.0, -1.0,  0.0,     0.0, -1.0,  0.0,     0.0, -1.0,  0.0,     0.0, -1.0,  0.0,   // V7 V4 V3 V2 Bottom
+         0.0,  0.0, -1.0,     0.0,  0.0, -1.0,     0.0,  0.0, -1.0,     0.0,  0.0, -1.0    // V4 V7 V6 V5 Back
     ]);
     var texCoords = new Float32Array([
-        1.0, 1.0,   0.0, 1.0,   0.0, 0.0,   1.0, 0.0,    // v0 v1 v2 v3 Front
-        0.0, 1.0,   0.0, 0.0,   1.0, 0.0,   1.0, 1.0,    // v0 v3 v4 v5 Right
-        1.0, 0.0,   1.0, 1.0,   0.0, 1.0,   0.0, 0.0,    // v0 v5 v6 v1 Top
-        1.0, 1.0,   0.0, 1.0,   0.0, 0.0,   1.0, 0.0,    // v1 v6 v7 v2 Left
-        0.0, 0.0,   1.0, 0.0,   1.0, 1.0,   0.0, 1.0,    // v7 v4 v3 v2 Bottom
-        0.0, 0.0,   1.0, 0.0,   1.0, 1.0,   0.0, 1.0     // v4 v7 v6 v5 Back
+        1.0, 1.0,   0.0, 1.0,   0.0, 0.0,   1.0, 0.0,    // V0 V1 V2 V3 Front
+        0.0, 1.0,   0.0, 0.0,   1.0, 0.0,   1.0, 1.0,    // V0 V3 V4 V5 Right
+        1.0, 0.0,   1.0, 1.0,   0.0, 1.0,   0.0, 0.0,    // V0 V5 V6 V1 Top
+        1.0, 1.0,   0.0, 1.0,   0.0, 0.0,   1.0, 0.0,    // V1 V6 V7 V2 Left
+        0.0, 0.0,   1.0, 0.0,   1.0, 1.0,   0.0, 1.0,    // V7 V4 V3 V2 Bottom
+        0.0, 0.0,   1.0, 0.0,   1.0, 1.0,   0.0, 1.0     // V4 V7 V6 V5 Back
     ]);
     var indices = new Uint8Array([
          0,  1,  2,     0,  2,  3,    // Front
@@ -692,9 +698,10 @@ function texturedCube(gl, imagePath) {
     t.indexBuffer    = initElementArrayBufferForLaterUse(gl, indices, gl.UNSIGNED_BYTE);
     t.texture        = initTextures(gl, imagePath);
     t.numIndices     = indices.length;
-    t.isTextured(true);
+    t.isTextured     = true;
 
     if (!t.vertexBuffer || !t.texCoordBuffer || !t.indexBuffer || !t.normalBuffer) {
+        console.error("Some buffer broke in texturedCube()");
         return null;
     }
     return t;
@@ -702,7 +709,8 @@ function texturedCube(gl, imagePath) {
 
 // Co-ordinate transformation matrix
 var g_ModelMatrix = new Matrix4();
-var g_mvpMatrix = new Matrix4();
+console.log("Made g_ModelMatrix =", g_ModelMatrix);
+var g_MvpMatrix = new Matrix4();
 
 /* DRAW SHAPES */
 // Door position
@@ -722,6 +730,7 @@ function draw(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     drawChairs(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     drawSkyPlane(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     g_ModelMatrix = popMatrix();
+    // console.log("n in draw() is ", n);
 
     // document.getElementById("speed").inner
 }
@@ -731,7 +740,7 @@ function drawTables(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatr
     pushMatrix(g_ModelMatrix);
     for (var i = 0; i < 2; i++) {
         for (var j = 0; j < 6; j++) {
-            drawTable(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -14 + -15*k, 15-(3*k), -37.5 - 75*i);
+            drawTable(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -14 + -15*j, 15-(3*j), -37.5 - 75*i);
         }
     }
     drawPodium(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -160, 2, -35);
@@ -739,13 +748,14 @@ function drawTables(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatr
 }
 
 function drawTable(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z) {
+    // console.log("n in drawTable() is ", n);
     g_ModelMatrix.setTranslate(x, y, z);
     gl.vertexAttrib3f(a_Color, COLORS.black[0], COLORS.black[1], COLORS.black[2]);
 
     // Legs
     for (var i = 0; i < 2; i++) {
         for (var j = 0; j < 2; j++) {
-            pushmatrix(g_ModelMatrix);
+            pushMatrix(g_ModelMatrix);
             g_ModelMatrix.translate(3.5 - (7 * i), 0.0, 30.5 - 61*j);
             drawBox(gl, n, 0.5, 9.0, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
             g_ModelMatrix = popMatrix();
@@ -817,7 +827,7 @@ function drawChair(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
     for (var i = 0; i < 2; i++) {
         for (var j = 0; j < 2; j++) {
             pushMatrix(g_ModelMatrix);
-            g_ModelMatrix.translate(2.5 - 5*l, 0.0, 2.5 - 5*k);
+            g_ModelMatrix.translate(2.5 - 5*i, 0.0, 2.5 - 5*j);
             drawBox(gl, n, 0.5, 5.0, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
             g_ModelMatrix = popMatrix();
         }
@@ -828,6 +838,7 @@ function drawChair(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
     gl.vertexAttrib3f(a_Color, COLORS.purple[0], COLORS.purple[1], COLORS.purple[2]);
 
     // Draw seat
+    pushMatrix(g_ModelMatrix);
     drawBox(gl, n, 6.0, 0.5, 6.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     g_ModelMatrix = popMatrix();
 
@@ -857,7 +868,7 @@ function drawSteps(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
     gl.vertexAttrib3f(a_Color, COLORS.grey[0], COLORS.grey[1], COLORS.grey[2]);
     pushMatrix(g_ModelMatrix);
     for (var i = 0; i < 6; i++) {
-        drawStep(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, 3.95 - 15*p, 13 - 3*p, -77.5, n);
+        drawStep(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, 3.95 - 15*i, 13 - 3*i, -77.5, n);
     }
     g_ModelMatrix = popMatrix();
 }
@@ -876,7 +887,277 @@ function drawStage(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
     drawBox(gl, n, 49.0, 2.0, 148.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 }
 
+/* DRAW ROOM */
+function drawWalls(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+    gl.vertexAttrib3f(a_Color, COLORS.cream[0], COLORS.cream[1], COLORS.cream[2]);
 
+    // Back part of door wall
+    g_ModelMatrix.setTranslate(-56.0, 0.0, -149.5);
+    drawBox(gl, n, 112.0, 26.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    // Draw wall top panel
+    g_ModelMatrix.setTranslate(-100.0, 26.0, -149.5);
+    drawBox(gl, n, 200.0, 24.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    // Draw wall front panel
+    g_ModelMatrix.setTranslate(-164.0, 0.0, -149.5);
+    drawBox(gl, n, 72.0, 26.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    // "Not door" wall
+    g_ModelMatrix.setTranslate(-10.0, 0.0, -0.5);
+    for (var i = 0; i < 9; i++) {
+        drawBox(gl, n, 20.0, 50, 1, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        if (i == 8) {
+            break;
+        }
+        for (var j = 0; j < 2; j++) {
+            g_ModelMatrix.setTranslate(-22.5, -25*i, 35*j, -0.5);
+            drawBox(gl, n, 5.0, 15.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        }
+        g_ModelMatrix.setTranslate(-10.0 - 25*i, 0.0, -0.5);
+    }
+
+    // Front wall
+    g_ModelMatrix.setTranslate(-199.5, 0.0, -75.0);
+    g_ModelMatrix.rotate(90.0, 0.0, 1.0, 0.0); // Rotate around the y-axis
+    drawBox(gl, n, 149.0, 50.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    // Back wall
+    g_ModelMatrix.setTranslate(0.0, 0.0, -75.0);
+    g_ModelMatrix.rotate(90.0, 0.0, 1.0, 0.0); // Rotate around the y-axis
+    drawBox(gl, n, 149.0, 50.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    // Roof
+    g_ModelMatrix.setTranslate(-100.0, 50.0, -75.0);
+    drawBox(gl, n, 200.0, 1.0, 150, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+}
+
+function drawSliders(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+    gl.vertexAttrib3f(a_Color, COLORS.lightBrown[0], COLORS.lightBrown[1], COLORS.lightBrown[2]);
+    g_ModelMatrix.setTranslate(-198, 10.0, -75.0);
+    drawBox(gl, n, 2, 38, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    g_ModelMatrix.translate(0.0, 0.0, -69.5)
+    drawBox(gl, n, 2, 38, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    g_ModelMatrix.translate(0.0, 0.0, 139.0)
+    drawBox(gl, n, 2, 38, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+}
+
+function drawBoards(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+    g_ModelMatrix.setTranslate(-198.5, 11.0, -109.75);
+    drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    g_ModelMatrix.translate(0.0, 0.0, 69.5)
+    drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    g_ModelMatrix.translate(1.0, 19.5, 0.0);
+    drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    g_ModelMatrix.translate(0.0, 0.0, -69.5)
+    drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+}
+
+function drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+    pushMatrix(g_ModelMatrix);
+    gl.vertexAttrib3f(a_Color, COLORS.greyGreen[0], COLORS.greyGreen[1], COLORS.greyGreen[2]);
+    drawBox(gl, texCube2, 0.3, 16.0, 68.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    gl.vertexAttrib3f(a_Color, COLORS.grey[0], COLORS.grey[1], COLORS.grey[2]);
+    g_ModelMatrix.translate(0.0, 0.0, 0.0);// Bottom frame
+    drawBox(gl, n, 0.5, 0.5, 69, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    g_ModelMatrix.translate(0.0, 16.0, 0.0);// Top frame
+    drawBox(gl, n, 0.5, 0.5, 69, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    g_ModelMatrix.translate(0.0, -16.0, 34.0); // Left frame
+    drawBox(gl, n, 0.5, 16, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    g_ModelMatrix.translate(0.0, 0.0, -68); // Right frame
+    drawBox(gl, n, 0.5, 16, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+    g_ModelMatrix = popMatrix();
+}
+
+/* DRAW DYNAMIC ELEMENTS */
+function drawBlinds(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+    gl.vertexAttrib3f(a_Color, COLORS.grey[0], COLORS.grey[1], COLORS.grey[2]);
+    for (var i = 0; i < 8; i++) {
+        g_ModelMatrix.setTranslate(-22.5 - 25*i, 35 - blindSize, -0.5);
+        drawBox(gl, n, 5.0, blindSize, 0.3, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    }
+}
+
+function drawDoor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, doorAngle){
+    gl.vertexAttrib3f(a_Color, COLORS.brown[0], COLORS.brown[1], COLORS.brown[2]);
+    g_ModelMatrix.setTranslate(0, 0, 0);
+    g_ModelMatrix.translate(-128 + Math.cos(doorAngle)*8, 0.0, -149.5 - Math.sin(doorAngle)*8);
+    g_ModelMatrix.rotate(doorAngle * 360 / (2 * Math.PI), 0.0, 1.0, 0.0);
+    drawBox(gl, n, 16.0, 26.0, 0.7, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+}
+
+function drawLights(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+    pushMatrix(g_ModelMatrix);
+    gl.vertexAttrib3f(a_Color, COLORS.white[0], COLORS.white[1], COLORS.white[2]);
+    for (var i = 0; i < 5; i++) {
+        for (var j = 0; j < 4; j++) {
+            g_ModelMatrix.setTranslate(-20 - 40*i, 49.5, -15 - 40*j);
+            drawBox(gl, n, 2.6, 0.4, 13.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        }
+    }
+    g_ModelMatrix = popMatrix();
+}
+
+function drawSkyPlane(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+    pushMatrix(g_ModelMatrix);
+    gl.vertexAttrib3f(a_Color, COLORS.white[0], COLORS.white[1], COLORS.white[2]);
+    g_ModelMatrix.setTranslate(-200.0, -20.0, 200.0);
+    drawBox(gl, texCube, 16000.0, 400.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    g_ModelMatrix = popMatrix();
+}
+
+/* DRAW MATRIX */
+
+// Array for storing a matrix
+var g_MatrixStack = [];
+
+// Store the specified matrix in the array
+function pushMatrix(m) {
+    var _m = new Matrix4(m);
+    g_MatrixStack.push(_m);
+}
+
+// Retrieve the matrix from the erray
+function popMatrix() {
+    return g_MatrixStack.pop();
+}
+
+// Co-ordinate transformation matrix for normals
+var g_NormalMatrix = new Matrix4();
+
+/* DRAW BOX */
+function drawBox(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+    // Save the model matrix
+    pushMatrix(g_ModelMatrix);
+
+    // Vertex co-ordinates
+    initAttributeVariable(gl, a_Position, n.vertexBuffer);
+
+    // Normal co-ordinates
+    initAttributeVariable(gl, a_Normal, n.normalBuffer);
+
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, n.indexBuffer);
+
+    // Scale a cube, and draw
+    g_ModelMatrix.scale(width, height, depth);
+
+    // Pass the model matrix to u_ModelMatrix
+    gl.uniformMatrix4fv(u_ModelMatrix, false, g_ModelMatrix.elements);
+
+    // Calculate the model view project matrix and pass it to u_MvpMatrix
+    g_MvpMatrix.set(viewProjMatrix);
+    g_MvpMatrix.multiply(g_ModelMatrix);
+    gl.uniformMatrix4fv(u_MvpMatrix, false, g_MvpMatrix.elements);
+
+    // Calculate the normal transformation matrix and pass it to u_NormalMatrix
+    g_NormalMatrix.setInverseOf(g_ModelMatrix);
+    g_NormalMatrix.transpose();
+    gl.uniformMatrix4fv(u_NormalMatrix, false, g_NormalMatrix.elements);
+
+    if (n.isTextured != false) {
+        gl.uniform1i(u_isTexture, true);
+        initAttributeVariable(gl, a_TexCoord, n.texCoordBuffer);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, n.texture);
+        gl.drawElements(gl.TRIANGLES, n.numIndices, n.indexBuffer.type, 0);
+        gl.uniform1i(u_isTexture, false);
+    } else {
+        gl.drawElements(gl.TRIANGLES, n.numIndices, n.indexBuffer.type, 0);
+    }
+    // Retrieve the model matrix
+    g_ModelMatrix = popMatrix();
+}
+
+/* INITIALISE ARRAYS */
+function initArrayBufferForLaterUse(gl, data, num, type) {
+    // Create a buffer object
+    var buf = gl.createBuffer();
+    if (!buf) {
+        console.error("Failed to create the buffer object");
+        return null;
+    }
+
+    // Write data into the buffer object
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+    buf.num = num;
+    buf.type = type;
+
+    return buf;
+}
+
+function initElementArrayBufferForLaterUse(gl, data, type) {
+    // Create a buffer object
+    var buf = gl.createBuffer();
+    if (!buf) {
+        console.error("Failed to create the buffer object");
+        return null;
+    }
+    // Write date into the buffer object
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, data, gl.STATIC_DRAW);
+    buf.type = type;
+
+    return buf;
+}
+
+function initAttributeVariable(gl, a_Attribute, buf) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.vertexAttribPointer(a_Attribute, buf.num, buf.type, false, 0, 0);
+    gl.enableVertexAttribArray(a_Attribute);
+}
+
+function initTextures(gl, imagePath) {
+    // Create a texture object
+    var tex = gl.createTexture();
+    if (!tex) {
+        console.error("Failed to create the texture object");
+        return null;
+    }
+
+    var img = new Image();
+    if (!img) {
+        console.error("Failed to create the image object");
+        return null;
+    }
+
+    // Register the event handler to be called when image loading is completed
+    img.onload = function() {
+        // Write image data to texture object
+
+        // Flip the image Y co-ordinate
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+
+        // Pass the texture unit 0 to u_Sampler
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+        gl.generateMipmap(gl.TEXTURE_2D);
+        gl.uniform1i(u_Sampler, 0);
+
+        // Unbind the texture object
+        gl.bindTexture(gl.TEXTURE_2D, null);
+    }
+
+    // Load the image
+    img.src = imagePath
+    return tex;
+}
 
 
 function randomIntFromInterval(min, max)
