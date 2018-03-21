@@ -242,10 +242,10 @@ function main() {
         updateCameraDirection(); // Initially set camera
         update_lights();
         viewProjMatrix.setPerspective(50.0, CG.canvas.width / CG.canvas.height, 1.0, 700.0);
-        viewProjMatrix.lookAt(cameraPosition[0], cameraPosition[1], cameraPosition[2],
-            cameraPosition[0] + cameraOrientation[0],
-            cameraPosition[1] + cameraOrientation[1],
-            cameraPosition[2] + cameraOrientation[2],
+        viewProjMatrix.lookAt(CG.cameraPosition[0], CG.cameraPosition[1], CG.cameraPosition[2],
+            CG.cameraPosition[0] + CG.cameraOrientation[0],
+            CG.cameraPosition[1] + CG.cameraOrientation[1],
+            CG.cameraPosition[2] + CG.cameraOrientation[2],
             0.0, 1.0, 0);
         // console.log("first time thing", gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         draw(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix); // Draw
@@ -378,11 +378,11 @@ window.requestAnimFrame = (function(){
 
 /*========================= Camera Handling ========================= */
 // Camera
-var yAxisRot = -Math.PI;
-var xAxisRot = Math.PI/2;
-var lookSpeed = 1;
-var cameraPosition = [-10.0, 30.0, -10.0];
-var cameraOrientation = [0.0, 0.0, 0.0];
+CG.yAxisRot = -Math.PI;
+CG.xAxisRot = Math.PI/2;
+CG.lookSpeed = 1;
+CG.cameraPosition = [-10.0, 30.0, -10.0];
+CG.cameraOrientation = [0.0, 0.0, 0.0];
 
 // Lock camera to mouse movements
 CG.canvas.requestPointerLock = CG.canvas.requestPointerLock ||
@@ -422,12 +422,12 @@ function lockChangeAlert() {
         e.mozMovementY      ||
         e.webkitMovementY   ||
         0;
-        yAxisRot += movementX * lookSpeed * 0.005;
-        xAxisRot += movementY * lookSpeed * 0.005;
+        CG.yAxisRot += movementX * CG.lookSpeed * 0.005;
+        CG.xAxisRot += movementY * CG.lookSpeed * 0.005;
     }
     // Updates the camera"s position + orientation
     function updateCameraDirection() {
-        cameraOrientation = [Math.cos(yAxisRot)*Math.sin(xAxisRot), Math.cos(xAxisRot), Math.sin(yAxisRot)*Math.sin(xAxisRot)];
+        CG.cameraOrientation = [Math.cos(CG.yAxisRot)*Math.sin(CG.xAxisRot), Math.cos(CG.xAxisRot), Math.sin(CG.yAxisRot)*Math.sin(CG.xAxisRot)];
     }
 
     // /*========================= Audio ========================= */
@@ -448,43 +448,43 @@ function lockChangeAlert() {
     if (keys[87]) {
         // "w" key
         // Move forward at camera direction
-        cameraPosition[0] += cameraOrientation[0] * moveSpeed;
-        cameraPosition[1] += cameraOrientation[1] * moveSpeed;
-        cameraPosition[2] += cameraOrientation[2] * moveSpeed;
+        CG.cameraPosition[0] += CG.cameraOrientation[0] * moveSpeed;
+        CG.cameraPosition[1] += CG.cameraOrientation[1] * moveSpeed;
+        CG.cameraPosition[2] += CG.cameraOrientation[2] * moveSpeed;
     }
 
     if (keys[83]) {
         // "s" key
         // Move backward at camera direction
-        cameraPosition[0] -= cameraOrientation[0] * moveSpeed;
-        cameraPosition[1] -= cameraOrientation[1] * moveSpeed;
-        cameraPosition[2] -= cameraOrientation[2] * moveSpeed;
+        CG.cameraPosition[0] -= CG.cameraOrientation[0] * moveSpeed;
+        CG.cameraPosition[1] -= CG.cameraOrientation[1] * moveSpeed;
+        CG.cameraPosition[2] -= CG.cameraOrientation[2] * moveSpeed;
     }
 
     if (keys[68]) {
         // "d" key
         // Move right relative to camera direction
-        cameraPosition[0] -= cameraOrientation[2] * moveSpeed;
-        cameraPosition[2] += cameraOrientation[0] * moveSpeed;
+        CG.cameraPosition[0] -= CG.cameraOrientation[2] * moveSpeed;
+        CG.cameraPosition[2] += CG.cameraOrientation[0] * moveSpeed;
     }
 
     if (keys[65]) {
         // "a" key
         // Move left relative to camera direction
-        cameraPosition[0] += cameraOrientation[2] * moveSpeed;
-        cameraPosition[2] -= cameraOrientation[0] * moveSpeed;
+        CG.cameraPosition[0] += CG.cameraOrientation[2] * moveSpeed;
+        CG.cameraPosition[2] -= CG.cameraOrientation[0] * moveSpeed;
     }
 
     if (keys[81]) {
         // "q" key
         // Move camera down
-        cameraPosition[1] -= moveSpeed;
+        CG.cameraPosition[1] -= moveSpeed;
     }
 
     if (keys[69]) {
         // "e" key
         // Move camera up
-        cameraPosition[1] += moveSpeed;
+        CG.cameraPosition[1] += moveSpeed;
     }
 
     if (keys[79]) {
@@ -634,7 +634,7 @@ function closeBlinds(){
 // }
 
 function introLights() {
-    yAxisRot += 0.4;
+    CG.yAxisRot += 0.4;
     setTimeout(function() { CG.toggleSpecificLights([ 1,  2,  3,  4]); }, 5000);
     setTimeout(function() { CG.toggleSpecificLights([ 5,  6,  7,  8]); }, 4000);
     setTimeout(function() { CG.toggleSpecificLights([ 9, 10, 11, 12]); }, 3000);
@@ -657,9 +657,9 @@ function normalLights(){
 
 // //Slender Note
 // function checkSlender(){
-//     if (cameraPosition[0]>-168 && cameraPosition[0]<-153){
-//         if (cameraPosition[1]>7.5 && cameraPosition[1]<17.5){
-//             if (cameraPosition[2]>-43 && cameraPosition[2]<-27){
+//     if (CG.cameraPosition[0]>-168 && CG.cameraPosition[0]<-153){
+//         if (CG.cameraPosition[1]>7.5 && CG.cameraPosition[1]<17.5){
+//             if (CG.cameraPosition[2]>-43 && CG.cameraPosition[2]<-27){
 //                 console.log("did");
 //                 showSlender();
 //                 return } } }
@@ -804,8 +804,8 @@ function draw(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     drawNote(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     g_modelMatrix = popMatrix();
 
-    // document.getElementById("speed").innerHTML = "<b>Speed (Camera Sensitivity): </b>" + lookSpeed;
-    // document.getElementById("camera_coords").innerHTML = "<b>Camera Coordinates: </b>" + cameraPosition[0].toFixed(2) + ", " + cameraPosition[1].toFixed(2) + ", " + cameraPosition[2].toFixed(2);
+    // document.getElementById("speed").innerHTML = "<b>Speed (Camera Sensitivity): </b>" + CG.lookSpeed;
+    // document.getElementById("camera_coords").innerHTML = "<b>Camera Coordinates: </b>" + CG.cameraPosition[0].toFixed(2) + ", " + CG.cameraPosition[1].toFixed(2) + ", " + CG.cameraPosition[2].toFixed(2);
 }
 
 /*========================= Draw Tables ========================= */
