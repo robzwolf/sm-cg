@@ -325,10 +325,10 @@ for (var j = 1; j <= 20; j++) {
 
 
 /*========================= FPS Checking ========================= */
-CG.fps = 30;
-CG.currentTime=0;
-CG.currentFps=0;
-CG.oldTime=0;
+CG.fps         = 30;
+CG.currentTime =  0;
+CG.currentFps  =  0;
+CG.oldTime     =  0;
 
 function findFps() {
     CG.currentTime = new Date().getTime();
@@ -336,45 +336,45 @@ function findFps() {
     if (CG.currentTime - CG.oldTime >= 1000) {
         // document.getElementById("fps_counter").innerHTML = "<b>FPS: </b>" + Number(CG.currentFps * 1000.0 / (CG.currentTime - CG.oldTime)).toPrecision( 5 );
         //Reset for next calc
-        CG.oldTime = CG.currentTime;
+        CG.oldTime    = CG.currentTime;
         CG.currentFps = 0;
     }
 }
 
 window.requestAnimFrame = (function(){
-    return  window.requestAnimationFrame       ||
+    return window.requestAnimationFrame /*      ||
     window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame    ||
-    function( callback ){
+    window.mozRequestAnimationFrame    */||
+    function(callback){
         window.setTimeout(callback, 1000 / CG.fps);
     };
 })();
 
 /*========================= Camera Handling ========================= */
 // Camera
-CG.yAxisRot = -Math.PI;
-CG.xAxisRot = Math.PI/2;
-CG.lookSpeed = 1;
-CG.cameraPosition = [-10.0, 30.0, -10.0];
-CG.cameraOrientation = [0.0, 0.0, 0.0];
+CG.yAxisRot          = -Math.PI;
+CG.xAxisRot          = Math.PI/2;
+CG.lookSpeed         = 0.8;
+CG.cameraPosition    = [-10.0, 30.0, -10.0];
+CG.cameraOrientation = [  0.0,  0.0,   0.0];
 
 // Lock camera to mouse movements
-CG.canvas.requestPointerLock = CG.canvas.requestPointerLock ||
+CG.canvas.requestPointerLock = CG.canvas.requestPointerLock;/* ||
 CG.canvas.mozRequestPointerLock ||
-CG.canvas.webkitRequestPointerLock;
-document.exitPointerLock = document.exitPointerLock ||
+CG.canvas.webkitRequestPointerLock;*/
+document.exitPointerLock = document.exitPointerLock;/* ||
 document.mozExitPointerLock ||
-document.webkitExitPointerLock;
-//Start pointer lock
+document.webkitExitPointerLock;*/
+// Start pointer lock
 CG.canvas.onclick = function() {
     CG.canvas.requestPointerLock();
 }
 
 
 CG.lockChangeAlert = function() {
-    if(document.pointerLockElement === CG.canvas ||
+    if(document.pointerLockElement === CG.canvas/* ||
        document.mozPointerLockElement === CG.canvas ||
-       document.webkitPointerLockElement === CG.canvas) {
+       document.webkitPointerLockElement === CG.canvas*/) {
         console.log("The pointer lock status is now locked");
         document.addEventListener("mousemove", CG.changeCameraView, false);
     } else {
@@ -385,8 +385,8 @@ CG.lockChangeAlert = function() {
 
 // Hook pointer lock state change events for different browsers
 document.addEventListener("pointerlockchange", CG.lockChangeAlert, false);
-document.addEventListener("mozpointerlockchange", CG.lockChangeAlert, false);
-document.addEventListener("webkitpointerlockchange", CG.lockChangeAlert, false);
+// document.addEventListener("mozpointerlockchange", CG.lockChangeAlert, false);
+// document.addEventListener("webkitpointerlockchange", CG.lockChangeAlert, false);
 
 // Changes camera view based on mouse position changes
 CG.changeCameraView = function(e) {
