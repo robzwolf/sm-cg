@@ -89,16 +89,16 @@ function main() {
 
     var u_AmbientLight = gl.getUniformLocation(gl.program, "u_AmbientLight");
 
-    u_isTexture = gl.getUniformLocation(gl.program, "u_isTexture");
+    u_IsTexture = gl.getUniformLocation(gl.program, "u_IsTexture");
     a_Color     = gl.getAttribLocation(gl.program,  "a_Color");
     a_Position  = gl.getAttribLocation(gl.program,  "a_Position");
     a_Normal    = gl.getAttribLocation(gl.program,  "a_Normal");
     a_TexCoord  = gl.getAttribLocation(gl.program,  "a_TexCoord");
     u_Sampler   = gl.getUniformLocation(gl.program, "u_Sampler");
-    u_scale     = gl.getUniformLocation(gl.program, "u_scale");
+    u_Scale     = gl.getUniformLocation(gl.program, "u_Scale");
 
-    gl.uniform1i(u_isTexture, false);
-    gl.uniform1f(u_scale, 1.0);
+    gl.uniform1i(u_IsTexture, false);
+    gl.uniform1f(u_Scale, 1.0);
 
     if (!u_ModelMatrix || !u_MvpMatrix || !u_NormalMatrix || !u_LightColor || !u_LightPos || !u_LightPos2
         || !u_LightPos3 || !u_LightPos4 || !u_LightPos5 || !u_LightPos6 || !u_LightPos7 || !u_AmbientLight) {
@@ -255,7 +255,7 @@ function main() {
 
         update_lights();
 
-        viewProjMatrix.setPerspective(50.0, canvas.width / canvas.height, 1.0, 700.0);
+        viewProjMatrix.setPerspective(50.0, cWidth / cHeight, 1.0, 700.0);
         viewProjMatrix.lookAt(cameraPosition[0], cameraPosition[1], cameraPosition[2],
             cameraPosition[0] + cameraOrientation[0],
             cameraPosition[1] + cameraOrientation[1],
@@ -263,7 +263,9 @@ function main() {
             0.0, 1.0, 0);
 
         // Draw
+        // console.log("gonna call draw");
         draw(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        // console.log("called draw()");
 
         checkKeys(keys);
     }
@@ -711,6 +713,7 @@ function texturedCube(gl, imagePath) {
 var g_ModelMatrix = new Matrix4();
 console.log("Made g_ModelMatrix =", g_ModelMatrix);
 var g_MvpMatrix = new Matrix4();
+console.log("Made g_MvpMatrix = ", g_MvpMatrix);
 
 /* DRAW SHAPES */
 // Door position
@@ -854,6 +857,7 @@ function drawChair(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
 
 /* DRAW FLOOR/STEPS */
 function drawFloor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+    console.log("called drawfloor");
     gl.vertexAttrib3f(a_Color, COLORS.grey[0], COLORS.grey[1], COLORS.grey[2]);
     g_ModelMatrix.setTranslate(-100, -1, -75);
     drawBox(gl, n, 200.0, 1.0, 150.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
@@ -1039,9 +1043,11 @@ var g_NormalMatrix = new Matrix4();
 function drawBox(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     // Save the model matrix
     pushMatrix(g_ModelMatrix);
+    // console.log("g_MM is ", g_ModelMatrix);
 
     // Vertex co-ordinates
     initAttributeVariable(gl, a_Position, n.vertexBuffer);
+    // console.log("n is ", n);
 
     // Normal co-ordinates
     initAttributeVariable(gl, a_Normal, n.normalBuffer);
@@ -1065,14 +1071,14 @@ function drawBox(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, u_Nor
     gl.uniformMatrix4fv(u_NormalMatrix, false, g_NormalMatrix.elements);
 
     if (n.isTextured != false) {
-        gl.uniform1i(u_isTexture, true);
+        gl.uniform1i(u_IsTexture, true);
         initAttributeVariable(gl, a_TexCoord, n.texCoordBuffer);
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, n.texture);
         gl.drawElements(gl.TRIANGLES, n.numIndices, n.indexBuffer.type, 0);
-        gl.uniform1i(u_isTexture, false);
+        gl.uniform1i(u_IsTexture, false);
     } else {
-        gl.drawElements(gl.TRIANGLES, n.numIndices, n.indexBuffer.type, 0);
+        gl.drawElements(gl.TRIANGLES, n.numIndices, n.indexBuffer.type, 0);1112345
     }
     // Retrieve the model matrix
     g_ModelMatrix = popMatrix();
@@ -1090,8 +1096,12 @@ function initArrayBufferForLaterUse(gl, data, num, type) {
     // Write data into the buffer object
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+
+    // Store the necessary information to assign the object to the attribute variable later
     buf.num = num;
     buf.type = type;
+
+    console.log(data, buf);
 
     return buf;
 }
@@ -1106,6 +1116,8 @@ function initElementArrayBufferForLaterUse(gl, data, type) {
     // Write date into the buffer object
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buf);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, data, gl.STATIC_DRAW);
+
+    // Store the necessary information to assign the object to the attribute variable later
     buf.type = type;
 
     return buf;

@@ -7,8 +7,8 @@ var VSHADER_SOURCE = `
     uniform mat4 u_MvpMatrix;
     uniform mat4 u_ModelMatrix;
     uniform mat4 u_NormalMatrix;
-    uniform bool u_isTexture;
-    uniform float u_scale;
+    uniform bool u_IsTexture;
+    uniform float u_Scale;
     varying vec4 v_Color;
     varying vec3 v_Normal;
     varying vec3 v_Position;
@@ -19,9 +19,9 @@ var VSHADER_SOURCE = `
         gl_Position = u_MvpMatrix * a_Position;
         v_Position = vec3(u_ModelMatrix * a_Position);
         v_Normal = normalize(vec3(u_NormalMatrix * a_Normal));
-        if (u_isTexture)
+        if (u_IsTexture)
         {
-            v_TexCoord = a_TexCoord * u_scale;
+            v_TexCoord = a_TexCoord * u_Scale;
         }
         else
         {
@@ -30,3 +30,5 @@ var VSHADER_SOURCE = `
     }
 
 `
+
+console.log("Loaded VSHADER_SOURCE");
