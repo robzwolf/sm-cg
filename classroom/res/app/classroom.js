@@ -66,26 +66,34 @@ function main() {
     // console.log(u_LightColorArr);
 
     // Light Positions
-    var u_LightPos     = gl.getUniformLocation(gl.program, "u_LightPos");
-    var u_LightPos2    = gl.getUniformLocation(gl.program, "u_LightPos2");
-    var u_LightPos3    = gl.getUniformLocation(gl.program, "u_LightPos3");
-    var u_LightPos4    = gl.getUniformLocation(gl.program, "u_LightPos4");
-    var u_LightPos5    = gl.getUniformLocation(gl.program, "u_LightPos5");
-    var u_LightPos6    = gl.getUniformLocation(gl.program, "u_LightPos6");
-    var u_LightPos7    = gl.getUniformLocation(gl.program, "u_LightPos7");
-    var u_LightPos8    = gl.getUniformLocation(gl.program, "u_LightPos8");
-    var u_LightPos9    = gl.getUniformLocation(gl.program, "u_LightPos9");
-    var u_LightPos10   = gl.getUniformLocation(gl.program, "u_LightPos10");
-    var u_LightPos11   = gl.getUniformLocation(gl.program, "u_LightPos11");
-    var u_LightPos12   = gl.getUniformLocation(gl.program, "u_LightPos12");
-    var u_LightPos13   = gl.getUniformLocation(gl.program, "u_LightPos13");
-    var u_LightPos14   = gl.getUniformLocation(gl.program, "u_LightPos14");
-    var u_LightPos15   = gl.getUniformLocation(gl.program, "u_LightPos15");
-    var u_LightPos16   = gl.getUniformLocation(gl.program, "u_LightPos16");
-    var u_LightPos17   = gl.getUniformLocation(gl.program, "u_LightPos17");
-    var u_LightPos18   = gl.getUniformLocation(gl.program, "u_LightPos18");
-    var u_LightPos19   = gl.getUniformLocation(gl.program, "u_LightPos19");
-    var u_LightPos20   = gl.getUniformLocation(gl.program, "u_LightPos20");
+    // var u_LightPos     = gl.getUniformLocation(gl.program, "u_LightPos");
+    // var u_LightPos2    = gl.getUniformLocation(gl.program, "u_LightPos2");
+    // var u_LightPos3    = gl.getUniformLocation(gl.program, "u_LightPos3");
+    // var u_LightPos4    = gl.getUniformLocation(gl.program, "u_LightPos4");
+    // var u_LightPos5    = gl.getUniformLocation(gl.program, "u_LightPos5");
+    // var u_LightPos6    = gl.getUniformLocation(gl.program, "u_LightPos6");
+    // var u_LightPos7    = gl.getUniformLocation(gl.program, "u_LightPos7");
+    // var u_LightPos8    = gl.getUniformLocation(gl.program, "u_LightPos8");
+    // var u_LightPos9    = gl.getUniformLocation(gl.program, "u_LightPos9");
+    // var u_LightPos10   = gl.getUniformLocation(gl.program, "u_LightPos10");
+    // var u_LightPos11   = gl.getUniformLocation(gl.program, "u_LightPos11");
+    // var u_LightPos12   = gl.getUniformLocation(gl.program, "u_LightPos12");
+    // var u_LightPos13   = gl.getUniformLocation(gl.program, "u_LightPos13");
+    // var u_LightPos14   = gl.getUniformLocation(gl.program, "u_LightPos14");
+    // var u_LightPos15   = gl.getUniformLocation(gl.program, "u_LightPos15");
+    // var u_LightPos16   = gl.getUniformLocation(gl.program, "u_LightPos16");
+    // var u_LightPos17   = gl.getUniformLocation(gl.program, "u_LightPos17");
+    // var u_LightPos18   = gl.getUniformLocation(gl.program, "u_LightPos18");
+    // var u_LightPos19   = gl.getUniformLocation(gl.program, "u_LightPos19");
+    // var u_LightPos20   = gl.getUniformLocation(gl.program, "u_LightPos20");
+
+    var u_LightPosArr = [null];
+    for (var i = 1; i <= 20; i++) {
+        u_LightPosArr.push(gl.getUniformLocation(gl.program, "u_LightPos" + i));
+    }
+    // console.log(u_LightPos);
+    // console.log(u_LightPos2);
+    // console.log(u_LightPosArr);
 
     var u_AmbientLight = gl.getUniformLocation(gl.program, "u_AmbientLight");
 
@@ -100,7 +108,7 @@ function main() {
     gl.uniform1i(CG.u_IsTexture, false);
     gl.uniform1f(CG.u_Scale, 1.0);
 
-    if (!u_ModelMatrix || !u_MvpMatrix || !u_NormalMatrix /*|| !u_LightColor*/ || !u_LightPos || !u_LightPos2 || !u_LightPos3 || !u_LightPos4 || !u_LightPos5 || !u_LightPos6 || !u_AmbientLight) {
+    if (!u_ModelMatrix || !u_MvpMatrix || !u_NormalMatrix /*|| !u_LightColor*/ /*|| !u_LightPos || !u_LightPos2 || !u_LightPos3 || !u_LightPos4 || !u_LightPos5 || !u_LightPos6 */|| !u_AmbientLight) {
         console.error("Failed to get at least one storage location");
         return;
     }
@@ -192,26 +200,26 @@ function main() {
     }
 
     // Set the light direction (in the world coordinate)
-    gl.uniform3f(u_LightPos,    -20.0, 45.0,  -15.0);
-    gl.uniform3f(u_LightPos2,   -20.0, 45.0,  -55.0);
-    gl.uniform3f(u_LightPos3,   -20.0, 45.0,  -95.0);
-    gl.uniform3f(u_LightPos4,   -20.0, 45.0, -135.0);
-    gl.uniform3f(u_LightPos5,   -60.0, 45.0,  -15.0);
-    gl.uniform3f(u_LightPos6,   -60.0, 45.0,  -55.0);
-    gl.uniform3f(u_LightPos7,   -60.0, 45.0,  -95.0);
-    gl.uniform3f(u_LightPos8,   -60.0, 45.0, -135.0);
-    gl.uniform3f(u_LightPos9,  -100.0, 45.0,  -15.0);
-    gl.uniform3f(u_LightPos10, -100.0, 45.0,  -55.0);
-    gl.uniform3f(u_LightPos11, -100.0, 45.0,  -95.0);
-    gl.uniform3f(u_LightPos12, -100.0, 45.0, -135.0);
-    gl.uniform3f(u_LightPos13, -140.0, 45.0,  -15.0);
-    gl.uniform3f(u_LightPos14, -140.0, 45.0,  -55.0);
-    gl.uniform3f(u_LightPos15, -140.0, 45.0,  -95.0);
-    gl.uniform3f(u_LightPos16, -140.0, 45.0, -135.0);
-    gl.uniform3f(u_LightPos17, -180.0, 45.0,  -15.0);
-    gl.uniform3f(u_LightPos18, -180.0, 45.0,  -55.0);
-    gl.uniform3f(u_LightPos19, -180.0, 45.0,  -95.0);
-    gl.uniform3f(u_LightPos20, -180.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPosArr[1],    -20.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[2],   -20.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[3],   -20.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[4],   -20.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPosArr[5],   -60.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[6],   -60.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[7],   -60.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[8],   -60.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPosArr[9],  -100.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[10], -100.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[11], -100.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[12], -100.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPosArr[13], -140.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[14], -140.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[15], -140.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[16], -140.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPosArr[17], -180.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[18], -180.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[19], -180.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[20], -180.0, 45.0, -135.0);
 
     // Set the ambient light level
     gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight - 0.2);
