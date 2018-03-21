@@ -1027,7 +1027,7 @@ CG.drawBlinds = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_Mode
     };
 };
 
-CG.drawDoor = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, CG.doorAngle){
+CG.drawDoor = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, doorAngle){
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.brown[0], CG.COLORS.brown[1], CG.COLORS.brown[2]);
     CG.g_modelMatrix.setTranslate(0, 0, 0);
     CG.g_modelMatrix.translate(-128 +Math.cos(CG.doorAngle)*8, 0, -149.5 -Math.sin(CG.doorAngle)*8);
