@@ -249,7 +249,7 @@ function main() {
             0.0, 1.0, 0);
         // console.log("first time thing", gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         draw(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix); // Draw
-        checkKeys(keys);
+        CG.checkKeys(keys);
         // checkSlender()
     }
 }
@@ -417,12 +417,13 @@ document.addEventListener("webkitpointerlockchange", CG.lockChangeAlert, false);
 // Changes camera view based on mouse position changes
 CG.changeCameraView = function(e) {
     console.log(e);
-    var movementX = e.movementX || e.mozMovementX || e.webkitMovementX || 0;
-    var movementY = e.movementY || e.mozMovementY || e.webkitMovementY || 0;
-    CG.yAxisRot += movementX * CG.lookSpeed * 0.005;
-    CG.xAxisRot += movementY * CG.lookSpeed * 0.005;
+    // var movementX = e.movementX; // || e.mozMovementX || e.webkitMovementX || 0;
+    // var movementY = e.movementY; // || e.mozMovementY || e.webkitMovementY || 0;
+    CG.yAxisRot += e.movementX * CG.lookSpeed * 0.005;
+    CG.xAxisRot += e.movementY * CG.lookSpeed * 0.005;
 }
-// Updates the camera"s position + orientation
+
+// Updates the camera's position + orientation
 CG.updateCameraDirection = function() {
     CG.cameraOrientation = [Math.cos(CG.yAxisRot)*Math.sin(CG.xAxisRot), Math.cos(CG.xAxisRot), Math.sin(CG.yAxisRot)*Math.sin(CG.xAxisRot)];
 }
@@ -436,83 +437,85 @@ CG.updateCameraDirection = function() {
 // bgNoise.play();
 
 /*========================= Key Handling ========================= */
-//Movement vars
-var moveSpeed = 1;
-var doorMove;
-var blindMove;
+// Movement variables
+CG.moveSpeed = 1;
+CG.doorMove;
+CG.blindMove;
 
-function checkKeys(keys) {
+CG.checkKeys = function(keys) {
+
+// function checkKeys(keys) {
     if (keys[87]) {
         // "w" key
         // Move forward at camera direction
-        CG.cameraPosition[0] += CG.cameraOrientation[0] * moveSpeed;
-        CG.cameraPosition[1] += CG.cameraOrientation[1] * moveSpeed;
-        CG.cameraPosition[2] += CG.cameraOrientation[2] * moveSpeed;
+        CG.cameraPosition[0] += CG.cameraOrientation[0] * CG.moveSpeed;
+        CG.cameraPosition[1] += CG.cameraOrientation[1] * CG.moveSpeed;
+        CG.cameraPosition[2] += CG.cameraOrientation[2] * CG.moveSpeed;
     }
 
     if (keys[83]) {
         // "s" key
         // Move backward at camera direction
-        CG.cameraPosition[0] -= CG.cameraOrientation[0] * moveSpeed;
-        CG.cameraPosition[1] -= CG.cameraOrientation[1] * moveSpeed;
-        CG.cameraPosition[2] -= CG.cameraOrientation[2] * moveSpeed;
+        CG.cameraPosition[0] -= CG.cameraOrientation[0] * CG.moveSpeed;
+        CG.cameraPosition[1] -= CG.cameraOrientation[1] * CG.moveSpeed;
+        CG.cameraPosition[2] -= CG.cameraOrientation[2] * CG.moveSpeed;
     }
 
     if (keys[68]) {
         // "d" key
         // Move right relative to camera direction
-        CG.cameraPosition[0] -= CG.cameraOrientation[2] * moveSpeed;
-        CG.cameraPosition[2] += CG.cameraOrientation[0] * moveSpeed;
+        CG.cameraPosition[0] -= CG.cameraOrientation[2] * CG.moveSpeed;
+        CG.cameraPosition[2] += CG.cameraOrientation[0] * CG.moveSpeed;
     }
 
     if (keys[65]) {
         // "a" key
         // Move left relative to camera direction
-        CG.cameraPosition[0] += CG.cameraOrientation[2] * moveSpeed;
-        CG.cameraPosition[2] -= CG.cameraOrientation[0] * moveSpeed;
+        CG.cameraPosition[0] += CG.cameraOrientation[2] * CG.moveSpeed;
+        CG.cameraPosition[2] -= CG.cameraOrientation[0] * CG.moveSpeed;
     }
 
     if (keys[81]) {
         // "q" key
         // Move camera down
-        CG.cameraPosition[1] -= moveSpeed;
+        CG.cameraPosition[1] -= CG.moveSpeed;
     }
 
     if (keys[69]) {
         // "e" key
         // Move camera up
-        CG.cameraPosition[1] += moveSpeed;
+        CG.cameraPosition[1] += CG.moveSpeed;
     }
 
     if (keys[79]) {
         // "o" key
         // Open door
-        clearInterval(doorMove);
-        doorMove = setInterval(openDoor, 50);
+        clearInterval(CG.doorMove);
+        CG.doorMove = setInterval(CG.openDoor, 50);
         keys[79] = false;
     }
 
     if (keys[80]) {
         // "p" key
         // Close door
-        clearInterval(doorMove);
-        doorMove = setInterval(closeDoor, 50);
+        clearInterval(CG.doorMove);
+        CG.doorMove = setInterval(CG.closeDoor, 50);
         keys[80] = false;
     }
 
     if (keys[78]) {
         // "n" key
         // Open blind
-        clearInterval(blindMove);
-        blindMove = setInterval(openBlinds, 50);
+        clearInterval(CG.blindMove);
+        CG.blindMove = setInterval(openBlinds, 50);
         keys[78] = false;
     }
 
     if (keys[66]) {
         // "b" key
         // Close blind
-        clearInterval(blindMove);
-        blindMove = setInterval(closeBlinds, 50);
+        clearInterval(CG.blindMove);
+        CG.blindMove = setInterval(closeBlinds, 50);
         keys[66] = false;
     }
 
@@ -565,30 +568,31 @@ function checkKeys(keys) {
 }
 
 /*========================= Dynamic Objects ========================= */
-//Open/Close Doors
-function openDoor(){
+//Open / close doors
+CG.openDoor = function() {
+// function CG.openDoor(){
     doorAngle +=0.05
     if(doorAngle >= 3*Math.PI/4 + 0.1){
-        clearInterval(doorMove);
+        clearInterval(CG.doorMove);
     }
 }
-function closeDoor(){
+CG.closeDoor = function() {
     doorAngle -=0.05
     if(doorAngle <= 0.1){
         doorAngle = 0
-        clearInterval(doorMove);
+        clearInterval(CG.doorMove);
     };
 }
 
 //Open/Close blinds
 var blindSize = 20;
-blindMove = setInterval(function () {closeBlinds()}, 50);
+CG.blindMove = setInterval(function () {closeBlinds()}, 50);
 
 function openBlinds(){
     blindSize -=0.1
     if(blindSize < 0.1){
         blindSize = 0
-        clearInterval(blindMove);
+        clearInterval(CG.blindMove);
     };
     CG.ambLight +=0.003
     if (CG.ambLight >= 0.4){
@@ -599,7 +603,7 @@ function closeBlinds(){
     blindSize +=0.1
     if(blindSize > 20){
         blindSize = 20
-        clearInterval(blindMove);
+        clearInterval(CG.blindMove);
     };
     CG.ambLight -=0.003
     if (CG.ambLight <= 0){
