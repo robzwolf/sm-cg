@@ -507,7 +507,7 @@ CG.checkKeys = function(keys) {
         // "n" key
         // Open blind
         clearInterval(CG.blindMove);
-        CG.blindMove = setInterval(openBlinds, 50);
+        CG.blindMove = setInterval(CG.openBlinds, 50);
         keys[78] = false;
     }
 
@@ -515,7 +515,7 @@ CG.checkKeys = function(keys) {
         // "b" key
         // Close blind
         clearInterval(CG.blindMove);
-        CG.blindMove = setInterval(closeBlinds, 50);
+        CG.blindMove = setInterval(CG.closeBlinds, 50);
         keys[66] = false;
     }
 
@@ -585,13 +585,13 @@ CG.closeDoor = function() {
 }
 
 //Open/Close blinds
-var blindSize = 20;
-CG.blindMove = setInterval(function () {closeBlinds()}, 50);
+CG.blindSize = 20;
+CG.blindMove = setInterval(function () {CG.closeBlinds()}, 50);
 
-function openBlinds(){
-    blindSize -=0.1
-    if(blindSize < 0.1){
-        blindSize = 0
+CG.openBlinds = function() {
+    CG.blindSize -=0.1
+    if(CG.blindSize < 0.1){
+        CG.blindSize = 0
         clearInterval(CG.blindMove);
     };
     CG.ambLight +=0.003
@@ -599,10 +599,10 @@ function openBlinds(){
         CG.ambLight = 0.4;
     };
 }
-function closeBlinds(){
-    blindSize +=0.1
-    if(blindSize > 20){
-        blindSize = 20
+CG.closeBlinds = function() {
+    CG.blindSize +=0.1
+    if(CG.blindSize > 20){
+        CG.blindSize = 20
         clearInterval(CG.blindMove);
     };
     CG.ambLight -=0.003
@@ -1033,8 +1033,8 @@ function drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
 function drawBlinds(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
     for (var i = 0; i < 8; i++) {
-        g_modelMatrix.setTranslate(-22.5 -(25* i), 35-(blindSize), -0.5);
-        drawBox(gl, n, 5, blindSize, 0.3, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        g_modelMatrix.setTranslate(-22.5 -(25* i), 35-(CG.blindSize), -0.5);
+        drawBox(gl, n, 5, CG.blindSize, 0.3, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     };
 };
 
