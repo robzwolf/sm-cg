@@ -100,111 +100,113 @@ function main() {
     // Update lights
     function update_lights(){
         gl.uniform3f(u_LightColor,
-            (lightColor[0]   + redMod)   * CG.LIGHT_ON[1],
-            (lightColor[1]   + greenMod) * CG.LIGHT_ON[1],
-            (lightColor[2]   + blueMod)  * CG.LIGHT_ON[1]);
+            (CG.lightColor[1][0]   + redMod)   * CG.LIGHT_ON[1],
+            (CG.lightColor[1][1]   + greenMod) * CG.LIGHT_ON[1],
+            (CG.lightColor[2][2]   + blueMod)  * CG.LIGHT_ON[1]);
         gl.uniform3f(u_LightColor2,
-            (lightColor2[0]  + redMod)   * CG.LIGHT_ON[2],
-            (lightColor2[1]  + greenMod) * CG.LIGHT_ON[2],
-            (lightColor2[2]  + blueMod)  * CG.LIGHT_ON[2]);
+            (CG.lightColor[2][0]  + redMod)   * CG.LIGHT_ON[2],
+            (CG.lightColor[2][1]  + greenMod) * CG.LIGHT_ON[2],
+            (CG.lightColor[2][2]  + blueMod)  * CG.LIGHT_ON[2]);
         gl.uniform3f(u_LightColor3,
-            (lightColor3[0]  + redMod)   * CG.LIGHT_ON[3],
-            (lightColor3[1]  + greenMod) * CG.LIGHT_ON[3],
-            (lightColor3[2]  + blueMod)  * CG.LIGHT_ON[3]);
+            (CG.lightColor[3][0]  + redMod)   * CG.LIGHT_ON[3],
+            (CG.lightColor[3][1]  + greenMod) * CG.LIGHT_ON[3],
+            (CG.lightColor[3][2]  + blueMod)  * CG.LIGHT_ON[3]);
         gl.uniform3f(u_LightColor4,
-            (lightColor4[0]  + redMod)   * CG.LIGHT_ON[4],
-            (lightColor4[1]  + greenMod) * CG.LIGHT_ON[4],
-            (lightColor4[2]  + blueMod)  * CG.LIGHT_ON[4]);
+            (CG.lightColor[4][0]  + redMod)   * CG.LIGHT_ON[4],
+            (CG.lightColor[4][1]  + greenMod) * CG.LIGHT_ON[4],
+            (CG.lightColor[4][2]  + blueMod)  * CG.LIGHT_ON[4]);
         gl.uniform3f(u_LightColor5,
-            (lightColor5[0]  + redMod)   * CG.LIGHT_ON[5],
-            (lightColor5[1]  + greenMod) * CG.LIGHT_ON[5],
-            (lightColor5[2]  + blueMod)  * CG.LIGHT_ON[5]);
+            (CG.lightColor[5][0]  + redMod)   * CG.LIGHT_ON[5],
+            (CG.lightColor[5][1]  + greenMod) * CG.LIGHT_ON[5],
+            (CG.lightColor[5][2]  + blueMod)  * CG.LIGHT_ON[5]);
         gl.uniform3f(u_LightColor6,
-            (lightColor6[0]  + redMod)   * CG.LIGHT_ON[6],
-            (lightColor6[1]  + greenMod) * CG.LIGHT_ON[6],
-            (lightColor6[2]  + blueMod)  * CG.LIGHT_ON[6]);
+            (CG.lightColor[6][0]  + redMod)   * CG.LIGHT_ON[6],
+            (CG.lightColor[6][1]  + greenMod) * CG.LIGHT_ON[6],
+            (CG.lightColor[6][2]  + blueMod)  * CG.LIGHT_ON[6]);
         gl.uniform3f(u_LightColor7,
-            (lightColor7[0]  + redMod)   * CG.LIGHT_ON[7],
-            (lightColor7[1]  + greenMod) * CG.LIGHT_ON[7],
-            (lightColor7[2]  + blueMod)  * CG.LIGHT_ON[7]);
+            (CG.lightColor[7][0]  + redMod)   * CG.LIGHT_ON[7],
+            (CG.lightColor[7][1]  + greenMod) * CG.LIGHT_ON[7],
+            (CG.lightColor[7][2]  + blueMod)  * CG.LIGHT_ON[7]);
         gl.uniform3f(u_LightColor8,
-            (lightColor8[0]  + redMod)   * CG.LIGHT_ON[8],
-            (lightColor8[1]  + greenMod) * CG.LIGHT_ON[8],
-            (lightColor8[2]  + blueMod)  * CG.LIGHT_ON[8]);
+            (CG.lightColor[8][0]  + redMod)   * CG.LIGHT_ON[8],
+            (CG.lightColor[8][1]  + greenMod) * CG.LIGHT_ON[8],
+            (CG.lightColor[8][2]  + blueMod)  * CG.LIGHT_ON[8]);
         gl.uniform3f(u_LightColor9,
-            (lightColor9[0]  + redMod)   * CG.LIGHT_ON[9],
-            (lightColor9[1]  + greenMod) * CG.LIGHT_ON[9],
-            (lightColor9[2]  + blueMod)  * CG.LIGHT_ON[9]);
+            (CG.lightColor[9][0]  + redMod)   * CG.LIGHT_ON[9],
+            (CG.lightColor[9][1]  + greenMod) * CG.LIGHT_ON[9],
+            (CG.lightColor[9][2]  + blueMod)  * CG.LIGHT_ON[9]);
         gl.uniform3f(u_LightColor10,
-            (lightColor10[0] + redMod)   * CG.LIGHT_ON[10],
-            (lightColor10[1] + greenMod) * CG.LIGHT_ON[10],
-            (lightColor10[2] + blueMod ) * CG.LIGHT_ON[10]);
+            (CG.lightColor[10][0] + redMod)   * CG.LIGHT_ON[10],
+            (CG.lightColor[10][1] + greenMod) * CG.LIGHT_ON[10],
+            (CG.lightColor[10][2] + blueMod ) * CG.LIGHT_ON[10]);
         gl.uniform3f(u_LightColor11,
-            (lightColor11[0] + redMod)   * CG.LIGHT_ON[11],
-            (lightColor11[1] + greenMod) * CG.LIGHT_ON[11],
-            (lightColor11[2] + blueMod)  * CG.LIGHT_ON[11]);
+            (CG.lightColor[11][0] + redMod)   * CG.LIGHT_ON[11],
+            (CG.lightColor[11][1] + greenMod) * CG.LIGHT_ON[11],
+            (CG.lightColor[11][2] + blueMod)  * CG.LIGHT_ON[11]);
         gl.uniform3f(u_LightColor12,
-            (lightColor12[0] + redMod)   * CG.LIGHT_ON[12],
-            (lightColor12[1] + greenMod) * CG.LIGHT_ON[12],
-            (lightColor12[2] + blueMod)  * CG.LIGHT_ON[12]);
+            (CG.lightColor[12][0] + redMod)   * CG.LIGHT_ON[12],
+            (CG.lightColor[12][1] + greenMod) * CG.LIGHT_ON[12],
+            (CG.lightColor[12][2] + blueMod)  * CG.LIGHT_ON[12]);
         gl.uniform3f(u_LightColor13,
-            (lightColor13[0] + redMod)   * CG.LIGHT_ON[13],
-            (lightColor13[1] + greenMod) * CG.LIGHT_ON[13],
-            (lightColor13[2] + blueMod)  * CG.LIGHT_ON[13]);
+            (CG.lightColor[13][0] + redMod)   * CG.LIGHT_ON[13],
+            (CG.lightColor[13][1] + greenMod) * CG.LIGHT_ON[13],
+            (CG.lightColor[13][2] + blueMod)  * CG.LIGHT_ON[13]);
         gl.uniform3f(u_LightColor14,
-            (lightColor14[0] + redMod)   * CG.LIGHT_ON[14],
-            (lightColor14[1] + greenMod) * CG.LIGHT_ON[14],
-            (lightColor14[2] + blueMod)  * CG.LIGHT_ON[14]);
+            (CG.lightColor[14][0] + redMod)   * CG.LIGHT_ON[14],
+            (CG.lightColor[14][1] + greenMod) * CG.LIGHT_ON[14],
+            (CG.lightColor[14][2] + blueMod)  * CG.LIGHT_ON[14]);
         gl.uniform3f(u_LightColor15,
-            (lightColor15[0] + redMod)   * CG.LIGHT_ON[15],
-            (lightColor15[1] + greenMod) * CG.LIGHT_ON[15],
-            (lightColor15[2] + blueMod)  * CG.LIGHT_ON[15]);
+            (CG.lightColor[15][0] + redMod)   * CG.LIGHT_ON[15],
+            (CG.lightColor[15][1] + greenMod) * CG.LIGHT_ON[15],
+            (CG.lightColor[15][2] + blueMod)  * CG.LIGHT_ON[15]);
         gl.uniform3f(u_LightColor16,
-            (lightColor16[0] + redMod)   * CG.LIGHT_ON[16],
-            (lightColor16[1] + greenMod) * CG.LIGHT_ON[16],
-            (lightColor16[2] + blueMod)  * CG.LIGHT_ON[16]);
+            (CG.lightColor[16][0] + redMod)   * CG.LIGHT_ON[16],
+            (CG.lightColor[16][1] + greenMod) * CG.LIGHT_ON[16],
+            (CG.lightColor[16][2] + blueMod)  * CG.LIGHT_ON[16]);
         gl.uniform3f(u_LightColor17,
-            (lightColor17[0] + redMod)   * CG.LIGHT_ON[17],
-            (lightColor17[1] + greenMod) * CG.LIGHT_ON[17],
-            (lightColor17[2] + blueMod)  * CG.LIGHT_ON[17]);
+            (CG.lightColor[17][0] + redMod)   * CG.LIGHT_ON[17],
+            (CG.lightColor[17][1] + greenMod) * CG.LIGHT_ON[17],
+            (CG.lightColor[17][2] + blueMod)  * CG.LIGHT_ON[17]);
         gl.uniform3f(u_LightColor18,
-            (lightColor18[0] + redMod)   * CG.LIGHT_ON[18],
-            (lightColor18[1] + greenMod) * CG.LIGHT_ON[18],
-            (lightColor18[2] + blueMod)  * CG.LIGHT_ON[18]);
+            (CG.lightColor[18][0] + redMod)   * CG.LIGHT_ON[18],
+            (CG.lightColor[18][1] + greenMod) * CG.LIGHT_ON[18],
+            (CG.lightColor[18][2] + blueMod)  * CG.LIGHT_ON[18]);
         gl.uniform3f(u_LightColor19,
-            (lightColor19[0] + redMod)   * CG.LIGHT_ON[19],
-            (lightColor19[1] + greenMod) * CG.LIGHT_ON[19],
-            (lightColor19[2] + blueMod)  * CG.LIGHT_ON[19]);
+            (CG.lightColor[19][0] + redMod)   * CG.LIGHT_ON[19],
+            (CG.lightColor[19][1] + greenMod) * CG.LIGHT_ON[19],
+            (CG.lightColor[19][2] + blueMod)  * CG.LIGHT_ON[19]);
         gl.uniform3f(u_LightColor20,
-            (lightColor20[0] + redMod)   * CG.LIGHT_ON[20],
-            (lightColor20[1] + greenMod) * CG.LIGHT_ON[20],
-            (lightColor20[2] + blueMod)  * CG.LIGHT_ON[20]);
+            (CG.lightColor[20][0] + redMod)   * CG.LIGHT_ON[20],
+            (CG.lightColor[20][1] + greenMod) * CG.LIGHT_ON[20],
+            (CG.lightColor[20][2] + blueMod)  * CG.LIGHT_ON[20]);
 
         gl.uniform3f(u_AmbientLight, ambLight, ambLight, ambLight);
     }
+
     // Set the light direction (in the world coordinate)
-    gl.uniform3f(u_LightPos, -20, 45, -15);
-    gl.uniform3f(u_LightPos2, -20, 45, -55);
-    gl.uniform3f(u_LightPos3, -20, 45, -95);
-    gl.uniform3f(u_LightPos4, -20, 45, -135);
-    gl.uniform3f(u_LightPos5, -60, 45, -15);
-    gl.uniform3f(u_LightPos6, -60, 45, -55);
-    gl.uniform3f(u_LightPos7, -60, 45, -95);
-    gl.uniform3f(u_LightPos8, -60, 45, -135);
-    gl.uniform3f(u_LightPos9, -100, 45, -15);
-    gl.uniform3f(u_LightPos10, -100, 45, -55);
-    gl.uniform3f(u_LightPos11, -100, 45, -95);
-    gl.uniform3f(u_LightPos12, -100, 45, -135);
-    gl.uniform3f(u_LightPos13, -140, 45, -15);
-    gl.uniform3f(u_LightPos14, -140, 45, -55);
-    gl.uniform3f(u_LightPos15, -140, 45, -95);
-    gl.uniform3f(u_LightPos16, -140, 45, -135);
-    gl.uniform3f(u_LightPos17, -180, 45, -15);
-    gl.uniform3f(u_LightPos18, -180, 45, -55);
-    gl.uniform3f(u_LightPos19, -180, 45, -95);
-    gl.uniform3f(u_LightPos20, -180, 45, -135);
+    gl.uniform3f(u_LightPos,    -20.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPos2,   -20.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPos3,   -20.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPos4,   -20.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPos5,   -60.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPos6,   -60.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPos7,   -60.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPos8,   -60.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPos9,  -100.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPos10, -100.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPos11, -100.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPos12, -100.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPos13, -140.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPos14, -140.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPos15, -140.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPos16, -140.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPos17, -180.0, 45.0,  -15.0);
+    gl.uniform3f(u_LightPos18, -180.0, 45.0,  -55.0);
+    gl.uniform3f(u_LightPos19, -180.0, 45.0,  -95.0);
+    gl.uniform3f(u_LightPos20, -180.0, 45.0, -135.0);
+
     // Set the ambient light level
-    gl.uniform3f(u_AmbientLight, ambLight, ambLight, ambLight-0.2);
+    gl.uniform3f(u_AmbientLight, ambLight, ambLight, ambLight - 0.2);
 
     n = makeCube(gl);
     texCube = texturedCube(gl, "res/tex/durham.png");
@@ -214,10 +216,11 @@ function main() {
         console.error("Failed to set the vertex information");
         return;
     }
+
     // Calculate the view projection matrix
     var viewProjMatrix = new Matrix4();
 
-    //Key Handling
+    // Key Handling
     var keys = {};
     document.onkeydown = function(ev){
         keys[ev.keyCode] = true;
@@ -226,10 +229,10 @@ function main() {
         keys[ev.keyCode] = false;
     }
 
-    //Introduction Lighting
+    // Introduction Lighting
     introLights();
 
-    //Update scene and draw every frame
+    // Update scene and draw every frame
     updateCanvas();
     function updateCanvas() {
         requestAnimFrame(updateCanvas);
@@ -305,38 +308,45 @@ for (var i = 1; i <= 20; i++) {
     CG.LIGHT_ON.push(false);
 }
 
-function toggleSpecificLights(lightsList) {
+CG.toggleSpecificLights = function(lightsList) {
     lightsList.forEach(function(i) {
         CG.LIGHT_ON[i] = !CG.LIGHT_ON[i];
     });
 }
 
-//Light/Color modifiers
-var redMod = 0.05;
-var greenMod = 0;
-var blueMod = -0.1;
-var ambLight = 0;
-var lightIntensity = 0.5;
-var lightColor = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor2 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor3 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor4 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor5 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor6 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor7 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor8 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor9 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor10 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor11 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor12 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor13 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor14 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor15 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor16 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor17 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor18 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor19 = [lightIntensity, lightIntensity, lightIntensity];
-var lightColor20 = [lightIntensity, lightIntensity, lightIntensity];
+// Light / colour modifiers
+var redMod         =  0.05;
+var greenMod       =  0.00;
+var blueMod        = -0.10;
+var ambLight       =  0.00;
+var lightIntensity =  0.50;
+
+
+CG.lightColor = [null];
+for (var j = 1; j <= 20; j++) {
+    CG.lightColor.push([lightIntensity, lightIntensity, lightIntensity]);
+}
+
+// var lightColor     = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor2    = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor3    = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor4    = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor5    = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor6    = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor7    = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor8    = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor9    = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor10   = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor11   = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor12   = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor13   = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor14   = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor15   = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor16   = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor17   = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor18   = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor19   = [lightIntensity, lightIntensity, lightIntensity];
+// var lightColor20   = [lightIntensity, lightIntensity, lightIntensity];
 
 
 
@@ -512,35 +522,35 @@ function lockChangeAlert() {
     if (keys[49]) {
         // "1" key
         // Toggle lights 1-4
-        toggleSpecificLights([1, 2, 3, 4])
+        CG.toggleSpecificLights([1, 2, 3, 4])
         keys[49] = false;
     }
 
     if (keys[50]) {
         // "2" key
         // Toggle lights 5-8
-        toggleSpecificLights([5, 6, 7, 8])
+        CG.toggleSpecificLights([5, 6, 7, 8])
         keys[50] = false;
     }
 
     if (keys[51]) {
         // "3" key
         // Toggle lights 9-12
-        toggleSpecificLights([9, 10, 11, 12])
+        CG.toggleSpecificLights([9, 10, 11, 12])
         keys[51] = false;
     }
 
     if (keys[52]) {
         // "4" key
         // Toggle lights 13-16
-        toggleSpecificLights([13, 14, 15, 16])
+        CG.toggleSpecificLights([13, 14, 15, 16])
         keys[52] = false;
     }
 
     if (keys[53]) {
         // "5" key
         // Toggle lights 17-20
-        toggleSpecificLights([17, 18, 19, 20])
+        CG.toggleSpecificLights([17, 18, 19, 20])
         keys[53] = false;
     }
 
@@ -625,11 +635,11 @@ function closeBlinds(){
 
 function introLights() {
     yAxisRot += 0.4;
-    setTimeout(function() { toggleSpecificLights([ 1,  2,  3,  4]); }, 5000);
-    setTimeout(function() { toggleSpecificLights([ 5,  6,  7,  8]); }, 4000);
-    setTimeout(function() { toggleSpecificLights([ 9, 10, 11, 12]); }, 3000);
-    setTimeout(function() { toggleSpecificLights([13, 14, 15, 16]); }, 2000);
-    setTimeout(function() { toggleSpecificLights([17, 18, 19, 20]); }, 1000);
+    setTimeout(function() { CG.toggleSpecificLights([ 1,  2,  3,  4]); }, 5000);
+    setTimeout(function() { CG.toggleSpecificLights([ 5,  6,  7,  8]); }, 4000);
+    setTimeout(function() { CG.toggleSpecificLights([ 9, 10, 11, 12]); }, 3000);
+    setTimeout(function() { CG.toggleSpecificLights([13, 14, 15, 16]); }, 2000);
+    setTimeout(function() { CG.toggleSpecificLights([17, 18, 19, 20]); }, 1000);
 }
 
 //Disco Light functionality
