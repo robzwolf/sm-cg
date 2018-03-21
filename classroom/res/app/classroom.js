@@ -111,23 +111,75 @@ function main() {
             (lightColor3[0]+redMod)*lightOn3,
             (lightColor3[1]+greenMod)*lightOn3,
             (lightColor3[2]+blueMod)*lightOn3);
-        gl.uniform3f(u_LightColor4, (lightColor4[0]+redMod)*lightOn4, (lightColor4[1]+greenMod)*lightOn4, (lightColor4[2]+blueMod)*lightOn4);
-        gl.uniform3f(u_LightColor5, (lightColor5[0]+redMod)*lightOn5, (lightColor5[1]+greenMod)*lightOn5, (lightColor5[2]+blueMod)*lightOn5);
-        gl.uniform3f(u_LightColor6, (lightColor6[0]+redMod)*lightOn6, (lightColor6[1]+greenMod)*lightOn6, (lightColor6[2]+blueMod)*lightOn6);
-        gl.uniform3f(u_LightColor7, (lightColor7[0]+redMod)*lightOn7, (lightColor7[1]+greenMod)*lightOn7, (lightColor7[2]+blueMod)*lightOn7);
-        gl.uniform3f(u_LightColor8, (lightColor8[0]+redMod)*lightOn8, (lightColor8[1]+greenMod)*lightOn8, (lightColor8[2]+blueMod)*lightOn8);
-        gl.uniform3f(u_LightColor9, (lightColor9[0]+redMod)*lightOn9, (lightColor9[1]+greenMod)*lightOn9, (lightColor9[2]+blueMod)*lightOn9);
-        gl.uniform3f(u_LightColor10, (lightColor10[0]+redMod)*lightOn10, (lightColor10[1]+greenMod)*lightOn10, (lightColor10[2]+blueMod)*lightOn10);
-        gl.uniform3f(u_LightColor11, (lightColor11[0]+redMod)*lightOn11, (lightColor11[1]+greenMod)*lightOn11, (lightColor11[2]+blueMod)*lightOn11);
-        gl.uniform3f(u_LightColor12, (lightColor12[0]+redMod)*lightOn12, (lightColor12[1]+greenMod)*lightOn12, (lightColor12[2]+blueMod)*lightOn12);
-        gl.uniform3f(u_LightColor13, (lightColor13[0]+redMod)*lightOn13, (lightColor13[1]+greenMod)*lightOn13, (lightColor13[2]+blueMod)*lightOn13);
-        gl.uniform3f(u_LightColor14, (lightColor14[0]+redMod)*lightOn14, (lightColor14[1]+greenMod)*lightOn14, (lightColor14[2]+blueMod)*lightOn14);
-        gl.uniform3f(u_LightColor15, (lightColor15[0]+redMod)*lightOn15, (lightColor15[1]+greenMod)*lightOn15, (lightColor15[2]+blueMod)*lightOn15);
-        gl.uniform3f(u_LightColor16, (lightColor16[0]+redMod)*lightOn16, (lightColor16[1]+greenMod)*lightOn16, (lightColor16[2]+blueMod)*lightOn16);
-        gl.uniform3f(u_LightColor17, (lightColor17[0]+redMod)*lightOn17, (lightColor17[1]+greenMod)*lightOn17, (lightColor17[2]+blueMod)*lightOn17);
-        gl.uniform3f(u_LightColor18, (lightColor18[0]+redMod)*lightOn18, (lightColor18[1]+greenMod)*lightOn18, (lightColor18[2]+blueMod)*lightOn18);
-        gl.uniform3f(u_LightColor19, (lightColor19[0]+redMod)*lightOn19, (lightColor19[1]+greenMod)*lightOn19, (lightColor19[2]+blueMod)*lightOn19);
-        gl.uniform3f(u_LightColor20, (lightColor20[0]+redMod)*lightOn20, (lightColor20[1]+greenMod)*lightOn20, (lightColor20[2]+blueMod)*lightOn20);
+        gl.uniform3f(u_LightColor4,
+            (lightColor4[0]+redMod)*lightOn4,
+            (lightColor4[1]+greenMod)*lightOn4,
+            (lightColor4[2]+blueMod)*lightOn4);
+        gl.uniform3f(u_LightColor5,
+            (lightColor5[0]+redMod)*lightOn5,
+            (lightColor5[1]+greenMod)*lightOn5,
+            (lightColor5[2]+blueMod)*lightOn5);
+        gl.uniform3f(u_LightColor6,
+            (lightColor6[0]+redMod)*lightOn6,
+            (lightColor6[1]+greenMod)*lightOn6,
+            (lightColor6[2]+blueMod)*lightOn6);
+        gl.uniform3f(u_LightColor7,
+            (lightColor7[0]+redMod)*lightOn7,
+            (lightColor7[1]+greenMod)*lightOn7,
+            (lightColor7[2]+blueMod)*lightOn7);
+        gl.uniform3f(u_LightColor8,
+            (lightColor8[0]+redMod)*lightOn8,
+            (lightColor8[1]+greenMod)*lightOn8,
+            (lightColor8[2]+blueMod)*lightOn8);
+        gl.uniform3f(u_LightColor9,
+            (lightColor9[0]+redMod)*lightOn9,
+            (lightColor9[1]+greenMod)*lightOn9,
+            (lightColor9[2]+blueMod)*lightOn9);
+        gl.uniform3f(u_LightColor10,
+            (lightColor10[0]+redMod)*lightOn10,
+            (lightColor10[1]+greenMod)*lightOn10,
+             (lightColor10[2]+blueMod)*lightOn10);
+        gl.uniform3f(u_LightColor11,
+            (lightColor11[0]+redMod)*lightOn11,
+            (lightColor11[1]+greenMod)*lightOn11,
+            (lightColor11[2]+blueMod)*lightOn11);
+        gl.uniform3f(u_LightColor12,
+            (lightColor12[0]+redMod)*lightOn12,
+            (lightColor12[1]+greenMod)*lightOn12,
+            (lightColor12[2]+blueMod)*lightOn12);
+        gl.uniform3f(u_LightColor13,
+            (lightColor13[0]+redMod)*lightOn13,
+            (lightColor13[1]+greenMod)*lightOn13,
+            (lightColor13[2]+blueMod)*lightOn13);
+        gl.uniform3f(u_LightColor14,
+            (lightColor14[0]+redMod)*lightOn14,
+            (lightColor14[1]+greenMod)*lightOn14,
+            (lightColor14[2]+blueMod)*lightOn14);
+        gl.uniform3f(u_LightColor15,
+            (lightColor15[0]+redMod)*lightOn15,
+            (lightColor15[1]+greenMod)*lightOn15,
+            (lightColor15[2]+blueMod)*lightOn15);
+        gl.uniform3f(u_LightColor16,
+            (lightColor16[0]+redMod)*lightOn16,
+            (lightColor16[1]+greenMod)*lightOn16,
+            (lightColor16[2]+blueMod)*lightOn16);
+        gl.uniform3f(u_LightColor17,
+            (lightColor17[0]+redMod)*lightOn17,
+            (lightColor17[1]+greenMod)*lightOn17,
+            (lightColor17[2]+blueMod)*lightOn17);
+        gl.uniform3f(u_LightColor18,
+            (lightColor18[0]+redMod)*lightOn18,
+            (lightColor18[1]+greenMod)*lightOn18,
+            (lightColor18[2]+blueMod)*lightOn18);
+        gl.uniform3f(u_LightColor19,
+            (lightColor19[0]+redMod)*lightOn19,
+            (lightColor19[1]+greenMod)*lightOn19,
+            (lightColor19[2]+blueMod)*lightOn19);
+        gl.uniform3f(u_LightColor20,
+            (lightColor20[0]+redMod)*lightOn20,
+            (lightColor20[1]+greenMod)*lightOn20,
+            (lightColor20[2]+blueMod)*lightOn20);
+        
         gl.uniform3f(u_AmbientLight, ambLight, ambLight, ambLight);
     }
     // Set the light direction (in the world coordinate)
