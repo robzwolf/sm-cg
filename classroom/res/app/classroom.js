@@ -239,7 +239,7 @@ function main() {
         findFps();
         // Start drawing
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        updateCameraDirection(); // Initially set camera
+        CG.updateCameraDirection(); // Initially set camera
         update_lights();
         viewProjMatrix.setPerspective(50.0, CG.canvas.width / CG.canvas.height, 1.0, 700.0);
         viewProjMatrix.lookAt(CG.cameraPosition[0], CG.cameraPosition[1], CG.cameraPosition[2],
@@ -395,56 +395,53 @@ document.webkitExitPointerLock;
 CG.canvas.onclick = function() {
     CG.canvas.requestPointerLock();
 }
-// Hook pointer lock state change events for different browsers
-document.addEventListener("pointerlockchange", lockChangeAlert, false);
-document.addEventListener("mozpointerlockchange", lockChangeAlert, false);
-document.addEventListener("webkitpointerlockchange", lockChangeAlert, false);
 
-function lockChangeAlert() {
+
+CG.lockChangeAlert = function() {
     if(document.pointerLockElement === CG.canvas ||
-        document.mozPointerLockElement === CG.canvas ||
-        document.webkitPointerLockElement === CG.canvas) {
-            console.log("The pointer lock status is now locked");
-            document.addEventListener("mousemove", changeCameraView, false);
-        } else {
-            console.log("The pointer lock status is now unlocked");
-            document.removeEventListener("mousemove", changeCameraView, false);
-        }
+       document.mozPointerLockElement === CG.canvas ||
+       document.webkitPointerLockElement === CG.canvas) {
+        console.log("The pointer lock status is now locked");
+        document.addEventListener("mousemove", CG.changeCameraView, false);
+    } else {
+        console.log("The pointer lock status is now unlocked");
+        document.removeEventListener("mousemove", CG.changeCameraView, false);
     }
-    // Changes camera view based on mouse position changes
-    function changeCameraView(e) {
-        console.log(e);
-        var movementX = e.movementX ||
-        e.mozMovementX          ||
-        e.webkitMovementX       ||
-        0;
-        var movementY = e.movementY ||
-        e.mozMovementY      ||
-        e.webkitMovementY   ||
-        0;
-        CG.yAxisRot += movementX * CG.lookSpeed * 0.005;
-        CG.xAxisRot += movementY * CG.lookSpeed * 0.005;
-    }
-    // Updates the camera"s position + orientation
-    function updateCameraDirection() {
-        CG.cameraOrientation = [Math.cos(CG.yAxisRot)*Math.sin(CG.xAxisRot), Math.cos(CG.xAxisRot), Math.sin(CG.yAxisRot)*Math.sin(CG.xAxisRot)];
-    }
+}
 
-    // /*========================= Audio ========================= */
-    // var audio = new Audio("audio/lightOn.mp3");
-    // var audio2 = new Audio("audio/lightOn2.mp3");
-    // var audio3 = new Audio("audio/lightOn.mp3");
-    // var bgNoise = new Audio("audio/faintBuzz.mp3");
-    // bgNoise.loop = true;
-    // bgNoise.play();
+// Hook pointer lock state change events for different browsers
+document.addEventListener("pointerlockchange", CG.lockChangeAlert, false);
+document.addEventListener("mozpointerlockchange", CG.lockChangeAlert, false);
+document.addEventListener("webkitpointerlockchange", CG.lockChangeAlert, false);
 
-    /*========================= Key Handling ========================= */
-    //Movement vars
-    var moveSpeed = 1;
-    var doorMove;
-    var blindMove;
+// Changes camera view based on mouse position changes
+CG.changeCameraView = function(e) {
+    console.log(e);
+    var movementX = e.movementX || e.mozMovementX || e.webkitMovementX || 0;
+    var movementY = e.movementY || e.mozMovementY || e.webkitMovementY || 0;
+    CG.yAxisRot += movementX * CG.lookSpeed * 0.005;
+    CG.xAxisRot += movementY * CG.lookSpeed * 0.005;
+}
+// Updates the camera"s position + orientation
+CG.updateCameraDirection = function() {
+    CG.cameraOrientation = [Math.cos(CG.yAxisRot)*Math.sin(CG.xAxisRot), Math.cos(CG.xAxisRot), Math.sin(CG.yAxisRot)*Math.sin(CG.xAxisRot)];
+}
 
-    function checkKeys(keys) {
+// /*========================= Audio ========================= */
+// var audio = new Audio("audio/lightOn.mp3");
+// var audio2 = new Audio("audio/lightOn2.mp3");
+// var audio3 = new Audio("audio/lightOn.mp3");
+// var bgNoise = new Audio("audio/faintBuzz.mp3");
+// bgNoise.loop = true;
+// bgNoise.play();
+
+/*========================= Key Handling ========================= */
+//Movement vars
+var moveSpeed = 1;
+var doorMove;
+var blindMove;
+
+function checkKeys(keys) {
     if (keys[87]) {
         // "w" key
         // Move forward at camera direction
