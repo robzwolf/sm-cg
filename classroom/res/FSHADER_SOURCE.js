@@ -1,5 +1,0 @@
-var FSHADER_SOURCE = `
-
-    
-
-`
