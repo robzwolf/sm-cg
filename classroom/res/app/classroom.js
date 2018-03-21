@@ -351,19 +351,19 @@ for (var j = 1; j <= 20; j++) {
 
 
 /*========================= FPS Checking ========================= */
-var fps = 30;
-var currentTime=0;
-var currentFps=0;
-var oldTime=0;
+CG.fps = 30;
+CG.currentTime=0;
+CG.currentFps=0;
+CG.oldTime=0;
 
 function findFps() {
-    currentTime = new Date().getTime();
-    currentFps++;
-    if (currentTime - oldTime >= 1000) {
-        // document.getElementById("fps_counter").innerHTML = "<b>FPS: </b>" + Number(currentFps * 1000.0 / (currentTime - oldTime)).toPrecision( 5 );
+    CG.currentTime = new Date().getTime();
+    CG.currentFps++;
+    if (CG.currentTime - CG.oldTime >= 1000) {
+        // document.getElementById("fps_counter").innerHTML = "<b>FPS: </b>" + Number(CG.currentFps * 1000.0 / (CG.currentTime - CG.oldTime)).toPrecision( 5 );
         //Reset for next calc
-        oldTime = currentTime;
-        currentFps = 0;
+        CG.oldTime = CG.currentTime;
+        CG.currentFps = 0;
     }
 }
 
@@ -372,7 +372,7 @@ window.requestAnimFrame = (function(){
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame    ||
     function( callback ){
-        window.setTimeout(callback, 1000 / fps);
+        window.setTimeout(callback, 1000 / CG.fps);
     };
 })();
 
