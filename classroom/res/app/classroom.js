@@ -179,7 +179,7 @@ function main() {
             (lightColor20[0]+redMod)*lightOn20,
             (lightColor20[1]+greenMod)*lightOn20,
             (lightColor20[2]+blueMod)*lightOn20);
-        
+
         gl.uniform3f(u_AmbientLight, ambLight, ambLight, ambLight);
     }
     // Set the light direction (in the world coordinate)
@@ -209,7 +209,7 @@ function main() {
     n = makeCube(gl);
     texCube = texturedCube(gl, "res/tex/durham.png");
     texCube2 = texturedCube(gl, "res/tex/board.png");
-    texCube3 = texturedCube(gl, "res/tex/slender.jpeg");
+    // texCube3 = texturedCube(gl, "res/tex/slender.jpeg");
     if (n < 0) {
         console.error("Failed to set the vertex information");
         return;
@@ -247,7 +247,7 @@ function main() {
         // console.log("first time thing", gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         draw(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix); // Draw
         checkKeys(keys);
-        checkSlender()
+        // checkSlender()
     }
 }
 
@@ -408,13 +408,13 @@ function lockChangeAlert() {
         cameraOrientation = [Math.cos(yAxisRot)*Math.sin(xAxisRot), Math.cos(xAxisRot), Math.sin(yAxisRot)*Math.sin(xAxisRot)];
     }
 
-    /*========================= Audio ========================= */
-    var audio = new Audio("audio/lightOn.mp3");
-    var audio2 = new Audio("audio/lightOn2.mp3");
-    var audio3 = new Audio("audio/lightOn.mp3");
-    var bgNoise = new Audio("audio/faintBuzz.mp3");
-    bgNoise.loop = true;
-    bgNoise.play();
+    // /*========================= Audio ========================= */
+    // var audio = new Audio("audio/lightOn.mp3");
+    // var audio2 = new Audio("audio/lightOn2.mp3");
+    // var audio3 = new Audio("audio/lightOn.mp3");
+    // var bgNoise = new Audio("audio/faintBuzz.mp3");
+    // bgNoise.loop = true;
+    // bgNoise.play();
 
     /*========================= Key Handling ========================= */
     //Movement vars
@@ -558,28 +558,28 @@ function closeBlinds(){
     };
 }
 
-setInterval(function () {flickerLight()}, 13000);
-setInterval(function () {flickerLight2()}, 19000);
-
-function flickerLight(){
-    audio2.play();
-    if (lightOn7 = true){
-        lightOn7 = !lightOn7;
-        setTimeout(function(){
-            lightOn7 = !lightOn7;
-        },200);
-    };
-}
-
-function flickerLight2(){
-    audio.play();
-    if (lightOn7 = true){
-        lightOn13 = !lightOn13;
-        setTimeout(function(){
-            lightOn13 = !lightOn13;
-        },200);
-    };
-}
+// setInterval(function () {flickerLight()}, 13000);
+// setInterval(function () {flickerLight2()}, 19000);
+//
+// function flickerLight(){
+//     audio2.play();
+//     if (lightOn7 = true){
+//         lightOn7 = !lightOn7;
+//         setTimeout(function(){
+//             lightOn7 = !lightOn7;
+//         },200);
+//     };
+// }
+//
+// function flickerLight2(){
+//     audio.play();
+//     if (lightOn7 = true){
+//         lightOn13 = !lightOn13;
+//         setTimeout(function(){
+//             lightOn13 = !lightOn13;
+//         },200);
+//     };
+// }
 
 function introLights(){
     yAxisRot+=0.4
@@ -588,35 +588,35 @@ function introLights(){
         lightOn2 = !lightOn2;
         lightOn3 = !lightOn3;
         lightOn4 = !lightOn4;
-        audio.play();
+        // audio.play();
     },5000);
     setTimeout(function(){
         lightOn5 = !lightOn5;
         lightOn6 = !lightOn6;
         lightOn7 = !lightOn7;
         lightOn8 = !lightOn8;
-        audio2.play();
+        // audio2.play();
     },4000);
     setTimeout(function(){
         lightOn9 = !lightOn9;
         lightOn10 = !lightOn10;
         lightOn11 = !lightOn11;
         lightOn12 = !lightOn12;
-        audio3.play();
+        // audio3.play();
     },3000);
     setTimeout(function(){
         lightOn13 = !lightOn13;
         lightOn14 = !lightOn14;
         lightOn15 = !lightOn15;
         lightOn16 = !lightOn16;
-        audio.play();
+        // audio.play();
     },2000);
     setTimeout(function(){
         lightOn17 = !lightOn17;
         lightOn18 = !lightOn18;
         lightOn19 = !lightOn19;
         lightOn20 = !lightOn20;
-        audio2.play();
+        // audio2.play();
     },1000);
 }
 
@@ -633,39 +633,39 @@ function normalLights(){
     blueMod = -0.1;
 }
 
-//Slender Note
-function checkSlender(){
-    if (cameraPosition[0]>-168 && cameraPosition[0]<-153){
-        if (cameraPosition[1]>7.5 && cameraPosition[1]<17.5){
-            if (cameraPosition[2]>-43 && cameraPosition[2]<-27){
-                console.log("did");
-                showSlender();
-                return } } }
-                hideSlender();
-            }
-
-//Overlay CSS editing
-function showSlender(){
-    document.getElementById("slenderNoteBG").style.position="absolute";
-    document.getElementById("slenderNoteBG").style.top="0";
-    document.getElementById("slenderNoteBG").style.left="0";
-    document.getElementById("slenderNoteBG").style.display="block";
-    document.getElementById("slenderNoteBG").style.paddingLeft="40%";
-    document.getElementById("slenderNoteBG").style.paddingTop="20%";
-    document.getElementById("slenderNoteBG").style.width="100%";
-    document.getElementById("slenderNoteBG").style.height="100%";
-    document.getElementById("slenderNoteBG").style.height="100%";
-    document.getElementById("slenderNoteBG").style.backgroundColor="rgba(1,1,1,0.5)";
-    document.getElementById("slenderNote").style.display="block";
-    document.getElementById("slenderNote").style.width="181px";
-    document.getElementById("slenderNote").style.height="257px";
-    document.getElementById("slenderNote").style.backgroundImage="url(\"textures/slender2.jpeg\")";
-    document.getElementById("slenderNote").style.backgroundSize="100%";
-}
-function hideSlender(){
-    document.getElementById("slenderNoteBG").style.display="none";
-    document.getElementById("slenderNote").style.display="none";
-}
+// //Slender Note
+// function checkSlender(){
+//     if (cameraPosition[0]>-168 && cameraPosition[0]<-153){
+//         if (cameraPosition[1]>7.5 && cameraPosition[1]<17.5){
+//             if (cameraPosition[2]>-43 && cameraPosition[2]<-27){
+//                 console.log("did");
+//                 showSlender();
+//                 return } } }
+//                 hideSlender();
+//             }
+//
+// //Overlay CSS editing
+// function showSlender(){
+//     document.getElementById("slenderNoteBG").style.position="absolute";
+//     document.getElementById("slenderNoteBG").style.top="0";
+//     document.getElementById("slenderNoteBG").style.left="0";
+//     document.getElementById("slenderNoteBG").style.display="block";
+//     document.getElementById("slenderNoteBG").style.paddingLeft="40%";
+//     document.getElementById("slenderNoteBG").style.paddingTop="20%";
+//     document.getElementById("slenderNoteBG").style.width="100%";
+//     document.getElementById("slenderNoteBG").style.height="100%";
+//     document.getElementById("slenderNoteBG").style.height="100%";
+//     document.getElementById("slenderNoteBG").style.backgroundColor="rgba(1,1,1,0.5)";
+//     document.getElementById("slenderNote").style.display="block";
+//     document.getElementById("slenderNote").style.width="181px";
+//     document.getElementById("slenderNote").style.height="257px";
+//     document.getElementById("slenderNote").style.backgroundImage="url(\"textures/slender2.jpeg\")";
+//     document.getElementById("slenderNote").style.backgroundSize="100%";
+// }
+// function hideSlender(){
+//     document.getElementById("slenderNoteBG").style.display="none";
+//     document.getElementById("slenderNote").style.display="none";
+// }
 
 /*========================= Cube handling (coloured and textured) ========================= */
 function makeCube(gl) {
@@ -1048,7 +1048,7 @@ function drawNote(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix
     gl.vertexAttrib3f(a_Color, 1, 1, 1);
     g_modelMatrix.setTranslate(-160,12.5,-35);
     g_modelMatrix.rotate(90.0, 0.0, 0.5, 0.0);
-    drawBox(gl, texCube3, 2.1, 0.05, 2.97, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    // drawBox(gl, texCube3, 2.1, 0.05, 2.97, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     g_modelMatrix = popMatrix();
 }
 
