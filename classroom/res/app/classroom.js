@@ -801,18 +801,18 @@ var doorAngle = 0;
 
 function draw(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     pushMatrix(g_modelMatrix);
-    drawFloor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawWalls(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawBlinds(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawStage(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawDoor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, doorAngle);
-    drawSliders(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawBoards(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawLights(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawTables(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawChairs(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawSkyPlane(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawNote(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawFloor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawWalls(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawBlinds(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawStage(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawDoor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, doorAngle);
+    CG.drawSliders(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawBoards(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawLights(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawTables(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawChairs(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawSkyPlane(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    // drawNote(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     g_modelMatrix = popMatrix();
 
     // document.getElementById("speed").innerHTML = "<b>Speed (Camera Sensitivity): </b>" + CG.lookSpeed;
@@ -820,18 +820,18 @@ function draw(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
 }
 
 /*========================= Draw Tables ========================= */
-function drawTables(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+CG.drawTables = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     pushMatrix(g_modelMatrix);
     for (var l = 0; l < 2; l++) {
         for (var k = 0; k < 6; k++) {
-            drawTable(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -14 + k*-15, 15-(3*k), -37.5 -(75*l));
+            CG.drawTable(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -14 + k*-15, 15-(3*k), -37.5 -(75*l));
         };
     };
-    drawPodium(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -160,2,-35);
+    CG.drawPodium(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -160,2,-35);
     g_modelMatrix = popMatrix();
 }
 
-function drawTable(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z) {
+CG.drawTable = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z) {
     g_modelMatrix.setTranslate(x, y, z);
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.black[0], CG.COLORS.black[1], CG.COLORS.black[2]);
     //Legs
@@ -858,7 +858,7 @@ function drawTable(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
     g_modelMatrix = popMatrix();
 }
 
-function drawPodium(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z) {
+CG.drawPodium = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z) {
     g_modelMatrix.setTranslate(x, y, z);
     // Top
     g_modelMatrix.translate(0.0, 10.0, 0.0); //move to table centre
@@ -883,12 +883,12 @@ function drawPodium(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatr
 }
 
 /*========================= Draw Chairs ========================= */
-function drawChairs(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+CG.drawChairs = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     pushMatrix(g_modelMatrix);
     for (var h = 0; h < 2; h++) {
         for (var i = 0; i < 6; i++) {
             for (var j = 0; j < 7; j++) {
-                drawChair(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -10 + i*-15, 15-(3*i),
+                CG.drawChair(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -10 + i*-15, 15-(3*i),
                 -12.5 - (h * 75) + (j * -8.5), 10*i);
             };
         };
@@ -896,7 +896,7 @@ function drawChairs(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatr
     g_modelMatrix = popMatrix();
 }
 
-function drawChair(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z) {
+CG.drawChair = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z) {
     g_modelMatrix.setTranslate(x, y, z);
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.black[0], CG.COLORS.black[1], CG.COLORS.black[2]);
     //Legs
@@ -929,26 +929,26 @@ function drawChair(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
 }
 
 /*========================= Draw Floor/Steps ========================= */
-function drawFloor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+CG.drawFloor = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
     g_modelMatrix.setTranslate(-100, -1, -75);
     drawBox(gl, n, 200.0, 1.0, 150.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.green[0], CG.COLORS.green[1], CG.COLORS.green[2]);
     g_modelMatrix.setTranslate(-100, -2, -75);
     drawBox(gl, n, 500.0, 1.0, 500.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    drawSteps(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawSteps(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 }
 
-function drawSteps(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+CG.drawSteps = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
     pushMatrix(g_modelMatrix);
     for (var p = 1; p < 6; p++) {
-        drawStep(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, 3.95 + (p *-15), 13-(3*p), -77.5, n);
+        CG.drawStep(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, 3.95 + (p *-15), 13-(3*p), -77.5, n);
     };
     g_modelMatrix = popMatrix();
 }
 
-function drawStep(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z){
+CG.drawStep = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z){
     g_modelMatrix.setTranslate(x, y, z);
     pushMatrix(g_modelMatrix);// Draw Leg 1
     g_modelMatrix.translate(2.5, 0.0, 2.5);
@@ -956,7 +956,7 @@ function drawStep(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix
     g_modelMatrix = popMatrix();
 }
 
-function drawStage(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+CG.drawStage = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.darkGrey[0], CG.COLORS.darkGrey[1], CG.COLORS.darkGrey[2]);
     g_modelMatrix.setTranslate(-174.5, 0, -75);
     drawBox(gl, n, 49.0, 2, 148, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
@@ -964,7 +964,7 @@ function drawStage(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
 
 
 /*========================= Draw Room ========================= */
-function drawWalls(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+CG.drawWalls = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.cream[0], CG.COLORS.cream[1], CG.COLORS.cream[2]);
     //Back part of door wall
     g_modelMatrix.setTranslate(-56, 0, -149.5);
@@ -1002,7 +1002,7 @@ function drawWalls(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
     drawBox(gl, n, 200.0, 1, 150, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 }
 
-function drawSliders(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+CG.drawSliders = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.lightBrown[0], CG.COLORS.lightBrown[1], CG.COLORS.lightBrown[2]);
     g_modelMatrix.setTranslate(-198, 10, -75);
     drawBox(gl, n, 2, 38, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
@@ -1012,18 +1012,18 @@ function drawSliders(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMat
     drawBox(gl, n, 2, 38, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 }
 
-function drawBoards(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+CG.drawBoards = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
     g_modelMatrix.setTranslate(-198.5, 11, -109.75);
-    drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     g_modelMatrix.translate(0, 0, 69.5)
-    drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     g_modelMatrix.translate(1, 19.5, 0);
-    drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     g_modelMatrix.translate(0, 0, -69.5)
-    drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 }
 
-function drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+CG.drawBoard = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
     pushMatrix(g_modelMatrix);
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.greyGreen[0], CG.COLORS.greyGreen[1], CG.COLORS.greyGreen[2]);
     drawBox(gl, texCube2, 0.3, 16, 68, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
@@ -1040,7 +1040,7 @@ function drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
     g_modelMatrix = popMatrix();
 }
 /*========================= Draw Dynamic Elements ========================= */
-function drawBlinds(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+CG.drawBlinds = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
     for (var i = 0; i < 8; i++) {
         g_modelMatrix.setTranslate(-22.5 -(25* i), 35-(CG.blindSize), -0.5);
@@ -1048,7 +1048,7 @@ function drawBlinds(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatr
     };
 };
 
-function drawDoor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, doorAngle){
+CG.drawDoor = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, doorAngle){
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.brown[0], CG.COLORS.brown[1], CG.COLORS.brown[2]);
     g_modelMatrix.setTranslate(0, 0, 0);
     g_modelMatrix.translate(-128 +Math.cos(doorAngle)*8, 0, -149.5 -Math.sin(doorAngle)*8);
@@ -1056,7 +1056,7 @@ function drawDoor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix
     drawBox(gl, n, 16.0, 26, 0.7, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 }
 
-function drawLights(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+CG.drawLights = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
     pushMatrix(g_modelMatrix);
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
     for (var i = 0; i < 5; i++) {
@@ -1068,7 +1068,7 @@ function drawLights(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatr
     g_modelMatrix = popMatrix();
 }
 
-function drawSkyPlane(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+CG.drawSkyPlane = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
     pushMatrix(g_modelMatrix);
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
     g_modelMatrix.setTranslate(-200,-20,200);
@@ -1076,14 +1076,14 @@ function drawSkyPlane(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMa
     g_modelMatrix = popMatrix();
 }
 
-function drawNote(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
-    pushMatrix(g_modelMatrix);
-    gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
-    g_modelMatrix.setTranslate(-160,12.5,-35);
-    g_modelMatrix.rotate(90.0, 0.0, 0.5, 0.0);
-    // drawBox(gl, texCube3, 2.1, 0.05, 2.97, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    g_modelMatrix = popMatrix();
-}
+// function drawNote(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix){
+//     pushMatrix(g_modelMatrix);
+//     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
+//     g_modelMatrix.setTranslate(-160,12.5,-35);
+//     g_modelMatrix.rotate(90.0, 0.0, 0.5, 0.0);
+//     // drawBox(gl, texCube3, 2.1, 0.05, 2.97, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+//     g_modelMatrix = popMatrix();
+// }
 
 /*========================= Draw Matrix ========================= */
 
