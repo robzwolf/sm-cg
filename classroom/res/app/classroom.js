@@ -84,13 +84,13 @@ function main() {
     CG.u_IsTexture = gl.getUniformLocation(gl.program, "u_IsTexture");
     CG.a_Color     = gl.getAttribLocation (gl.program, "a_Color")
     CG.a_Position  = gl.getAttribLocation (gl.program, "a_Position");
-    a_Normal    = gl.getAttribLocation (gl.program, "a_Normal");
-    a_TexCoord  = gl.getAttribLocation (gl.program, "a_TexCoord");
-    u_Sampler   = gl.getUniformLocation(gl.program, "u_Sampler");
-    u_Scale     = gl.getUniformLocation(gl.program, "u_Scale")
+    CG.a_Normal    = gl.getAttribLocation (gl.program, "a_Normal");
+    CG.a_TexCoord  = gl.getAttribLocation (gl.program, "a_TexCoord");
+    CG.u_Sampler   = gl.getUniformLocation(gl.program, "u_Sampler");
+    CG.u_Scale     = gl.getUniformLocation(gl.program, "u_Scale")
 
     gl.uniform1i(CG.u_IsTexture, false);
-    gl.uniform1f(u_Scale, 1.0);
+    gl.uniform1f(CG.u_Scale, 1.0);
 
     if (!u_ModelMatrix || !u_MvpMatrix || !u_NormalMatrix || !u_LightColor || !u_LightPos || !u_LightPos2 || !u_LightPos3 || !u_LightPos4 || !u_LightPos5 || !u_LightPos6 || !u_AmbientLight) {
         console.error("Failed to get at least one storage location");
@@ -901,11 +901,11 @@ function drawChair(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatri
     g_modelMatrix.translate(0.0, 5.0, 0.0);
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.purple[0], CG.COLORS.purple[1], CG.COLORS.purple[2]);
     // Draw Seat
-    //gl.uniform1f(u_Scale, 1.0);//change scale
+    //gl.uniform1f(CG.u_Scale, 1.0);//change scale
     pushMatrix(g_modelMatrix);
     drawBox(gl, n, 6.0, 0.5, 6.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     g_modelMatrix = popMatrix();
-    //gl.uniform1f(u_Scale, 1.0);//change back
+    //gl.uniform1f(CG.u_Scale, 1.0);//change back
 
     // Move back of chair
     g_modelMatrix.translate(2.5, 0.5, 0.0);
@@ -1095,7 +1095,7 @@ function drawBox(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, u_Nor
     // console.log("g_MM is ", g_modelMatrix);
     initAttributeVariable(gl, CG.a_Position, n.vertexBuffer);    // Vertex coordinates
     // console.log("n is ", n);
-    initAttributeVariable(gl, a_Normal, n.normalBuffer);  // Texture coordinates
+    initAttributeVariable(gl, CG.a_Normal, n.normalBuffer);  // Texture coordinates
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, n.indexBuffer);
     // Scale a cube and draw
     g_modelMatrix.scale(width, height, depth);
@@ -1114,7 +1114,7 @@ function drawBox(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, u_Nor
 
     if (n.isTextured != false){
         gl.uniform1i(CG.u_IsTexture, true);
-        initAttributeVariable(gl, a_TexCoord, n.texCoordBuffer);
+        initAttributeVariable(gl, CG.a_TexCoord, n.texCoordBuffer);
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, n.texture);
         gl.drawElements(gl.TRIANGLES, n.numIndices, n.indexBuffer.type, 0);
@@ -1170,8 +1170,8 @@ function initTextures(gl, imagePath) {
         console.error("Failed to create the Texture object");
         return null;
     }
-    // if (!u_Sampler) {
-    //   console.error("Failed to get the storage location of u_Sampler");
+    // if (!CG.u_Sampler) {
+    //   console.error("Failed to get the storage location of CG.u_Sampler");
     //   return null;
     // }
     var image = new Image();  // Create image object
@@ -1189,11 +1189,11 @@ function initTextures(gl, imagePath) {
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
-        // Pass the texture unit 0 to u_Sampler
+        // Pass the texture unit 0 to CG.u_Sampler
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
         gl.generateMipmap(gl.TEXTURE_2D);
-        gl.uniform1i(u_Sampler, 0);
+        gl.uniform1i(CG.u_Sampler, 0);
         gl.bindTexture(gl.TEXTURE_2D, null); // Unbind the texture object
     };
 
