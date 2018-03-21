@@ -208,10 +208,10 @@ function main() {
     // Set the ambient light level
     gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight - 0.2);
 
-    n = makeCube(gl);
-    texCube = texturedCube(gl, "res/tex/durham.png");
-    texCube2 = texturedCube(gl, "res/tex/board.png");
-    // texCube3 = texturedCube(gl, "res/tex/slender.jpeg");
+    n = CG.makeCube(gl);
+    texCube = CG.texturedCube(gl, "res/tex/durham.png");
+    texCube2 = CG.texturedCube(gl, "res/tex/board.png");
+    // texCube3 = CG.texturedCube(gl, "res/tex/slender.jpeg");
     if (n < 0) {
         console.error("Failed to set the vertex information");
         return;
@@ -230,7 +230,7 @@ function main() {
     }
 
     // Introduction Lighting
-    introLights();
+    CG.setupLights();
 
     // Update scene and draw every frame
     updateCanvas();
@@ -443,7 +443,7 @@ CG.doorMove;
 CG.blindMove;
 
 CG.checkKeys = function(keys) {
-
+    console.log(keys);
 // function checkKeys(keys) {
     if (keys[87]) {
         // "w" key
@@ -554,16 +554,16 @@ CG.checkKeys = function(keys) {
         keys[53] = false;
     }
 
-    if (keys[77]) {
-        // "m" key
+    if (keys[75]) {
+        // "k" key
         // Disco lights on
-        discoLights();
+        CG.discoLights();
     }
 
-    if (keys[78]) {
-        // "n" key
+    if (keys[76]) {
+        // "l" key
         // Normal lights
-        normalLights();
+        CG.normalLights();
     }
 }
 
@@ -590,14 +590,14 @@ CG.blindMove = setInterval(function () {CG.closeBlinds()}, 50);
 
 CG.openBlinds = function() {
     CG.blindSize -=0.1
-    if(CG.blindSize < 0.1){
+    if(CG.blindSize < 0.1) {
         CG.blindSize = 0
         clearInterval(CG.blindMove);
-    };
+    }
     CG.ambLight +=0.003
-    if (CG.ambLight >= 0.4){
+    if (CG.ambLight >= 0.4) {
         CG.ambLight = 0.4;
-    };
+    }
 }
 CG.closeBlinds = function() {
     CG.blindSize +=0.1
@@ -634,7 +634,7 @@ CG.closeBlinds = function() {
 //     };
 // }
 
-function introLights() {
+CG.setupLights = function() {
     CG.yAxisRot += 0.4;
     setTimeout(function() { CG.toggleSpecificLights([ 1,  2,  3,  4]); }, 5000);
     setTimeout(function() { CG.toggleSpecificLights([ 5,  6,  7,  8]); }, 4000);
@@ -643,17 +643,18 @@ function introLights() {
     setTimeout(function() { CG.toggleSpecificLights([17, 18, 19, 20]); }, 1000);
 }
 
-//Disco Light functionality
-function discoLights(){
+// Disco Light functionality
+CG.discoLights = function() {
+    console.log("Disco lights");
     CG.redMod =  Math.random() * (2 - 0) - 1;
     CG.greenMod =  Math.random() * (2 - 0) - 1;
     CG.blueMod =  Math.random() * (2 - 0) - 1;
 }
-function normalLights(){
+CG.normalLights = function() {
     console.log("norm");
-    CG.redMod = 0.05;
-    CG.greenMod = 0;
-    CG.blueMod = -0.1;
+    CG.redMod   =  0.05;
+    CG.greenMod =  0.00;
+    CG.blueMod  = -0.10;
 }
 
 // //Slender Note
@@ -691,7 +692,7 @@ function normalLights(){
 // }
 
 /*========================= Cube handling (coloured and textured) ========================= */
-function makeCube(gl) {
+CG.makeCube = function(gl) {
     // Coordinates（Cube which length of one side is 1 with the origin on the center of the bottom)
     var c = new Object();
     var vertices = new Float32Array([
@@ -730,16 +731,16 @@ function makeCube(gl) {
     return c;
 }
 
-function texturedCube(gl, imagePath) {
-    var o = new Object();
+CG.texturedCube = function(gl, imagePath) {
+    var t = new Object();
     // Coordinatesï¼ˆCube which length of one side is 1 with the origin on the center of the bottom)
     var vertices = new Float32Array([
-        0.5, 1.0, 0.5, -0.5, 1.0, 0.5, -0.5, 0.0, 0.5,  0.5, 0.0, 0.5, // v0-v1-v2-v3 front
-        0.5, 1.0, 0.5,  0.5, 0.0, 0.5,  0.5, 0.0,-0.5,  0.5, 1.0,-0.5, // v0-v3-v4-v5 right
-        0.5, 1.0, 0.5,  0.5, 1.0,-0.5, -0.5, 1.0,-0.5, -0.5, 1.0, 0.5, // v0-v5-v6-v1 up
-        -0.5, 1.0, 0.5, -0.5, 1.0,-0.5, -0.5, 0.0,-0.5, -0.5, 0.0, 0.5, // v1-v6-v7-v2 left
-        -0.5, 0.0,-0.5,  0.5, 0.0,-0.5,  0.5, 0.0, 0.5, -0.5, 0.0, 0.5, // v7-v4-v3-v2 down
-        0.5, 0.0,-0.5, -0.5, 0.0,-0.5, -0.5, 1.0,-0.5,  0.5, 1.0,-0.5  // v4-v7-v6-v5 back
+         0.5,  1.0,  0.5,   -0.5,  1.0,  0.5,    -0.5,  0.0,  0.5,     0.5,  0.0,  0.5,  // V0 V1 V2 V3 Front
+         0.5,  1.0,  0.5,    0.5,  0.0,  0.5,     0.5,  0.0, -0.5,     0.5,  1.0, -0.5,  // V0 V3 V4 V5 Right
+         0.5,  1.0,  0.5,    0.5,  1.0, -0.5,    -0.5,  1.0, -0.5,    -0.5,  1.0,  0.5,  // V0 V5 V6 V1 Up
+        -0.5,  1.0,  0.5,   -0.5,  1.0, -0.5,    -0.5,  0.0, -0.5,    -0.5,  0.0,  0.5,  // V1 V6 V7 V2 Left
+        -0.5,  0.0, -0.5,    0.5,  0.0, -0.5,     0.5,  0.0,  0.5,    -0.5,  0.0,  0.5,  // V7 V4 V3 V2 Down
+         0.5,  0.0, -0.5,   -0.5,  0.0, -0.5,    -0.5,  1.0, -0.5,     0.5,  1.0, -0.5   // V4 V7 V6 V5 Back
     ]);
     // Normal
     var normals = new Float32Array([
@@ -769,16 +770,18 @@ function texturedCube(gl, imagePath) {
         20,21,22,  20,22,23     // back
     ]);
 
-    o.vertexBuffer = initArrayBufferForLaterUse(gl, vertices, 3, gl.FLOAT);
-    o.normalBuffer = initArrayBufferForLaterUse(gl, normals, 3, gl.FLOAT);
-    o.texCoordBuffer = initArrayBufferForLaterUse(gl, texCoords, 2, gl.FLOAT);
-    o.indexBuffer = initElementArrayBufferForLaterUse(gl, indices, gl.UNSIGNED_BYTE);
-    o.texture = initTextures(gl, imagePath)
-    o.numIndices = indices.length;
-    o.isTextured = true;
+    t.vertexBuffer = initArrayBufferForLaterUse(gl, vertices, 3, gl.FLOAT);
+    t.normalBuffer = initArrayBufferForLaterUse(gl, normals, 3, gl.FLOAT);
+    t.texCoordBuffer = initArrayBufferForLaterUse(gl, texCoords, 2, gl.FLOAT);
+    t.indexBuffer = initElementArrayBufferForLaterUse(gl, indices, gl.UNSIGNED_BYTE);
+    t.texture = initTextures(gl, imagePath)
+    t.numIndices = indices.length;
+    t.isTextured = true;
 
-    if (!o.vertexBuffer || !o.texCoordBuffer || !o.indexBuffer || !o.normalBuffer) return null;
-    return o;
+    if (!t.vertexBuffer || !t.texCoordBuffer || !t.indexBuffer || !t.normalBuffer){
+        return null;
+    }
+    return t;
 }
 
 // Coordinate transformation matrix
