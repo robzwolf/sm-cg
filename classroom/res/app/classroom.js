@@ -83,7 +83,7 @@ function main() {
 
     CG.u_IsTexture = gl.getUniformLocation(gl.program, "u_IsTexture");
     CG.a_Color     = gl.getAttribLocation (gl.program, "a_Color")
-    a_Position  = gl.getAttribLocation (gl.program, "a_Position");
+    CG.a_Position  = gl.getAttribLocation (gl.program, "a_Position");
     a_Normal    = gl.getAttribLocation (gl.program, "a_Normal");
     a_TexCoord  = gl.getAttribLocation (gl.program, "a_TexCoord");
     u_Sampler   = gl.getUniformLocation(gl.program, "u_Sampler");
@@ -1093,7 +1093,7 @@ var g_normalMatrix = new Matrix4();
 function drawBox(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     pushMatrix(g_modelMatrix);   // Save the model matrix
     // console.log("g_MM is ", g_modelMatrix);
-    initAttributeVariable(gl, a_Position, n.vertexBuffer);    // Vertex coordinates
+    initAttributeVariable(gl, CG.a_Position, n.vertexBuffer);    // Vertex coordinates
     // console.log("n is ", n);
     initAttributeVariable(gl, a_Normal, n.normalBuffer);  // Texture coordinates
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, n.indexBuffer);
