@@ -264,6 +264,7 @@ function main() {
 
         // Draw
         // console.log("gonna call draw");
+        console.log("first time thing", gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         draw(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         // console.log("called draw()");
 
@@ -1078,7 +1079,7 @@ function drawBox(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, u_Nor
         gl.drawElements(gl.TRIANGLES, n.numIndices, n.indexBuffer.type, 0);
         gl.uniform1i(u_IsTexture, false);
     } else {
-        gl.drawElements(gl.TRIANGLES, n.numIndices, n.indexBuffer.type, 0);1112345
+        gl.drawElements(gl.TRIANGLES, n.numIndices, n.indexBuffer.type, 0);
     }
     // Retrieve the model matrix
     g_ModelMatrix = popMatrix();
