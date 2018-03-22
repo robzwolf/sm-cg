@@ -1,5 +1,12 @@
 // Wrapper object for all our named stuff
-window.CG = {};
+window.CG = {
+    "hardURL": {
+        // "sky": "res/tex/durham.png",
+        // "sky": "res/tex/rainbow.png",
+        "sky": "res/tex/long-thin.jpg",
+        "board": "res/tex/board_grad1.jpg"
+    }
+};
 
 // Canvas
 CG.canvas = document.getElementById("classroom");
@@ -9,16 +16,25 @@ function main() {
     CG.canvas.width  = window.innerWidth;
     CG.canvas.height = window.innerHeight;
 
-    var gl = getWebGLContext(CG.canvas, false); // Remove false to enable debug
-    if (!gl) {
-        console.error("Failed to get the rendering context for WebGL, falling back on experimental");
-        gl = canvas.getContext("experimental-webgl");
+    window.gl = CG.canvas.getContext("webgl2");
+
+    if (!window.gl) {
+        console.error("Failed to get the rendering context for WebGL2, falling back on WebGL1");
+        window.gl = CG.canvas.getContext("webgl");
     }
 
-    if (!gl) {
-        console.error("Browser does not support WebGL");
-        alert("Your browser does not support WebGL.")
+    if (!window.gl) {
+        console.error("Failed to get the rendering context for WebGL, falling back on experimental");
+        window.gl = CG.canvas.getContext("experimental-webgl");
     }
+
+    if (!window.gl) {
+        console.error("Browser does not support WebGL");
+        alert("Your browser does not support WebGL.");
+        return;
+    }
+
+    console.log("Got some WebGL context.");
 
     // Initialise shaders
     if (!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
@@ -103,8 +119,8 @@ function main() {
     gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight + 0.2);
 
     n        = CG.makeCube(gl);
-    texCube  = CG.texturedCube(gl, "res/tex/durham.png");
-    texCube2 = CG.texturedCube(gl, "res/tex/board_grad1.jpg");
+    texCube  = CG.texturedCube(gl, CG.hardURL.sky);
+    texCube2 = CG.texturedCube(gl, CG.hardURL.board);
     if (n < 0) {
         console.error("Failed to set the vertex information");
         return;
@@ -871,7 +887,7 @@ CG.drawLights = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_Mode
 CG.drawSkyPlane = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     CG.pushMatrix(CG.g_modelMatrix);
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
-    CG.g_modelMatrix.setTranslate(-200,-20,200);
+    CG.g_modelMatrix.setTranslate(-200, -20, 200);
     CG.drawBox(gl, texCube, 16000, 400, 1, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     CG.g_modelMatrix = CG.popMatrix();
 }
@@ -991,20 +1007,19 @@ CG.initTextures = function(gl, imagePath) {
 
     // Register the event handler to be called when image loading is completed
     img.onload = function() {
-        // Write image data to texture object
-        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);  // Flip the img Y coordinate
-        gl.bindTexture(gl.TEXTURE_2D, tex);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        // NOTE: We know that we will always use power-of-two images, so we can use mips
+        // https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Using_textures_in_WebGL
 
-        // Pass the tex unit 0 to CG.u_Sampler
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        // Write image data to texture object
+
+        // Flip the image around the horizontal axis
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-        gl.generateMipmap(gl.TEXTURE_2D);
-        gl.uniform1i(CG.u_Sampler, 0);
-        gl.bindTexture(gl.TEXTURE_2D, null); // Unbind the texture object
+
+        // Unbind the texture object
+        gl.bindTexture(gl.TEXTURE_2D, null);
     };
 
     // Tell the browser to load an image
