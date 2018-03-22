@@ -975,13 +975,15 @@ CG.initAttributeVariable = function(gl, a_attribute, buf) {
 }
 
 CG.initTextures = function(gl, imagePath) {
-    var tex = gl.createTexture();   // Create a tex object
+    // Create a texture object
+    var tex = gl.createTexture();
     if (!tex) {
         console.error("Failed to create the Texture object");
         return null;
     }
 
-    var img = new Image();  // Create image object
+    // Create image object
+    var img = new Image();
     if (!img) {
         console.error("Failed to create the Image object");
         return null;
@@ -989,17 +991,17 @@ CG.initTextures = function(gl, imagePath) {
 
     // Register the event handler to be called when image loading is completed
     img.onload = function() {
-        // Write img data to tex object
+        // Write image data to texture object
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);  // Flip the img Y coordinate
         gl.bindTexture(gl.TEXTURE_2D, tex);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
         // Pass the tex unit 0 to CG.u_Sampler
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
         gl.generateMipmap(gl.TEXTURE_2D);
         gl.uniform1i(CG.u_Sampler, 0);
         gl.bindTexture(gl.TEXTURE_2D, null); // Unbind the texture object
