@@ -7,20 +7,60 @@ CG.draw = {
     "scene": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         CG.pushMatrix(CG.g_ModelMatrix);
 
-        CG.draw.floor    (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.walls    (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.blinds   (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.darkFloor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.floor       (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.walls       (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        // CG.draw.blinds      (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.darkFloor   (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         CG.draw.floorDivider(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.sliders  (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.boards   (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.lights   (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.tables   (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.chairs   (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.skyPlane (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.corridor (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        CG.draw.door     (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, CG.doorAngle);
+        CG.draw.sliders     (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.boards      (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.lights      (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.tables      (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.chairs      (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.skyPlane    (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.corridor    (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.bookCase    (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.du          (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.door        (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, CG.doorAngle);
         CG.g_ModelMatrix = CG.popMatrix();
+
+    },
+
+    /* DU LOGO */
+    "du": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+        // duTexCube
+
+        gl.vertexAttrib3f(CG.a_Color, CG.COLORS.wallBlue[0], CG.COLORS.wallBlue[1], CG.COLORS.wallBlue[2]);
+        CG.pushMatrix(CG.g_ModelMatrix);
+        CG.g_ModelMatrix.translate(147.5, 8.0, -30.0);
+        CG.draw.box(gl, duTexCube, 0.1, 50.0, 100.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.g_ModelMatrix = CG.popMatrix();
+    },
+
+    /* BOOK CASE */
+    "bookCase" : function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+        // Back of book case
+        gl.vertexAttrib3f(CG.a_Color, CG.COLORS.lightBrown[0], CG.COLORS.lightBrown[1], CG.COLORS.lightBrown[2]);
+        CG.pushMatrix(CG.g_ModelMatrix);
+        CG.g_ModelMatrix.translate(38.0, -12.0, 39.5);
+        CG.draw.box(gl, bookCaseTexCube, 35.0, 26.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.g_ModelMatrix = CG.popMatrix();
+
+        // Shelves
+        for (var i = 0; i < 4; i++) {
+            CG.pushMatrix(CG.g_ModelMatrix);
+            CG.g_ModelMatrix.translate(38.0, 14.0 - (25/3)*i, 37.0);
+            CG.draw.box(gl, bookCaseTexCube, 35.0, 1.0, 5.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+            CG.g_ModelMatrix = CG.popMatrix();
+        }
+
+        // Sides
+        for (var j = 0; j < 2; j++) {
+            CG.pushMatrix(CG.g_ModelMatrix);
+            CG.g_ModelMatrix.translate(55.02 - 34.04*j, -12.0, 37.0);
+            CG.draw.box(gl, bookCaseTexCube, 1.0, 26.0, 5.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+            CG.g_ModelMatrix = CG.popMatrix();
+        }
 
     },
 
@@ -70,13 +110,13 @@ CG.draw = {
         CG.pushMatrix(CG.g_ModelMatrix);
 
         for (var i = 0; i < 2; i++) {
-            for (var j = 3; j < 6; j++) {
+            for (var j = 3; j < 5; j++) {
                 CG.draw.table(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix,
-                    -14 -15*j, 0, -37.5 - 75*i);
+                    -14 - 20*j, 0, -37.5 - 75*i);
             }
         }
 
-        CG.draw.podium(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -160.0, 2.0, -35.0);
+        CG.draw.teacherTable(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, -160.0, 2.0, -117.8);
 
         CG.g_ModelMatrix = CG.popMatrix();
     },
@@ -112,7 +152,7 @@ CG.draw = {
         CG.g_ModelMatrix = CG.popMatrix();
     },
 
-    "podium": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z) {
+    "teacherTable": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z) {
         CG.g_ModelMatrix.setTranslate(x, y, z);
 
         // Top
@@ -144,10 +184,10 @@ CG.draw = {
     "chairs": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         CG.pushMatrix(CG.g_ModelMatrix);
         for (var i = 0; i < 2; i++) {
-            for (var j = 3; j < 6; j++) {
+            for (var j = 3; j < 5; j++) {
                 for (var k = 0; k < 7; k++) {
                     CG.draw.chair(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix,
-                        -10 + j*-15, 0, -12.5 - i*75 - k*8.5, 10*j);
+                        -10 - 20*j, 0, -12.5 - i*75 - k*8.5, 10*j);
                 }
             }
         }
@@ -295,12 +335,6 @@ CG.draw = {
 
         CG.g_ModelMatrix.translate(0, 0, 69.5)
         CG.draw.board(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-
-        // CG.g_ModelMatrix.translate(1, 19.5, 0);
-        // CG.draw.board(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        //
-        // CG.g_ModelMatrix.translate(0, 0, -69.5)
-        // CG.draw.board(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     },
 
     "board": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {

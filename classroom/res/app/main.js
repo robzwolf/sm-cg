@@ -137,6 +137,8 @@ function main() {
     darkCarpetTexCube = CG.texturedCube(gl, CG.hardURL.darkCarpet);
     corrFloorTexCube  = CG.texturedCube(gl, CG.hardURL.corridorFloor);
     corrSignTexCube   = CG.texturedCube(gl, CG.hardURL.corridorSign);
+    bookCaseTexCube   = CG.texturedCube(gl, CG.hardURL.bookCaseWood);
+    duTexCube         = CG.texturedCube(gl, CG.hardURL.du);
 
     // Calculate the view projection matrix
     var viewProjMatrix = new Matrix4();

@@ -133,55 +133,48 @@ CG.checkKeys = function(keys) {
         keys[80] = false;
     }
 
-    if (keys[78]) {
-        // "n" key
-        // Open blind
-        clearInterval(CG.blindMove);
-        CG.blindMove = setInterval(CG.openBlinds, CG.NUM_CONSTS.animFreq);
+    if (keys[77]) {
+        // "m" key
+        // Make day time
+        clearInterval(CG.dayNightSwap);
+        CG.dayNightSwap = setInterval(CG.makeDayTime, CG.NUM_CONSTS.animFreq);
         keys[78] = false;
     }
 
-    if (keys[66]) {
-        // "b" key
-        // Close blind
-        clearInterval(CG.blindMove);
-        CG.blindMove = setInterval(CG.closeBlinds, CG.NUM_CONSTS.animFreq);
+    if (keys[78]) {
+        // "n" key
+        // Make night time
+        clearInterval(CG.dayNightSwap);
+        CG.dayNightSwap = setInterval(CG.makeNightTime, CG.NUM_CONSTS.animFreq);
         keys[66] = false;
     }
 
     if (keys[49]) {
         // "1" key
-        // Toggle lights 1-4
-        CG.toggleSpecificLights([1, 2, 3, 4])
+        // Toggle lights 5-8
+        CG.toggleSpecificLights([5, 6, 7, 8])
         keys[49] = false;
     }
 
     if (keys[50]) {
         // "2" key
-        // Toggle lights 5-8
-        CG.toggleSpecificLights([5, 6, 7, 8])
+        // Toggle lights 9-12
+        CG.toggleSpecificLights([9, 10, 11, 12])
         keys[50] = false;
     }
 
     if (keys[51]) {
         // "3" key
-        // Toggle lights 9-12
-        CG.toggleSpecificLights([9, 10, 11, 12])
+        // Toggle lights 13-16
+        CG.toggleSpecificLights([13, 14, 15, 16])
         keys[51] = false;
     }
 
     if (keys[52]) {
         // "4" key
-        // Toggle lights 13-16
-        CG.toggleSpecificLights([13, 14, 15, 16])
-        keys[52] = false;
-    }
-
-    if (keys[53]) {
-        // "5" key
         // Toggle lights 17-20
         CG.toggleSpecificLights([17, 18, 19, 20])
-        keys[53] = false;
+        keys[52] = false;
     }
 
 }
@@ -202,42 +195,43 @@ CG.closeDoor = function() {
     }
 }
 
-/* OPEN / CLOSE BLINDS */
+/* DAY / NIGHT TIME */
 
-CG.blindSize = CG.NUM_CONSTS.blindSize.INITIAL;
+// CG.blindSize = CG.NUM_CONSTS.blindSize.INITIAL;
 
 // Open the blinds when the room first loads
-CG.blindMove = setInterval(function () {CG.openBlinds()}, CG.NUM_CONSTS.animFreq);
+CG.dayNightSwap = setInterval(function () {CG.makeDayTime()}, CG.NUM_CONSTS.animFreq);
 
-CG.openBlinds = function() {
-    CG.blindSize -= CG.NUM_CONSTS.blindSize.STEP;
-    if (CG.blindSize < CG.NUM_CONSTS.blindSize.LOW_THRESHOLD) {
-        CG.blindSize = CG.NUM_CONSTS.blindSize.MIN;
-        clearInterval(CG.blindMove);
-    }
+CG.makeDayTime = function() {
+    // CG.blindSize -= CG.NUM_CONSTS.blindSize.STEP;
+    // if (CG.blindSize < CG.NUM_CONSTS.blindSize.LOW_THRESHOLD) {
+    //     CG.blindSize = CG.NUM_CONSTS.blindSize.MIN;
+    // }
     CG.ambLight += CG.NUM_CONSTS.ambLight.STEP;
     if (CG.ambLight >= CG.NUM_CONSTS.ambLight.MAX) {
         CG.ambLight = CG.NUM_CONSTS.ambLight.MAX;
+        clearInterval(CG.dayNightSwap);
     }
 }
-CG.closeBlinds = function() {
-    CG.blindSize += CG.NUM_CONSTS.blindSize.STEP;
-    if (CG.blindSize > CG.NUM_CONSTS.blindSize.HIGH_THRESHOLD) {
-        CG.blindSize = CG.NUM_CONSTS.blindSize.MAX;
-        clearInterval(CG.blindMove);
-    }
+
+CG.makeNightTime = function() {
+    // CG.blindSize += CG.NUM_CONSTS.blindSize.STEP;
+    // if (CG.blindSize > CG.NUM_CONSTS.blindSize.HIGH_THRESHOLD) {
+    //     CG.blindSize = CG.NUM_CONSTS.blindSize.MAX;
+    // }
     CG.ambLight -= CG.NUM_CONSTS.ambLight.STEP;
     if (CG.ambLight <= CG.NUM_CONSTS.ambLight.MIN) {
         CG.ambLight = CG.NUM_CONSTS.ambLight.MIN;
+        clearInterval(CG.dayNightSwap);
     }
 }
 
 
 CG.staggerLighting = function() {
     CG.yAxisRot += 0.4;
-    setTimeout(function() { CG.toggleSpecificLights([ 1,  2,  3,  4]); }, 1000);
-    setTimeout(function() { CG.toggleSpecificLights([ 5,  6,  7,  8]); },  800);
-    setTimeout(function() { CG.toggleSpecificLights([ 9, 10, 11, 12]); },  600);
-    setTimeout(function() { CG.toggleSpecificLights([13, 14, 15, 16]); },  400);
-    setTimeout(function() { CG.toggleSpecificLights([17, 18, 19, 20]); },  200);
+    setTimeout(function() { CG.toggleSpecificLights([ 1,  2,  3,  4]); }, 0);
+    setTimeout(function() { CG.toggleSpecificLights([ 5,  6,  7,  8]); }, CG.staggerLightingTimingInterval * 4);
+    setTimeout(function() { CG.toggleSpecificLights([ 9, 10, 11, 12]); }, CG.staggerLightingTimingInterval * 3);
+    setTimeout(function() { CG.toggleSpecificLights([13, 14, 15, 16]); }, CG.staggerLightingTimingInterval * 2);
+    setTimeout(function() { CG.toggleSpecificLights([17, 18, 19, 20]); }, CG.staggerLightingTimingInterval * 1);
 }
