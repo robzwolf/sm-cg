@@ -104,7 +104,7 @@ function main() {
 
     n        = CG.makeCube(gl);
     texCube  = CG.texturedCube(gl, "res/tex/durham.png");
-    texCube2 = CG.texturedCube(gl, "res/tex/board.png");
+    texCube2 = CG.texturedCube(gl, "res/tex/board_grad1.png");
     if (n < 0) {
         console.error("Failed to set the vertex information");
         return;
@@ -816,10 +816,10 @@ CG.drawBoards = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_Mode
 
 CG.drawBoard = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     CG.pushMatrix(CG.g_modelMatrix);
-    gl.vertexAttrib3f(CG.a_Color, CG.COLORS.greyGreen[0], CG.COLORS.greyGreen[1], CG.COLORS.greyGreen[2]);
+    gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
     CG.drawBox(gl, texCube2, 0.3, 16, 68, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
-    gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
+    gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
 
     // Bottom frame
     CG.g_modelMatrix.translate(0, 0, 0);
