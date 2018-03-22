@@ -14,18 +14,19 @@ CG.shaders.VSHADER_SOURCE = `
     varying vec3 v_Normal;
     varying vec3 v_Position;
     varying vec2 v_TexCoord;
+
     void main() {
-      gl_Position = u_MvpMatrix * a_Position;
-      v_Position = vec3(u_ModelMatrix * a_Position);
-      v_Normal = normalize(vec3(u_NormalMatrix * a_Normal));
-      if(u_IsTexture)
-      {
-        v_TexCoord = a_TexCoord*u_Scale;
-      }
-      else
-      {
-        v_Color = a_Color;
-      }
+        gl_Position = u_MvpMatrix * a_Position;
+        v_Position = vec3(u_ModelMatrix * a_Position);
+        v_Normal = normalize(vec3(u_NormalMatrix * a_Normal));
+        if(u_IsTexture)
+        {
+            v_TexCoord = a_TexCoord*u_Scale;
+        }
+        else
+        {
+            v_Color = a_Color;
+        }
     }
 
 `
