@@ -4,7 +4,7 @@
 
 CG.draw = {
 
-    "all": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+    "scene": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         CG.pushMatrix(CG.g_modelMatrix);
 
         CG.draw.floor   (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);

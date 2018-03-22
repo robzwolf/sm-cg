@@ -160,7 +160,7 @@ function main() {
             0.0, 1.0, 0);
 
         // Draw scene
-        CG.draw.all(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.scene(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
         // Handle key presses
         CG.checkKeys(keys);
