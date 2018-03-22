@@ -1,5 +1,5 @@
 /* engine.js
- * Computes all the geometry, lightning etc before drawing it
+ * Computes all the geometry, lighting etc before drawing it
  */
 
 /* LIGHTING */

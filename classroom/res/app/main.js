@@ -96,26 +96,26 @@ function main() {
     }
 
     // Set the light positions, relative to the world co-ordinates
-    gl.uniform3f(u_LightPosArr[1],   -25.0, 60.0,  -15.0);
-    gl.uniform3f(u_LightPosArr[2],   -25.0, 60.0,  -55.0);
-    gl.uniform3f(u_LightPosArr[3],   -25.0, 60.0,  -95.0);
-    gl.uniform3f(u_LightPosArr[4],   -25.0, 60.0, -135.0);
-    gl.uniform3f(u_LightPosArr[5],   -65.0, 60.0,  -15.0);
-    gl.uniform3f(u_LightPosArr[6],   -65.0, 60.0,  -55.0);
-    gl.uniform3f(u_LightPosArr[7],   -65.0, 60.0,  -95.0);
-    gl.uniform3f(u_LightPosArr[8],   -65.0, 60.0, -135.0);
-    gl.uniform3f(u_LightPosArr[9],  -105.0, 60.0,  -15.0);
-    gl.uniform3f(u_LightPosArr[10], -105.0, 60.0,  -55.0);
-    gl.uniform3f(u_LightPosArr[11], -105.0, 60.0,  -95.0);
-    gl.uniform3f(u_LightPosArr[12], -105.0, 60.0, -135.0);
-    gl.uniform3f(u_LightPosArr[13], -145.0, 60.0,  -15.0);
-    gl.uniform3f(u_LightPosArr[14], -145.0, 60.0,  -55.0);
-    gl.uniform3f(u_LightPosArr[15], -145.0, 60.0,  -95.0);
-    gl.uniform3f(u_LightPosArr[16], -145.0, 60.0, -135.0);
-    gl.uniform3f(u_LightPosArr[17], -185.0, 60.0,  -15.0);
-    gl.uniform3f(u_LightPosArr[18], -185.0, 60.0,  -55.0);
-    gl.uniform3f(u_LightPosArr[19], -185.0, 60.0,  -95.0);
-    gl.uniform3f(u_LightPosArr[20], -185.0, 60.0, -135.0);
+    gl.uniform3f(u_LightPosArr[1],   -25.0, 65.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[2],   -25.0, 65.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[3],   -25.0, 65.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[4],   -25.0, 65.0, -135.0);
+    gl.uniform3f(u_LightPosArr[5],   -65.0, 65.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[6],   -65.0, 65.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[7],   -65.0, 65.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[8],   -65.0, 65.0, -135.0);
+    gl.uniform3f(u_LightPosArr[9],  -105.0, 65.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[10], -105.0, 65.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[11], -105.0, 65.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[12], -105.0, 65.0, -135.0);
+    gl.uniform3f(u_LightPosArr[13], -145.0, 65.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[14], -145.0, 65.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[15], -145.0, 65.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[16], -145.0, 65.0, -135.0);
+    gl.uniform3f(u_LightPosArr[17], -185.0, 65.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[18], -185.0, 65.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[19], -185.0, 65.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[20], -185.0, 65.0, -135.0);
 
     // Set the ambient light level
     // + 0.2 on the blue channel to simulate daylight
@@ -135,6 +135,7 @@ function main() {
     ceilingTexCube    = CG.texturedCube(gl, CG.hardURL.ceiling);
     doorTexCube       = CG.texturedCube(gl, CG.hardURL.door);
     darkCarpetTexCube = CG.texturedCube(gl, CG.hardURL.darkCarpet);
+    corrFloorTexCube  = CG.texturedCube(gl, CG.hardURL.corridorFloor);
 
     // Calculate the view projection matrix
     var viewProjMatrix = new Matrix4();

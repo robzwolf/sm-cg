@@ -4,7 +4,9 @@ CG.shaders.FSHADER_SOURCE = `
     #ifdef GL_ES
     precision mediump float;
     #endif
-    
+
+
+    // Originally had 20 lights due to having a longer room before I made it square
     uniform vec3 u_LightColor1;
     uniform vec3 u_LightColor2;
     uniform vec3 u_LightColor3;

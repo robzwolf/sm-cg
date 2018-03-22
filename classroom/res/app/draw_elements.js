@@ -18,9 +18,49 @@ CG.draw = {
         CG.draw.tables   (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         CG.draw.chairs   (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         CG.draw.skyPlane (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.corridor (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         CG.draw.door     (gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, CG.doorAngle);
         CG.g_ModelMatrix = CG.popMatrix();
 
+    },
+
+    /* CORRIDOR */
+    "corridor": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+        CG.pushMatrix(CG.g_ModelMatrix);
+
+        // Big outside wall
+        CG.draw.bigOutsideCorridorWall(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+        CG.draw.corridorFloor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+        CG.g_ModelMatrix = CG.popMatrix();
+    },
+
+    "bigOutsideCorridorWall": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+        gl.vertexAttrib3f(CG.a_Color, CG.COLORS.wallBlue[0], CG.COLORS.wallBlue[1], CG.COLORS.wallBlue[2]);
+        CG.pushMatrix(CG.g_ModelMatrix);
+        CG.g_ModelMatrix.translate(60.0, -12.0, 100.0);
+        CG.draw.box(gl, plainCube, 200.0, 72.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.g_ModelMatrix = CG.popMatrix();
+    },
+
+    "corridorFloor": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+        // corridorFloor
+        gl.vertexAttrib3f(CG.a_Color,
+            CG.COLORS.darkRed[0],
+            CG.COLORS.darkRed[1],
+            CG.COLORS.darkRed[2]);
+        CG.pushMatrix(CG.g_ModelMatrix);
+        CG.g_ModelMatrix.translate(
+            CG.geometry.corridor.floor.position[0],
+            CG.geometry.corridor.floor.position[1],
+            CG.geometry.corridor.floor.position[2]);
+        CG.draw.box(gl, corrFloorTexCube,
+            CG.geometry.corridor.floor.dimensions[0],
+            CG.geometry.corridor.floor.dimensions[1],
+            CG.geometry.corridor.floor.dimensions[2],
+            viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.g_ModelMatrix = CG.popMatrix();
     },
 
     /* TABLES */
@@ -157,25 +197,7 @@ CG.draw = {
         CG.g_ModelMatrix.setTranslate(-100, -2, -75);
         CG.draw.box(gl, plainCube, 2000.0, 1.0, 2000.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
-        // CG.draw.steps(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     },
-
-    // "steps": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
-    //     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
-    //     CG.pushMatrix(CG.g_ModelMatrix);
-    //     for (var i = 1; i < 6; i++) {
-    //         CG.draw.step(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, 3.95 - 15*i, 13 - 3*i, -77.5, plainCube);
-    //     };
-    //     CG.g_ModelMatrix = CG.popMatrix();
-    // },
-    //
-    // "step": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, x, y, z) {
-    //     CG.g_ModelMatrix.setTranslate(x, y, z);
-    //     CG.pushMatrix(CG.g_ModelMatrix);
-    //     CG.g_ModelMatrix.translate(2.5, 0.0, 2.5);
-    //     CG.draw.box(gl, plainCube, 19, 5.0, 149, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-    //     CG.g_ModelMatrix = CG.popMatrix();
-    // },
 
     "darkFloor": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.darkGrey[0], CG.COLORS.darkGrey[1], CG.COLORS.darkGrey[2]);
@@ -236,18 +258,20 @@ CG.draw = {
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.wallBlue[0], CG.COLORS.wallBlue[1], CG.COLORS.wallBlue[2]);
 
         /* Front wall */
-        CG.g_ModelMatrix.setTranslate(-199.5, 0, -75.0);
+        CG.g_ModelMatrix.setTranslate(-199.5, 0, -45.0);
         CG.g_ModelMatrix.rotate(90.0, 0.0, 1.0, 0.0);  // Rotate around the y-axis
-        CG.draw.box(gl, plainCube, 149.0, 70.5, 1, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.box(gl, plainCube, 329.0, 70.5, 1, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        // former width 209
 
         /* Back wall */
-        CG.g_ModelMatrix.setTranslate(-50.5, 0.0, -75.0);
+        CG.g_ModelMatrix.setTranslate(-50.5, 0.0, -45.0);
         CG.g_ModelMatrix.rotate(90.0, 0.0, 1.0, 0.0);  // Rotate around the y-axis
-        CG.draw.box(gl, plainCube, 149.0, 70.5, 1, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.box(gl, plainCube, 329.0, 70.5, 1, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        // former width 209
 
         /* Roof */
         CG.g_ModelMatrix.setTranslate(-125, 70, -75);
-        CG.draw.box(gl, ceilingTexCube, 250.0, 1.0, 250.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.box(gl, ceilingTexCube, 270.0, 1.0, 270.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     },
 
     "sliders": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {

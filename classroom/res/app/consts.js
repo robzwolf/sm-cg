@@ -10,7 +10,8 @@ window.CG = {
         "floor": "res/tex/carpet.jpg",
         "ceiling": "res/tex/ceiling.jpg",
         "door": "res/tex/door.jpg",
-        "darkCarpet": "res/tex/dark_carpet.jpg"
+        "darkCarpet": "res/tex/dark_carpet.jpg",
+        "corridorFloor": "res/tex/corridor_floor.jpg"
     },
 
     "draw": {},
@@ -49,6 +50,7 @@ window.CG = {
             "position": {
                 "INITIAL": [-118, 30, -15],
                 // "INITIAL": [-100, 33, -10], // For looking at the windows
+                // "INITIAL": [-80, 25, 100], // For designing the corridor
                 "limits": {
                     "x": {
                         "MIN": -190,
@@ -73,7 +75,7 @@ window.CG = {
                     "INITIAL": Math.PI/2
                 },
                 "y": {
-                    "INITIAL": -Math.PI +.3
+                    "INITIAL": -Math.PI + 0.3
                     // "INITIAL": -Math.PI +1.1 // For looking at the windows
                 }
             }
@@ -96,7 +98,23 @@ window.CG = {
         "brown"     : [0.80, 0.60, 0.43],
         "lightBrown": [0.66, 0.50, 0.30],
         "sky"       : [0.40, 0.90, 0.95],
-        "white"     : [1.00, 1.00, 1.00]
+        "white"     : [1.00, 1.00, 1.00],
+        "darkRed"   : [0.30, 0.00, 0.00]
+    },
+
+    "geometry": {
+        "corridor": {
+            "outsideWall": {
+                "position": [60.0, -12.0, 100.0],
+                "dimensions": [200.0, 72.0, 1.0],
+                "color": "wallBlue"
+            },
+            "floor": {
+                "position": [60.0, -12.0, 70.0],
+                "dimensions": [200.0, 1.0, 60.0],
+                "color": "darkRed"
+            }
+        }
     },
 
     "cameraFovY": 65.0,
