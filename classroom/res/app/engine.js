@@ -1,3 +1,7 @@
+/* engine.js
+ * Computes all the geometry, lightning etc before drawing it
+ */
+
 /* LIGHTING */
 // Light states
 CG.LIGHT_ON = [null]
@@ -12,9 +16,6 @@ CG.toggleSpecificLights = function(lightsList) {
 }
 
 // Light / colour modifiers
-CG.redMod         = CG.NUM_CONSTS.redMod.INITIAL;
-CG.greenMod       = CG.NUM_CONSTS.greenMod.INITIAL;
-CG.blueMod        = CG.NUM_CONSTS.blueMod.INITIAL;
 CG.ambLight       = CG.NUM_CONSTS.ambLight.INITIAL;
 CG.lightIntensity = CG.NUM_CONSTS.lightIntensity.INITIAL;
 

@@ -1,3 +1,7 @@
+/* draw_elements.js
+ * Handles creating the geometry of the scene
+ */
+
 CG.draw = {
 
     "all": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
@@ -256,7 +260,7 @@ CG.draw = {
     "board": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         CG.pushMatrix(CG.g_modelMatrix);
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
-        CG.draw.box(gl, texCube2, 0.3, 36, 68, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.box(gl, boardTexCube, 0.3, 36, 68, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
 
@@ -312,7 +316,7 @@ CG.draw = {
         CG.pushMatrix(CG.g_modelMatrix);
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
         CG.g_modelMatrix.setTranslate(-200, -20, -500);
-        CG.draw.box(gl, texCube, 1600, 400, 1, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.box(gl, skyTexCube, 1600, 400, 1, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         CG.g_modelMatrix = CG.popMatrix();
     },
 

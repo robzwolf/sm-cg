@@ -18,15 +18,6 @@ window.CG = {
             "MAX"    : 0.450,
             "STEP"   : 0.006,
         },
-        "redMod": {
-            "INITIAL": 0.02
-        },
-        "greenMod": {
-            "INITIAL": 0.00
-        },
-        "blueMod": {
-            "INITIAL": -0.06,
-        },
         "lightIntensity": {
             "INITIAL": 0.35
         },

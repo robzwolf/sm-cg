@@ -1,3 +1,7 @@
+/* main.js
+ * Draws everything on the screen
+ */
+
 // window.CG is first defined in index.html head script
 
 // Canvas
@@ -77,9 +81,9 @@ function main() {
     function updateLights() {
         for (var i = 1; i <= 20; i++) {
             gl.uniform3f(u_LightColorArr[i],
-            (CG.lightColor[i][0]   + CG.redMod)   * CG.LIGHT_ON[i],
-            (CG.lightColor[i][1]   + CG.greenMod) * CG.LIGHT_ON[i],
-            (CG.lightColor[i][2]   + CG.blueMod)  * CG.LIGHT_ON[i]);
+            (CG.lightColor[i][0]) * CG.LIGHT_ON[i],
+            (CG.lightColor[i][1]) * CG.LIGHT_ON[i],
+            (CG.lightColor[i][2]) * CG.LIGHT_ON[i]);
         }
 
         gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight);
@@ -108,11 +112,12 @@ function main() {
     gl.uniform3f(u_LightPosArr[20], -185.0, 60.0, -135.0);
 
     // Set the ambient light level
+    // + 0.2 on the blue channel to simulate daylight
     gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight + 0.2);
 
     n        = CG.makeCube(gl);
-    texCube  = CG.texturedCube(gl, CG.hardURL.sky);
-    texCube2 = CG.texturedCube(gl, CG.hardURL.board);
+    skyTexCube  = CG.texturedCube(gl, CG.hardURL.sky);
+    boardTexCube = CG.texturedCube(gl, CG.hardURL.board);
     if (n < 0) {
         console.error("Failed to set the vertex information");
         return;
@@ -147,7 +152,7 @@ function main() {
         CG.updateCameraDirection();
         updateLights();
 
-        viewProjMatrix.setPerspective(CG.cameraFovY, CG.canvas.width / CG.canvas.height, 1.0, 700.0);
+        viewProjMatrix.setPerspective(CG.cameraFovY, CG.canvas.width / CG.canvas.height, 1.0, 725.0);
         viewProjMatrix.lookAt(CG.cameraPosition[0], CG.cameraPosition[1], CG.cameraPosition[2],
             CG.cameraPosition[0] + CG.cameraOrientation[0],
             CG.cameraPosition[1] + CG.cameraOrientation[1],

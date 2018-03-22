@@ -1,3 +1,7 @@
+/* key_presses_camera_control.js
+ * Handles key presses and moving the camera
+ */
+
 /* CAMERA */
 // Camera
 CG.xAxisRot          = CG.NUM_CONSTS.camera.axisRotation.x.INITIAL;
