@@ -213,29 +213,26 @@ CG.initTextures = function(gl, imagePath) {
     }
 
     // Create image object
-    var img = new Image();
+    var img = document.querySelectorAll("[src='" + imagePath + "']")[0];
     if (!img) {
         console.error("Failed to create the Image object");
         return null;
     }
 
-    // Register the event handler to be called when image loading is completed
-    img.onload = function() {
-        // https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Using_textures_in_WebGL
+    console.log(img);
 
-        // Flip the image around the horizontal axis
-        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+    // https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Using_textures_in_WebGL
 
-        // Bind and prep the texture
-        gl.bindTexture(gl.TEXTURE_2D, tex);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    // Flip the image around the horizontal axis
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
 
-        // Unbind the texture object
-        gl.bindTexture(gl.TEXTURE_2D, null);
-    };
+    // Bind and prep the texture
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 
-    // Tell the browser to load an image
-    img.src = imagePath;
+    // Unbind the texture object
+    gl.bindTexture(gl.TEXTURE_2D, null);
+
     return tex;
 }

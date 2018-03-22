@@ -6,7 +6,9 @@ window.CG = {
         // "sky": "res/tex/durham.png",
         // "sky": "res/tex/rainbow.png",
         "sky": "res/tex/wide_sky_tiled.jpg",
-        "board": "res/tex/board_grad1.jpg"
+        "board": "res/tex/board_grad1.jpg",
+        "floor": "res/tex/carpet.jpg",
+        "ceiling": "res/tex/ceiling.jpg"
     },
 
     "draw": {},

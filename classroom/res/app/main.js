@@ -9,6 +9,12 @@ CG.canvas = document.getElementById("classroom");
 
 function main() {
 
+    console.log("onload()");
+
+    // Hide the loading screen and show the canvas
+    document.getElementById("loading-overlay").className = "hidden";
+    CG.canvas.className = "";
+
     CG.canvas.width  = window.innerWidth;
     CG.canvas.height = window.innerHeight;
 
@@ -115,10 +121,12 @@ function main() {
     // + 0.2 on the blue channel to simulate daylight
     gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight + 0.2);
 
-    n        = CG.makeCube(gl);
-    skyTexCube  = CG.texturedCube(gl, CG.hardURL.sky);
+    plainCube    = CG.makeCube(gl);
+    skyTexCube   = CG.texturedCube(gl, CG.hardURL.sky);
     boardTexCube = CG.texturedCube(gl, CG.hardURL.board);
-    if (n < 0) {
+    floorTexCube = CG.texturedCube(gl, CG.hardURL.floor);
+    ceilingTexCube = CG.texturedCube(gl, CG.hardURL.ceiling);
+    if (plainCube < 0) {
         console.error("Failed to set the vertex information");
         return;
     }

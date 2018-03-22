@@ -12,10 +12,23 @@
     </head>
 
     <body onload="main()">
-        <canvas id="classroom">
+        <canvas id="classroom" class="hidden">
             Please use a browser that supports HTML5.
         </canvas>
 
+        <div id="loading-overlay">
+            <div>
+                <h1>Loading, please wait...</h1>
+                <h2>-vzbf32</h2>
+            </div>
+        </div>
+
+        <!-- Textures -->
+        <img class="hidden"src="res/tex/wide_sky_tiled.jpg" />
+        <img class="hidden"src="res/tex/board_grad1.jpg" />
+        <img class="hidden"src="res/tex/carpet.jpg" />
+        <img class="hidden"src="res/tex/ceiling.jpg" />
+        
         <!-- WebGL libraries -->
         <script src="res/lib/webgl-utils.js"></script>
         <script src="res/lib/webgl-debug.js"></script>

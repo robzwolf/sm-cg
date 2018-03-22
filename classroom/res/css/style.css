@@ -3,4 +3,30 @@
 body {
     margin: 0;
     overflow: hidden;
+    font-family: sans-serif;
+    background: #f7f7f7;
+}
+
+.hidden {
+    display: none;
+}
+
+#loading-overlay {
+    display: flex;
+    align-items: center;
+}
+
+html, body, #loading-overlay {
+    height: 100%;
+}
+
+#loading-overlay div {
+    /* width: 100%; */
+    text-align: center;
+    margin: auto;
+    border: 1px solid #c34;
+    padding: 30px 60px;
+    border-radius: 5px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .1);
+    background: #fff;
 }
