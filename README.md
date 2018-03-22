@@ -6,7 +6,7 @@ Software Methodologies – Computer Graphics (WebGL) assignment.
 ```bash
     python3 -m http.server 8001
 ```
-    
+
 2) Navigate to `http://localhost:8001` in your browser.
 
 ## Sources
@@ -20,6 +20,10 @@ _Retrieved 21/03/2018_
 
 #### Textures in WebGL
 https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Using_textures_in_WebGL  
+_Retrieved 21/03/2018_
+
+#### Favicon
+https://www.dur.ac.uk/favicon-32x32.png  
 _Retrieved 21/03/2018_
 
 #### WebGL Example
