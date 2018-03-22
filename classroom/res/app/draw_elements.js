@@ -33,7 +33,7 @@ CG.draw = {
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.wallBlue[0], CG.COLORS.wallBlue[1], CG.COLORS.wallBlue[2]);
         CG.pushMatrix(CG.g_ModelMatrix);
         CG.g_ModelMatrix.translate(147.5, 8.0, -30.0);
-        CG.draw.box(gl, duTexCube, 0.1, 50.0, 100.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.box(gl, duTexCube, 0.01, 50.0, 100.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         CG.g_ModelMatrix = CG.popMatrix();
     },
 
