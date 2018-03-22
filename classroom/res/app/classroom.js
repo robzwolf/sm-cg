@@ -564,7 +564,7 @@ CG.texturedCube = function(gl, imagePath) {
     t.normalBuffer   = CG.initArrayBufferForLaterUse(gl, normals, 3, gl.FLOAT);
     t.texCoordBuffer = CG.initArrayBufferForLaterUse(gl, texCoords, 2, gl.FLOAT);
     t.indexBuffer    = CG.initElementArrayBufferForLaterUse(gl, indices, gl.UNSIGNED_BYTE);
-    t.texture        = CG.initTextures(gl, imagePath)
+    t.texture        = CG.initTextures(gl, imagePath);
     t.numIndices     = indices.length;
     t.isTextured     = true;
 
