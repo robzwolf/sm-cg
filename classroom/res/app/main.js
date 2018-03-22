@@ -86,26 +86,26 @@ function main() {
     }
 
     // Set the light positions, relative to the world co-ordinates
-    gl.uniform3f(u_LightPosArr[1],   -20.0, 45.0,  -15.0);
-    gl.uniform3f(u_LightPosArr[2],   -20.0, 45.0,  -55.0);
-    gl.uniform3f(u_LightPosArr[3],   -20.0, 45.0,  -95.0);
-    gl.uniform3f(u_LightPosArr[4],   -20.0, 45.0, -135.0);
-    gl.uniform3f(u_LightPosArr[5],   -60.0, 45.0,  -15.0);
-    gl.uniform3f(u_LightPosArr[6],   -60.0, 45.0,  -55.0);
-    gl.uniform3f(u_LightPosArr[7],   -60.0, 45.0,  -95.0);
-    gl.uniform3f(u_LightPosArr[8],   -60.0, 45.0, -135.0);
-    gl.uniform3f(u_LightPosArr[9],  -100.0, 45.0,  -15.0);
-    gl.uniform3f(u_LightPosArr[10], -100.0, 45.0,  -55.0);
-    gl.uniform3f(u_LightPosArr[11], -100.0, 45.0,  -95.0);
-    gl.uniform3f(u_LightPosArr[12], -100.0, 45.0, -135.0);
-    gl.uniform3f(u_LightPosArr[13], -140.0, 45.0,  -15.0);
-    gl.uniform3f(u_LightPosArr[14], -140.0, 45.0,  -55.0);
-    gl.uniform3f(u_LightPosArr[15], -140.0, 45.0,  -95.0);
-    gl.uniform3f(u_LightPosArr[16], -140.0, 45.0, -135.0);
-    gl.uniform3f(u_LightPosArr[17], -180.0, 45.0,  -15.0);
-    gl.uniform3f(u_LightPosArr[18], -180.0, 45.0,  -55.0);
-    gl.uniform3f(u_LightPosArr[19], -180.0, 45.0,  -95.0);
-    gl.uniform3f(u_LightPosArr[20], -180.0, 45.0, -135.0);
+    gl.uniform3f(u_LightPosArr[1],   -25.0, 60.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[2],   -25.0, 60.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[3],   -25.0, 60.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[4],   -25.0, 60.0, -135.0);
+    gl.uniform3f(u_LightPosArr[5],   -65.0, 60.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[6],   -65.0, 60.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[7],   -65.0, 60.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[8],   -65.0, 60.0, -135.0);
+    gl.uniform3f(u_LightPosArr[9],  -105.0, 60.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[10], -105.0, 60.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[11], -105.0, 60.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[12], -105.0, 60.0, -135.0);
+    gl.uniform3f(u_LightPosArr[13], -145.0, 60.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[14], -145.0, 60.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[15], -145.0, 60.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[16], -145.0, 60.0, -135.0);
+    gl.uniform3f(u_LightPosArr[17], -185.0, 60.0,  -15.0);
+    gl.uniform3f(u_LightPosArr[18], -185.0, 60.0,  -55.0);
+    gl.uniform3f(u_LightPosArr[19], -185.0, 60.0,  -95.0);
+    gl.uniform3f(u_LightPosArr[20], -185.0, 60.0, -135.0);
 
     // Set the ambient light level
     gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight + 0.2);

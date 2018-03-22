@@ -1,10 +1,10 @@
 /* CAMERA */
 // Camera
-CG.yAxisRot          = -Math.PI;
-CG.xAxisRot          = Math.PI/2;
-CG.lookSpeed         = 0.8;
-CG.cameraPosition    = [-10.0, 30.0, -10.0];
-CG.cameraOrientation = [  0.0,  0.0,   0.0];
+CG.xAxisRot          = CG.NUM_CONSTS.camera.axisRotation.x.INITIAL;
+CG.yAxisRot          = CG.NUM_CONSTS.camera.axisRotation.y.INITIAL;
+CG.lookSpeed         = CG.NUM_CONSTS.camera.lookSpeed;
+CG.cameraPosition    = CG.NUM_CONSTS.camera.position.INITIAL;
+CG.cameraOrientation = CG.NUM_CONSTS.camera.orientation.INITIAL;
 
 // Start pointer lock
 CG.canvas.onclick = function() {
@@ -40,55 +40,52 @@ CG.updateCameraDirection = function() {
 }
 
 /* KEY PRESSES */
-// Movement variables
-CG.moveSpeed = 1;
-
 CG.checkKeys = function(keys) {
     if (keys[87]) {
         // "w" key
-        // Move forward at camera direction
-        CG.cameraPosition[0] += CG.cameraOrientation[0] * CG.moveSpeed;
-        CG.cameraPosition[1] += CG.cameraOrientation[1] * CG.moveSpeed;
-        CG.cameraPosition[2] += CG.cameraOrientation[2] * CG.moveSpeed;
+        // Move forward
+        CG.cameraPosition[0] += CG.cameraOrientation[0] * CG.NUM_CONSTS.moveStep;
+        CG.cameraPosition[1] += CG.cameraOrientation[1] * CG.NUM_CONSTS.moveStep;
+        CG.cameraPosition[2] += CG.cameraOrientation[2] * CG.NUM_CONSTS.moveStep;
         console.log(CG.cameraPosition);
     }
 
     if (keys[83]) {
         // "s" key
-        // Move backward at camera direction
-        CG.cameraPosition[0] -= CG.cameraOrientation[0] * CG.moveSpeed;
-        CG.cameraPosition[1] -= CG.cameraOrientation[1] * CG.moveSpeed;
-        CG.cameraPosition[2] -= CG.cameraOrientation[2] * CG.moveSpeed;
+        // Move backward
+        CG.cameraPosition[0] -= CG.cameraOrientation[0] * CG.NUM_CONSTS.moveStep;
+        CG.cameraPosition[1] -= CG.cameraOrientation[1] * CG.NUM_CONSTS.moveStep;
+        CG.cameraPosition[2] -= CG.cameraOrientation[2] * CG.NUM_CONSTS.moveStep;
         console.log(CG.cameraPosition);
     }
 
     if (keys[68]) {
         // "d" key
-        // Move right relative to camera direction
-        CG.cameraPosition[0] -= CG.cameraOrientation[2] * CG.moveSpeed;
-        CG.cameraPosition[2] += CG.cameraOrientation[0] * CG.moveSpeed;
+        // Move right
+        CG.cameraPosition[0] -= CG.cameraOrientation[2] * CG.NUM_CONSTS.moveStep;
+        CG.cameraPosition[2] += CG.cameraOrientation[0] * CG.NUM_CONSTS.moveStep;
         console.log(CG.cameraPosition);
     }
 
     if (keys[65]) {
         // "a" key
-        // Move left relative to camera direction
-        CG.cameraPosition[0] += CG.cameraOrientation[2] * CG.moveSpeed;
-        CG.cameraPosition[2] -= CG.cameraOrientation[0] * CG.moveSpeed;
+        // Move left
+        CG.cameraPosition[0] += CG.cameraOrientation[2] * CG.NUM_CONSTS.moveStep;
+        CG.cameraPosition[2] -= CG.cameraOrientation[0] * CG.NUM_CONSTS.moveStep;
         console.log(CG.cameraPosition);
     }
 
     if (keys[81]) {
         // "q" key
-        // Move camera down
-        CG.cameraPosition[1] -= CG.moveSpeed;
+        // Move down
+        CG.cameraPosition[1] -= CG.NUM_CONSTS.moveStep;
         console.log(CG.cameraPosition);
     }
 
     if (keys[69]) {
         // "e" key
-        // Move camera up
-        CG.cameraPosition[1] += CG.moveSpeed;
+        // Move up
+        CG.cameraPosition[1] += CG.NUM_CONSTS.moveStep;
         console.log(CG.cameraPosition);
     }
 
