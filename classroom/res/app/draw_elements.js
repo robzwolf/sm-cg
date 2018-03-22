@@ -50,7 +50,7 @@ CG.draw = {
         for (var i = 0; i < 4; i++) {
             CG.pushMatrix(CG.g_ModelMatrix);
             CG.g_ModelMatrix.translate(38.0, 14.0 - (25/3)*i, 37.0);
-            CG.draw.box(gl, bookCaseTexCube, 35.0, 1.0, 5.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+            CG.draw.box(gl, bookCaseTexCube, i == 0 ? 35.0 : 33.0, 1.0, 5.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
             CG.g_ModelMatrix = CG.popMatrix();
         }
 
