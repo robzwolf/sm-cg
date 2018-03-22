@@ -11,7 +11,8 @@ window.CG = {
         "ceiling": "res/tex/ceiling.jpg",
         "door": "res/tex/door.jpg",
         "darkCarpet": "res/tex/dark_carpet.jpg",
-        "corridorFloor": "res/tex/corridor_floor.jpg"
+        "corridorFloor": "res/tex/corridor_floor.jpg",
+        "corridorSign": "res/tex/do_not_leave.jpg"
     },
 
     "draw": {},
@@ -120,6 +121,6 @@ window.CG = {
     "cameraFovY": 65.0,
     // "cameraFovY": 110.0, // For loooking at the windows
 
-    // "limitCamera": true,
+    "limitCamera": true,
 
 };

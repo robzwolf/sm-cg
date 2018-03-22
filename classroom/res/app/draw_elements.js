@@ -31,7 +31,11 @@ CG.draw = {
         // Big outside wall
         CG.draw.bigOutsideCorridorWall(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
+        // Floor
         CG.draw.corridorFloor(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+
+        // Sign
+        CG.draw.corridorSign(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
         CG.g_ModelMatrix = CG.popMatrix();
     },
@@ -45,21 +49,19 @@ CG.draw = {
     },
 
     "corridorFloor": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
-        // corridorFloor
-        gl.vertexAttrib3f(CG.a_Color,
-            CG.COLORS.darkRed[0],
-            CG.COLORS.darkRed[1],
-            CG.COLORS.darkRed[2]);
+        gl.vertexAttrib3f(CG.a_Color, CG.COLORS.darkRed[0], CG.COLORS.darkRed[1], CG.COLORS.darkRed[2]);
         CG.pushMatrix(CG.g_ModelMatrix);
-        CG.g_ModelMatrix.translate(
-            CG.geometry.corridor.floor.position[0],
-            CG.geometry.corridor.floor.position[1],
-            CG.geometry.corridor.floor.position[2]);
-        CG.draw.box(gl, corrFloorTexCube,
-            CG.geometry.corridor.floor.dimensions[0],
-            CG.geometry.corridor.floor.dimensions[1],
-            CG.geometry.corridor.floor.dimensions[2],
-            viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.g_ModelMatrix.translate(60.0, -12.0, 70.0);
+        CG.draw.box(gl, corrFloorTexCube, 200.0, 1.0, 60.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.g_ModelMatrix = CG.popMatrix();
+    },
+
+    "corridorSign": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
+        // corrSignTexCube
+        gl.vertexAttrib3f(CG.a_Color, CG.COLORS.darkRed[0], CG.COLORS.darkRed[1], CG.COLORS.darkRed[2]);
+        CG.pushMatrix(CG.g_ModelMatrix);
+        CG.g_ModelMatrix.translate(70.0, 12.0, 99.4);
+        CG.draw.box(gl, corrSignTexCube, 20.0, 10.0, 0.05, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         CG.g_ModelMatrix = CG.popMatrix();
     },
 
