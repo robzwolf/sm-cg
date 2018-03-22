@@ -147,9 +147,7 @@ function main() {
         CG.updateCameraDirection();
         updateLights();
 
-        var fovy = 70.0;
-
-        viewProjMatrix.setPerspective(fovy, CG.canvas.width / CG.canvas.height, 1.0, 700.0);
+        viewProjMatrix.setPerspective(CG.cameraFovY, CG.canvas.width / CG.canvas.height, 1.0, 700.0);
         viewProjMatrix.lookAt(CG.cameraPosition[0], CG.cameraPosition[1], CG.cameraPosition[2],
             CG.cameraPosition[0] + CG.cameraOrientation[0],
             CG.cameraPosition[1] + CG.cameraOrientation[1],
