@@ -186,24 +186,25 @@ CG.draw = {
     "walls": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.wallBlue[0], CG.COLORS.wallBlue[1], CG.COLORS.wallBlue[2]);
 
+        /* Door wall */
         // Back part of door wall
         CG.g_ModelMatrix.setTranslate(-81.0, 0.0, -0.5);
         CG.draw.box(gl, n, 62.0, 31.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
         // Top part of door wall
         CG.g_ModelMatrix.setTranslate(-125.0, 31.0, -0.5);
-        CG.draw.box(gl, n, 150.0, 44.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        CG.draw.box(gl, n, 150.0, 39.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
         // Front part of door wall
         CG.g_ModelMatrix.setTranslate(-164.0, 0.0, -0.5);
         CG.draw.box(gl, n, 72.0, 31.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
-        // Windowed wall
+        /* Windowed wall */
         CG.g_ModelMatrix.setTranslate(-194.0, 0.0, -149.5);
         CG.draw.box(gl, n, 10.0, 70.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
         // Vertical bits
-        (function(){for (var i = 0; i <= 3; i++) {
+        (function(){for (var i = 0; i < 3; i++) {
             CG.g_ModelMatrix.setTranslate(-194.0 + 70*i, 0.0, -149.5);
             CG.draw.box(gl, n, 10.0, 70.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
         }})();
@@ -227,17 +228,17 @@ CG.draw = {
 
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.wallBlue[0], CG.COLORS.wallBlue[1], CG.COLORS.wallBlue[2]);
 
-        // Front wall
+        /* Front wall */
         CG.g_ModelMatrix.setTranslate(-199.5, 0, -75.0);
         CG.g_ModelMatrix.rotate(90.0, 0.0, 1.0, 0.0);  // Rotate around the y-axis
         CG.draw.box(gl, n, 149.0, 70.5, 1, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
-        // Back wall
+        /* Back wall */
         CG.g_ModelMatrix.setTranslate(-50.5, 0.0, -75.0);
         CG.g_ModelMatrix.rotate(90.0, 0.0, 1.0, 0.0);  // Rotate around the y-axis
         CG.draw.box(gl, n, 149.0, 70.5, 1, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
-        // Roof
+        /* Roof */
         CG.g_ModelMatrix.setTranslate(-125, 70, -75);
         CG.draw.box(gl, n, 250.0, 1.0, 250.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     },

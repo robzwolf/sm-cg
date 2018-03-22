@@ -98,6 +98,6 @@ window.CG = {
     "cameraFovY": 70.0,
     // "cameraFovY": 110.0, // For loooking at the windows
 
-    "limitCamera": true,
+    // "limitCamera": true,
 
 };
