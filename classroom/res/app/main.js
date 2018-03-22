@@ -121,15 +121,20 @@ function main() {
     // + 0.2 on the blue channel to simulate daylight
     gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight + 0.2);
 
+
+    // Prepare geometry
     plainCube    = CG.makeCube(gl);
-    skyTexCube   = CG.texturedCube(gl, CG.hardURL.sky);
-    boardTexCube = CG.texturedCube(gl, CG.hardURL.board);
-    floorTexCube = CG.texturedCube(gl, CG.hardURL.floor);
-    ceilingTexCube = CG.texturedCube(gl, CG.hardURL.ceiling);
     if (plainCube < 0) {
         console.error("Failed to set the vertex information");
         return;
     }
+
+    skyTexCube        = CG.texturedCube(gl, CG.hardURL.sky);
+    boardTexCube      = CG.texturedCube(gl, CG.hardURL.board);
+    floorTexCube      = CG.texturedCube(gl, CG.hardURL.floor);
+    ceilingTexCube    = CG.texturedCube(gl, CG.hardURL.ceiling);
+    doorTexCube       = CG.texturedCube(gl, CG.hardURL.door);
+    darkCarpetTexCube = CG.texturedCube(gl, CG.hardURL.darkCarpet);
 
     // Calculate the view projection matrix
     var viewProjMatrix = new Matrix4();

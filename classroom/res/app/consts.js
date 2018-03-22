@@ -8,7 +8,9 @@ window.CG = {
         "sky": "res/tex/wide_sky_tiled.jpg",
         "board": "res/tex/board_grad1.jpg",
         "floor": "res/tex/carpet.jpg",
-        "ceiling": "res/tex/ceiling.jpg"
+        "ceiling": "res/tex/ceiling.jpg",
+        "door": "res/tex/door.jpg",
+        "darkCarpet": "res/tex/dark_carpet.jpg"
     },
 
     "draw": {},
@@ -45,7 +47,7 @@ window.CG = {
         },
         "camera": {
             "position": {
-                "INITIAL": [-100, 33, -130],
+                "INITIAL": [-118, 30, -15],
                 // "INITIAL": [-100, 33, -10], // For looking at the windows
                 "limits": {
                     "x": {
@@ -71,7 +73,7 @@ window.CG = {
                     "INITIAL": Math.PI/2
                 },
                 "y": {
-                    "INITIAL": -Math.PI -.8
+                    "INITIAL": -Math.PI +.3
                     // "INITIAL": -Math.PI +1.1 // For looking at the windows
                 }
             }
@@ -97,7 +99,7 @@ window.CG = {
         "white"     : [1.00, 1.00, 1.00]
     },
 
-    "cameraFovY": 70.0,
+    "cameraFovY": 65.0,
     // "cameraFovY": 110.0, // For loooking at the windows
 
     // "limitCamera": true,
