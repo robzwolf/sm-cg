@@ -1,13 +1,7 @@
-// Wrapper object for all our named stuff
-window.CG = {
-    "hardURL": {
-        // "sky": "res/tex/durham.png",
-        // "sky": "res/tex/rainbow.png",
-        "sky": "res/tex/long-thin.jpg",
-        "board": "res/tex/board_grad1.jpg"
-    },
-    draw: {}
-};
+// window.CG is first defined in index.html head script, then added to in costs.js, VSHADER_SOURCE.js and FSHADER_SOURCE.js
+
+
+
 
 // Canvas
 CG.canvas = document.getElementById("classroom");
@@ -38,7 +32,7 @@ function main() {
     console.log("Got some WebGL context.");
 
     // Initialise shaders
-    if (!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
+    if (!initShaders(gl, CG.shaders.VSHADER_SOURCE, CG.shaders.FSHADER_SOURCE)) {
         console.error("Failed to intialise shaders.");
         return;
     }
@@ -147,7 +141,7 @@ function main() {
 
     function updateCanvas() {
         requestAnimFrame(updateCanvas);
-        CG.findFps();
+        // CG.findFps();
 
         // Start drawing
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -171,22 +165,7 @@ function main() {
     }
 }
 
-/*========================= Lighting ========================= */
-// Colour variable definitions
-CG.COLORS = {
-    "green"     : [0.30, 0.80, 0.50],
-    "greyGreen" : [0.23, 0.60, 0.40],
-    "grey"      : [0.50, 0.50, 0.50],
-    "darkGrey"  : [0.40, 0.40, 0.40],
-    "black"     : [0.00, 0.00, 0.00],
-    "cream"     : [0.95, 0.90, 0.95],
-    "purple"    : [0.60, 0.30, 0.60],
-    "brown"     : [0.80, 0.60, 0.43],
-    "lightBrown": [0.66, 0.50, 0.30],
-    "sky"       : [0.40, 0.90, 0.95],
-    "white"     : [1.00, 1.00, 1.00]
-}
-
+/* LIGHTING */
 // Light states
 CG.LIGHT_ON = [null]
 for (var i = 1; i <= 20; i++) {
@@ -200,11 +179,11 @@ CG.toggleSpecificLights = function(lightsList) {
 }
 
 // Light / colour modifiers
-CG.redMod         =  0.05;
-CG.greenMod       =  0.00;
-CG.blueMod        = -0.10;
-CG.ambLight       =  0.00;
-CG.lightIntensity =  0.50;
+CG.redMod         = CG.NUM_CONSTS.redMod.INITIAL;
+CG.greenMod       = CG.NUM_CONSTS.greenMod.INITIAL;
+CG.blueMod        = CG.NUM_CONSTS.blueMod.INITIAL;
+CG.ambLight       = CG.NUM_CONSTS.ambLight.INITIAL;
+CG.lightIntensity = CG.NUM_CONSTS.lightIntensity.INITIAL;
 
 
 CG.lightColor = [null];
@@ -213,28 +192,11 @@ for (var j = 1; j <= 20; j++) {
 }
 
 
-/*========================= FPS Checking ========================= */
-CG.fps         = 30;
-CG.currentTime =  0;
-CG.currentFps  =  0;
-CG.oldTime     =  0;
-
-CG.findFps = function() {
-    CG.currentTime = new Date().getTime();
-    CG.currentFps++;
-    if (CG.currentTime - CG.oldTime >= 1000) {
-        // document.getElementById("fps_counter").innerHTML = "<b>FPS: </b>" + Number(CG.currentFps * 1000.0 / (CG.currentTime - CG.oldTime)).toPrecision( 5 );
-        //Reset for next calc
-        CG.oldTime    = CG.currentTime;
-        CG.currentFps = 0;
-    }
-}
-
 window.requestAnimFrame = (function() {
-    return window.requestAnimationFrame || function(callback) { setTimeout(callback, 1000 / CG.fps); };
+    return window.requestAnimationFrame || function(callback) { setTimeout(callback, 50); };
 })();
 
-/*========================= Camera Handling ========================= */
+/* CAMERA */
 // Camera
 CG.yAxisRot          = -Math.PI;
 CG.xAxisRot          = Math.PI/2;
@@ -275,7 +237,7 @@ CG.updateCameraDirection = function() {
     ];
 }
 
-/*========================= Key Handling ========================= */
+/* KEY PRESSES */
 // Movement variables
 CG.moveSpeed = 1;
 
@@ -402,7 +364,7 @@ CG.checkKeys = function(keys) {
     }
 }
 
-/*========================= Dynamic Objects ========================= */
+/* DYNAMIC OBJECTS */
 // Open / close doors
 CG.openDoor = function() {
     CG.doorAngle +=0.05
@@ -471,7 +433,7 @@ CG.normalLights = function() {
 }
 
 
-/*========================= Cube handling (coloured and textured) ========================= */
+/* CUBES */
 CG.makeCube = function(gl) {
     // Coordinates (cube of side length 1, origin on the centre of the bottom)
     var c = {};
@@ -578,9 +540,9 @@ CG.texturedCube = function(gl, imagePath) {
 CG.g_modelMatrix = new Matrix4();
 CG.g_mvpMatrix = new Matrix4();
 
-/*========================= DrawShapes ========================= */
+/* SHAPE DRAWING */
 // Door position
-CG.doorAngle = 0;
+CG.doorAngle = CG.NUM_CONSTS.doorAngle.INITIAL;
 
 CG.draw = {
 
@@ -602,7 +564,7 @@ CG.draw = {
 
     },
 
-    /*========================= Draw Tables ========================= */
+    /* TABLES */
     "tables": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         CG.pushMatrix(CG.g_modelMatrix);
 
@@ -677,7 +639,7 @@ CG.draw = {
         }
     },
 
-    /*========================= Draw Chairs ========================= */
+    /* CHAIRS */
     "chairs": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         CG.pushMatrix(CG.g_modelMatrix);
         for (var i = 0; i < 2; i++) {
@@ -724,7 +686,7 @@ CG.draw = {
         CG.g_modelMatrix = CG.popMatrix();
     },
 
-    /*========================= Draw Floor/Steps ========================= */
+    /* FLOOR AND STEPS */
     "floor": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
         CG.g_modelMatrix.setTranslate(-100, -1, -75);
@@ -760,7 +722,7 @@ CG.draw = {
         CG.draw.box(gl, n, 49.0, 2, 148, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     },
 
-    /*========================= Draw Room ========================= */
+    /* ROOM */
     "walls": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.cream[0], CG.COLORS.cream[1], CG.COLORS.cream[2]);
 
@@ -858,7 +820,7 @@ CG.draw = {
         CG.g_modelMatrix = CG.popMatrix();
     },
 
-    /*========================= Draw Dynamic Elements ========================= */
+    /* DYNAMIC ELEMENTS */
     "blinds": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
         for (var i = 0; i < 8; i++) {
@@ -895,7 +857,7 @@ CG.draw = {
         CG.g_modelMatrix = CG.popMatrix();
     },
 
-    /*========================= Draw Box ========================= */
+    /* GENERIC BOX */
     "box": function(gl, n, width, height, depth, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
         CG.pushMatrix(CG.g_modelMatrix);   // Save the model matrix
         CG.initAttributeVariable(gl, CG.a_Position, n.vertexBuffer);    // Vertex coordinates
@@ -936,7 +898,7 @@ CG.draw = {
 }
 
 
-/*========================= Draw Matrix ========================= */
+/* MATRIX FOR DRAWING */
 // Array for storing the matrix(/-ces)
 CG.g_matrixStack = [];
 
@@ -955,7 +917,7 @@ CG.popMatrix = function() {
 CG.g_normalMatrix = new Matrix4();
 
 
-/*========================= Init Arrays ========================= */
+/* INITIALISE ARRAYS */
 CG.initArrayBufferForLaterUse = function(gl, data, num, type) {
     // Create a buffer object
     var buf = gl.createBuffer();
@@ -1015,13 +977,12 @@ CG.initTextures = function(gl, imagePath) {
 
     // Register the event handler to be called when image loading is completed
     img.onload = function() {
-        // NOTE: We know that we will always use power-of-two images, so we can use mips
         // https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Using_textures_in_WebGL
-
-        // Write image data to texture object
 
         // Flip the image around the horizontal axis
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+
+        // Bind and prep the texture
         gl.bindTexture(gl.TEXTURE_2D, tex);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
@@ -1037,5 +998,5 @@ CG.initTextures = function(gl, imagePath) {
 
 /* Source: https://stackoverflow.com/a/7228322/2176546, retrieved 21/03/2018 */
 CG.randomIntFromInterval = function(min, max) {
-    return Math.floor(Math.random()*(max-min+1)+min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }

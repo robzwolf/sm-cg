@@ -5,6 +5,10 @@
         <title>CG Classroom | vzbf32</title>
         <link href="res/css/style.css" rel="stylesheet" type="text/css" />
         <link rel="icon" type="image/png" href="res/favicon/favicon-32x32.png" sizes="32x32" />
+        <script>
+            // Define CG just in case anything tries to write to it early
+            window.CG = {};
+        </script>
     </head>
 
     <body onload="main()">
@@ -19,6 +23,7 @@
         <script src="res/lib/cuon-matrix.js"></script>
 
         <!-- Custom WebGL code -->
+        <script src="res/app/consts.js"></script>
         <script src="res/app/VSHADER_SOURCE.js"></script>
         <script src="res/app/FSHADER_SOURCE.js"></script>
         <script src="res/app/classroom.js"></script>

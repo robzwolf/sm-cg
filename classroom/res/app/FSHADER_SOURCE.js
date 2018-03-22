@@ -1,5 +1,5 @@
 // Fragment shader program
-var FSHADER_SOURCE = `
+CG.shaders.FSHADER_SOURCE = `
 
     #ifdef GL_ES
     precision mediump float;

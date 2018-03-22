@@ -1,0 +1,55 @@
+// Wrapper object for all our named stuff
+
+window.CG = {
+
+    "hardURL": {
+        // "sky": "res/tex/durham.png",
+        // "sky": "res/tex/rainbow.png",
+        "sky": "res/tex/long-thin.jpg",
+        "board": "res/tex/board_grad1.jpg"
+    },
+
+    "draw": {},
+
+    "NUM_CONSTS": {
+        "ambLight": {
+            "INITIAL": 0.20,
+            "MIN"   : 0.20,
+            "MAX"   : 0.50,
+            "STEP"  : 1.00,
+        },
+        "redMod": {
+            "INITIAL": 0.02
+        },
+        "greenMod": {
+            "INITIAL": 0.00
+        },
+        "blueMod": {
+            "INITIAL": -0.06,
+        },
+        "lightIntensity": {
+            "INITIAL": 0.50
+        },
+        "doorAngle": {
+            "INITIAL": 0.00
+        }
+    },
+
+    "shaders": {},
+
+    // Colour variable definitions
+    "COLORS": {
+        "green"     : [0.30, 0.80, 0.50],
+        "greyGreen" : [0.23, 0.60, 0.40],
+        "grey"      : [0.50, 0.50, 0.50],
+        "darkGrey"  : [0.40, 0.40, 0.40],
+        "black"     : [0.00, 0.00, 0.00],
+        "cream"     : [0.95, 0.90, 0.95],
+        "purple"    : [0.60, 0.30, 0.60],
+        "brown"     : [0.80, 0.60, 0.43],
+        "lightBrown": [0.66, 0.50, 0.30],
+        "sky"       : [0.40, 0.90, 0.95],
+        "white"     : [1.00, 1.00, 1.00]
+    }
+
+};
