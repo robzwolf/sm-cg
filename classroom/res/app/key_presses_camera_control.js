@@ -53,6 +53,7 @@ CG.cameraSafeUpdate = function(xChange, yChange, zChange) {
     if (newZ <= CG.NUM_CONSTS.camera.position.limits.z.MAX && newZ >= CG.NUM_CONSTS.camera.position.limits.z.MIN) {
         CG.cameraPosition[2] = newZ;
     }
+    // console.log(CG.cameraPosition);
 }
 
 /* KEY PRESSES */
@@ -64,7 +65,6 @@ CG.checkKeys = function(keys) {
         var yChange = CG.cameraOrientation[1] * CG.NUM_CONSTS.moveStep;
         var zChange = CG.cameraOrientation[2] * CG.NUM_CONSTS.moveStep;
         CG.cameraSafeUpdate(xChange, yChange, zChange);
-        console.log(CG.cameraPosition);
     }
 
     if (keys[83]) {
@@ -74,7 +74,6 @@ CG.checkKeys = function(keys) {
         var yChange = -CG.cameraOrientation[1] * CG.NUM_CONSTS.moveStep;
         var zChange = -CG.cameraOrientation[2] * CG.NUM_CONSTS.moveStep;
         CG.cameraSafeUpdate(xChange, yChange, zChange);
-        console.log(CG.cameraPosition);
     }
 
     if (keys[68]) {
@@ -83,7 +82,6 @@ CG.checkKeys = function(keys) {
         var xChange = -CG.cameraOrientation[2] * CG.NUM_CONSTS.moveStep;
         var zChange = CG.cameraOrientation[0] * CG.NUM_CONSTS.moveStep;
         CG.cameraSafeUpdate(xChange, 0, zChange);
-        console.log(CG.cameraPosition);
     }
 
     if (keys[65]) {
@@ -92,7 +90,6 @@ CG.checkKeys = function(keys) {
         var xChange = CG.cameraOrientation[2] * CG.NUM_CONSTS.moveStep;
         var zChange = -CG.cameraOrientation[0] * CG.NUM_CONSTS.moveStep;
         CG.cameraSafeUpdate(xChange, 0, zChange);
-        console.log(CG.cameraPosition);
     }
 
     if (keys[81]) {
@@ -100,7 +97,6 @@ CG.checkKeys = function(keys) {
         // Move down
         var yChange = -CG.NUM_CONSTS.moveStep;
         CG.cameraSafeUpdate(0, yChange, 0);
-        console.log(CG.cameraPosition);
     }
 
     if (keys[69]) {
@@ -108,7 +104,6 @@ CG.checkKeys = function(keys) {
         // Move up
         var yChange = CG.NUM_CONSTS.moveStep;
         CG.cameraSafeUpdate(0, yChange, 0);
-        console.log(CG.cameraPosition);
     }
 
     if (keys[79]) {
