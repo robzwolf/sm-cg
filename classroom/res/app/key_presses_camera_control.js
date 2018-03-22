@@ -48,13 +48,20 @@ CG.cameraSafeUpdate = function(xChange, yChange, zChange) {
     var newX = CG.cameraPosition[0] + xChange;
     var newY = CG.cameraPosition[1] + yChange;
     var newZ = CG.cameraPosition[2] + zChange;
-    if (newX <= CG.NUM_CONSTS.camera.position.limits.x.MAX && newX >= CG.NUM_CONSTS.camera.position.limits.x.MIN) {
+    if (CG.limitCamera) {
+
+        if (newX <= CG.NUM_CONSTS.camera.position.limits.x.MAX && newX >= CG.NUM_CONSTS.camera.position.limits.x.MIN) {
+            CG.cameraPosition[0] = newX;
+        }
+        if (newY <= CG.NUM_CONSTS.camera.position.limits.y.MAX && newY >= CG.NUM_CONSTS.camera.position.limits.y.MIN) {
+            CG.cameraPosition[1] = newY;
+        }
+        if (newZ <= CG.NUM_CONSTS.camera.position.limits.z.MAX && newZ >= CG.NUM_CONSTS.camera.position.limits.z.MIN) {
+            CG.cameraPosition[2] = newZ;
+        }
+    } else {
         CG.cameraPosition[0] = newX;
-    }
-    if (newY <= CG.NUM_CONSTS.camera.position.limits.y.MAX && newY >= CG.NUM_CONSTS.camera.position.limits.y.MIN) {
         CG.cameraPosition[1] = newY;
-    }
-    if (newZ <= CG.NUM_CONSTS.camera.position.limits.z.MAX && newZ >= CG.NUM_CONSTS.camera.position.limits.z.MIN) {
         CG.cameraPosition[2] = newZ;
     }
     // console.log(CG.cameraPosition);

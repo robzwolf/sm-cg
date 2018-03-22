@@ -44,6 +44,7 @@ window.CG = {
         "camera": {
             "position": {
                 "INITIAL": [-100, 33, -130],
+                // "INITIAL": [-100, 33, -10], // For looking at the windows
                 "limits": {
                     "x": {
                         "MIN": -190,
@@ -60,7 +61,7 @@ window.CG = {
                 }
             },
             "orientation": {
-                "INITIAL": [ 0.0,   0.0,   0.0],
+                "INITIAL": [0.0, 0.0, 0.0],
             },
             "lookSpeed": 0.7,
             "axisRotation": {
@@ -69,6 +70,7 @@ window.CG = {
                 },
                 "y": {
                     "INITIAL": -Math.PI -.8
+                    // "INITIAL": -Math.PI +1.1 // For looking at the windows
                 }
             }
         },
@@ -85,7 +87,7 @@ window.CG = {
         "darkGrey"  : [0.40, 0.40, 0.40],
         "black"     : [0.00, 0.00, 0.00],
         "cream"     : [0.95, 0.90, 0.95],
-        "wallBlue"     : [0.92, 0.98, 0.98],
+        "wallBlue"  : [0.92, 0.98, 0.98],
         "purple"    : [0.60, 0.30, 0.60],
         "brown"     : [0.80, 0.60, 0.43],
         "lightBrown": [0.66, 0.50, 0.30],
@@ -93,6 +95,9 @@ window.CG = {
         "white"     : [1.00, 1.00, 1.00]
     },
 
-    "cameraFovY": 70.0
+    "cameraFovY": 70.0,
+    // "cameraFovY": 110.0, // For loooking at the windows
+
+    "limitCamera": true,
 
 };

@@ -135,7 +135,7 @@ CG.texturedCube = function(gl, imagePath) {
 }
 
 // Coordinate transformation matrix
-CG.g_modelMatrix = new Matrix4();
+CG.g_ModelMatrix = new Matrix4();
 CG.g_mvpMatrix = new Matrix4();
 
 // Door position
