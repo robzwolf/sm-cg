@@ -13,10 +13,10 @@ window.CG = {
 
     "NUM_CONSTS": {
         "ambLight": {
-            "INITIAL": 0.250,
-            "MIN"    : 0.250,
+            "INITIAL": 0.150,
+            "MIN"    : 0.150,
             "MAX"    : 0.450,
-            "STEP"   : 0.003,
+            "STEP"   : 0.002,
         },
         "redMod": {
             "INITIAL": 0.02
@@ -34,12 +34,21 @@ window.CG = {
             "INITIAL": 0.00
         },
         "blindSize": {
-            "INITIAL"       : 20.0, // ??
+            "INITIAL"       : 20.0,
             "LOW_THRESHOLD" :  0.1,
             "MIN"           :  0.0,
             "HIGH_THRESHOLD": 20.0,
             "MAX"           : 20.0,
-            "STEP"          :  0.1
+            "STEP"          :  0.4
+        },
+        "animFreq": 5,
+        "doorAngle": {
+            "INITIAL"       : 0.4,
+            "LOW_THRESHOLD" : 0.1,
+            "MIN"           : 0.0,
+            "HIGH_THRESHOLD": 3*Math.PI/4 - 0.2,
+            "MAX"           : 3*Math.PI/4 - 0.2,
+            "STEP"          : 0.01
         }
     },
 

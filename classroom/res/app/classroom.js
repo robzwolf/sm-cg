@@ -288,7 +288,7 @@ CG.checkKeys = function(keys) {
         // "o" key
         // Open door
         clearInterval(CG.doorMove);
-        CG.doorMove = setInterval(CG.openDoor, 50);
+        CG.doorMove = setInterval(CG.openDoor, CG.NUM_CONSTS.animFreq);
         keys[79] = false;
     }
 
@@ -296,7 +296,7 @@ CG.checkKeys = function(keys) {
         // "p" key
         // Close door
         clearInterval(CG.doorMove);
-        CG.doorMove = setInterval(CG.closeDoor, 50);
+        CG.doorMove = setInterval(CG.closeDoor, CG.NUM_CONSTS.animFreq);
         keys[80] = false;
     }
 
@@ -304,7 +304,7 @@ CG.checkKeys = function(keys) {
         // "n" key
         // Open blind
         clearInterval(CG.blindMove);
-        CG.blindMove = setInterval(CG.openBlinds, 50);
+        CG.blindMove = setInterval(CG.openBlinds, CG.NUM_CONSTS.animFreq);
         keys[78] = false;
     }
 
@@ -312,7 +312,7 @@ CG.checkKeys = function(keys) {
         // "b" key
         // Close blind
         clearInterval(CG.blindMove);
-        CG.blindMove = setInterval(CG.closeBlinds, 50);
+        CG.blindMove = setInterval(CG.closeBlinds, CG.NUM_CONSTS.animFreq);
         keys[66] = false;
     }
 
@@ -367,22 +367,22 @@ CG.checkKeys = function(keys) {
 /* DYNAMIC OBJECTS */
 // Open / close doors
 CG.openDoor = function() {
-    CG.doorAngle +=0.05
-    if (CG.doorAngle >= 3*Math.PI/4 + 0.1) {
+    CG.doorAngle += CG.NUM_CONSTS.doorAngle.STEP;
+    if (CG.doorAngle >= CG.NUM_CONSTS.doorAngle.HIGH_THRESHOLD) {
         clearInterval(CG.doorMove);
     }
 }
 CG.closeDoor = function() {
-    CG.doorAngle -= 0.05
-    if (CG.doorAngle <= 0.1) {
-        CG.doorAngle = 0
+    CG.doorAngle -= CG.NUM_CONSTS.doorAngle.STEP;
+    if (CG.doorAngle <= CG.NUM_CONSTS.doorAngle.LOW_THRESHOLD) {
+        CG.doorAngle = CG.NUM_CONSTS.doorAngle.MIN;
         clearInterval(CG.doorMove);
     }
 }
 
 // Open / close blinds
-CG.blindSize = 20;
-CG.blindMove = setInterval(function () {CG.closeBlinds()}, 50);
+CG.blindSize = CG.NUM_CONSTS.blindSize.INITIAL;
+CG.blindMove = setInterval(function () {CG.openBlinds()}, 100);
 
 CG.openBlinds = function() {
     CG.blindSize -= CG.NUM_CONSTS.blindSize.STEP;
