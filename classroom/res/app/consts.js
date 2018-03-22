@@ -72,7 +72,7 @@ window.CG = {
                 }
             }
         },
-        "moveStep": 0.9
+        "moveStep": 0.6
     },
 
     "staggerLightingTimingInterval": 400,
