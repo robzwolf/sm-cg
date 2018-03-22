@@ -100,11 +100,11 @@ function main() {
     gl.uniform3f(u_LightPosArr[20], -180.0, 45.0, -135.0);
 
     // Set the ambient light level
-    gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight - 0.2);
+    gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight + 0.2);
 
     n        = CG.makeCube(gl);
     texCube  = CG.texturedCube(gl, "res/tex/durham.png");
-    texCube2 = CG.texturedCube(gl, "res/tex/board_grad1.png");
+    texCube2 = CG.texturedCube(gl, "res/tex/board_grad1.jpg");
     if (n < 0) {
         console.error("Failed to set the vertex information");
         return;
@@ -807,17 +807,17 @@ CG.drawBoards = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_Mode
     CG.g_modelMatrix.translate(0, 0, 69.5)
     CG.drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
-    CG.g_modelMatrix.translate(1, 19.5, 0);
-    CG.drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-
-    CG.g_modelMatrix.translate(0, 0, -69.5)
-    CG.drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    // CG.g_modelMatrix.translate(1, 19.5, 0);
+    // CG.drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    //
+    // CG.g_modelMatrix.translate(0, 0, -69.5)
+    // CG.drawBoard(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 }
 
 CG.drawBoard = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
     CG.pushMatrix(CG.g_modelMatrix);
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
-    CG.drawBox(gl, texCube2, 0.3, 16, 68, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawBox(gl, texCube2, 0.3, 36, 68, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
     gl.vertexAttrib3f(CG.a_Color, CG.COLORS.white[0], CG.COLORS.white[1], CG.COLORS.white[2]);
 
@@ -826,16 +826,16 @@ CG.drawBoard = function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_Model
     CG.drawBox(gl, n, 0.5, 0.5, 69, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
     // Top frame
-    CG.g_modelMatrix.translate(0, 16, 0);
+    CG.g_modelMatrix.translate(0, 36, 0);
     CG.drawBox(gl, n, 0.5, 0.5, 69, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
     // Left frame
-    CG.g_modelMatrix.translate(0, -16, 34);
-    CG.drawBox(gl, n, 0.5, 16, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.g_modelMatrix.translate(0, -36, 34);
+    CG.drawBox(gl, n, 0.5, 36, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
     // Right frame
     CG.g_modelMatrix.translate(0, 0, -68);
-    CG.drawBox(gl, n, 0.5, 16, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+    CG.drawBox(gl, n, 0.5, 36, 0.5, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
     CG.g_modelMatrix = CG.popMatrix();
 }
