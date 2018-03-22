@@ -33,9 +33,9 @@ CG.changeCameraView = function(e) {
 // Update the camera's position and orientation
 CG.updateCameraDirection = function() {
     CG.cameraOrientation = [
-        Math.cos(CG.yAxisRot)*Math.sin(CG.xAxisRot),
+        Math.cos(CG.yAxisRot) * Math.sin(CG.xAxisRot),
         Math.cos(CG.xAxisRot),
-        Math.sin(CG.yAxisRot)*Math.sin(CG.xAxisRot)
+        Math.sin(CG.yAxisRot) * Math.sin(CG.xAxisRot)
     ];
 }
 
@@ -50,6 +50,7 @@ CG.checkKeys = function(keys) {
         CG.cameraPosition[0] += CG.cameraOrientation[0] * CG.moveSpeed;
         CG.cameraPosition[1] += CG.cameraOrientation[1] * CG.moveSpeed;
         CG.cameraPosition[2] += CG.cameraOrientation[2] * CG.moveSpeed;
+        console.log(CG.cameraPosition);
     }
 
     if (keys[83]) {
@@ -58,6 +59,7 @@ CG.checkKeys = function(keys) {
         CG.cameraPosition[0] -= CG.cameraOrientation[0] * CG.moveSpeed;
         CG.cameraPosition[1] -= CG.cameraOrientation[1] * CG.moveSpeed;
         CG.cameraPosition[2] -= CG.cameraOrientation[2] * CG.moveSpeed;
+        console.log(CG.cameraPosition);
     }
 
     if (keys[68]) {
@@ -65,6 +67,7 @@ CG.checkKeys = function(keys) {
         // Move right relative to camera direction
         CG.cameraPosition[0] -= CG.cameraOrientation[2] * CG.moveSpeed;
         CG.cameraPosition[2] += CG.cameraOrientation[0] * CG.moveSpeed;
+        console.log(CG.cameraPosition);
     }
 
     if (keys[65]) {
@@ -72,18 +75,21 @@ CG.checkKeys = function(keys) {
         // Move left relative to camera direction
         CG.cameraPosition[0] += CG.cameraOrientation[2] * CG.moveSpeed;
         CG.cameraPosition[2] -= CG.cameraOrientation[0] * CG.moveSpeed;
+        console.log(CG.cameraPosition);
     }
 
     if (keys[81]) {
         // "q" key
         // Move camera down
         CG.cameraPosition[1] -= CG.moveSpeed;
+        console.log(CG.cameraPosition);
     }
 
     if (keys[69]) {
         // "e" key
         // Move camera up
         CG.cameraPosition[1] += CG.moveSpeed;
+        console.log(CG.cameraPosition);
     }
 
     if (keys[79]) {
