@@ -363,15 +363,6 @@ CG.draw = {
         CG.g_ModelMatrix = CG.popMatrix();
     },
 
-    /* DYNAMIC ELEMENTS */
-    "blinds": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
-        // gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
-        // for (var i = 0; i < 8; i++) {
-        //     CG.g_ModelMatrix.setTranslate(-22.5 - 25*i, 35 - CG.blindSize, -0.5);
-        //     CG.draw.box(gl, plainCube, 5, CG.blindSize, 0.3, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        // }
-    },
-
     "door": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, doorAngle) {
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.brown[0], CG.COLORS.brown[1], CG.COLORS.brown[2]);
         CG.g_ModelMatrix.setTranslate(0, 0, 0);

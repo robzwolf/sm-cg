@@ -64,7 +64,6 @@ CG.cameraSafeUpdate = function(xChange, yChange, zChange) {
         CG.cameraPosition[1] = newY;
         CG.cameraPosition[2] = newZ;
     }
-    // console.log(CG.cameraPosition);
 }
 
 /* KEY PRESSES */
@@ -197,16 +196,10 @@ CG.closeDoor = function() {
 
 /* DAY / NIGHT TIME */
 
-// CG.blindSize = CG.NUM_CONSTS.blindSize.INITIAL;
-
-// Open the blinds when the room first loads
+// Make sure it's day time when the room first loads
 CG.dayNightSwap = setInterval(function () {CG.makeDayTime()}, CG.NUM_CONSTS.animFreq);
 
 CG.makeDayTime = function() {
-    // CG.blindSize -= CG.NUM_CONSTS.blindSize.STEP;
-    // if (CG.blindSize < CG.NUM_CONSTS.blindSize.LOW_THRESHOLD) {
-    //     CG.blindSize = CG.NUM_CONSTS.blindSize.MIN;
-    // }
     CG.ambLight += CG.NUM_CONSTS.ambLight.STEP;
     if (CG.ambLight >= CG.NUM_CONSTS.ambLight.MAX) {
         CG.ambLight = CG.NUM_CONSTS.ambLight.MAX;
@@ -215,10 +208,6 @@ CG.makeDayTime = function() {
 }
 
 CG.makeNightTime = function() {
-    // CG.blindSize += CG.NUM_CONSTS.blindSize.STEP;
-    // if (CG.blindSize > CG.NUM_CONSTS.blindSize.HIGH_THRESHOLD) {
-    //     CG.blindSize = CG.NUM_CONSTS.blindSize.MAX;
-    // }
     CG.ambLight -= CG.NUM_CONSTS.ambLight.STEP;
     if (CG.ambLight <= CG.NUM_CONSTS.ambLight.MIN) {
         CG.ambLight = CG.NUM_CONSTS.ambLight.MIN;

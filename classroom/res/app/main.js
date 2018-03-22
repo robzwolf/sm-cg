@@ -45,7 +45,7 @@ function main() {
     }
 
     // Set the clear canvas colour and enable the depth test
-    gl.clearColor(CG.COLORS.sky[0], CG.COLORS.sky[1], CG.COLORS.sky[2], 0.7);
+    gl.clearColor(CG.COLORS.skyBlue[0], CG.COLORS.skyBlue[1], CG.COLORS.skyBlue[2], 0.7);
     gl.enable(gl.DEPTH_TEST);
 
     // Get the storage locations of uniform variables
