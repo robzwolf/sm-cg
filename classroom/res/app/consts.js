@@ -53,6 +53,20 @@ window.CG = {
         "camera": {
             "position": {
                 "INITIAL": [-100, 33, -130],
+                "limits": {
+                    "x": {
+                        "MIN": -190,
+                        "MAX": -60,
+                    },
+                    "y": {
+                        "MIN": 5,
+                        "MAX": 60
+                    },
+                    "z": {
+                        "MIN": -140,
+                        "MAX": -10
+                    }
+                }
             },
             "orientation": {
                 "INITIAL": [ 0.0,   0.0,   0.0],
