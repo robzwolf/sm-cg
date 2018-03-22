@@ -385,25 +385,25 @@ CG.blindSize = 20;
 CG.blindMove = setInterval(function () {CG.closeBlinds()}, 50);
 
 CG.openBlinds = function() {
-    CG.blindSize -= 0.1
-    if (CG.blindSize < 0.1) {
-        CG.blindSize = 0;
+    CG.blindSize -= CG.NUM_CONSTS.blindSize.STEP;
+    if (CG.blindSize < CG.NUM_CONSTS.blindSize.LOW_THRESHOLD) {
+        CG.blindSize = CG.NUM_CONSTS.blindSize.MIN;
         clearInterval(CG.blindMove);
     }
-    CG.ambLight += 0.003
-    if (CG.ambLight >= 0.4) {
-        CG.ambLight = 0.4;
+    CG.ambLight += CG.NUM_CONSTS.ambLight.STEP;
+    if (CG.ambLight >= CG.NUM_CONSTS.ambLight.MAX) {
+        CG.ambLight = CG.NUM_CONSTS.ambLight.MAX;
     }
 }
 CG.closeBlinds = function() {
-    CG.blindSize += 0.1;
-    if (CG.blindSize > 20) {
-        CG.blindSize = 20
+    CG.blindSize += CG.NUM_CONSTS.blindSize.STEP;
+    if (CG.blindSize > CG.NUM_CONSTS.blindSize.HIGH_THRESHOLD) {
+        CG.blindSize = CG.NUM_CONSTS.blindSize.MAX;
         clearInterval(CG.blindMove);
     }
-    CG.ambLight -= 0.003;
-    if (CG.ambLight <= 0) {
-        CG.ambLight = 0;
+    CG.ambLight -= CG.NUM_CONSTS.ambLight.STEP;
+    if (CG.ambLight <= CG.NUM_CONSTS.ambLight.MIN) {
+        CG.ambLight = CG.NUM_CONSTS.ambLight.MIN;
     }
 }
 
@@ -420,9 +420,9 @@ CG.staggerLighting = function() {
 // Disco light functionality
 CG.discoLights = function() {
     console.log("Disco lights");
-    CG.redMod   =  CG.randomIntFromInterval(-1, 1);//Math.random() * (2 - 0) - 1;
-    CG.greenMod =  CG.randomIntFromInterval(-1, 1);//Math.random() * (2 - 0) - 1;
-    CG.blueMod  =  CG.randomIntFromInterval(-1, 1);//Math.random() * (2 - 0) - 1;
+    CG.redMod   =  CG.randomIntFromInterval(-1, 1);
+    CG.greenMod =  CG.randomIntFromInterval(-1, 1);
+    CG.blueMod  =  CG.randomIntFromInterval(-1, 1);
 }
 
 CG.normalLights = function() {
