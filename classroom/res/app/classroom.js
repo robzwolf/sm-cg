@@ -88,7 +88,7 @@ function main() {
         gl.uniform3f(u_AmbientLight, CG.ambLight, CG.ambLight, CG.ambLight);
     }
 
-    // Set the light direction (in the world coordinate)
+    // Set the light positions, relative to the world co-ordinates
     gl.uniform3f(u_LightPosArr[1],   -20.0, 45.0,  -15.0);
     gl.uniform3f(u_LightPosArr[2],   -20.0, 45.0,  -55.0);
     gl.uniform3f(u_LightPosArr[3],   -20.0, 45.0,  -95.0);
