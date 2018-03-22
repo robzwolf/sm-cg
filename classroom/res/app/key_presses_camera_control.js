@@ -156,17 +156,6 @@ CG.checkKeys = function(keys) {
         keys[53] = false;
     }
 
-    if (keys[75]) {
-        // "k" key
-        // Disco lights on
-        CG.discoLights();
-    }
-
-    if (keys[76]) {
-        // "l" key
-        // Normal lights
-        CG.normalLights();
-    }
 }
 
 /* DYNAMIC OBJECTS */
@@ -185,9 +174,12 @@ CG.closeDoor = function() {
     }
 }
 
-// Open / close blinds
+/* OPEN / CLOSE BLINDS */
+
 CG.blindSize = CG.NUM_CONSTS.blindSize.INITIAL;
-CG.blindMove = setInterval(function () {CG.openBlinds()}, 100);
+
+// Open the blinds when the room first loads
+CG.blindMove = setInterval(function () {CG.openBlinds()}, CG.NUM_CONSTS.animFreq);
 
 CG.openBlinds = function() {
     CG.blindSize -= CG.NUM_CONSTS.blindSize.STEP;
@@ -220,19 +212,4 @@ CG.staggerLighting = function() {
     setTimeout(function() { CG.toggleSpecificLights([ 9, 10, 11, 12]); },  600);
     setTimeout(function() { CG.toggleSpecificLights([13, 14, 15, 16]); },  400);
     setTimeout(function() { CG.toggleSpecificLights([17, 18, 19, 20]); },  200);
-}
-
-// Disco light functionality
-CG.discoLights = function() {
-    console.log("Disco lights");
-    CG.redMod   =  CG.randomIntFromInterval(-1, 1);
-    CG.greenMod =  CG.randomIntFromInterval(-1, 1);
-    CG.blueMod  =  CG.randomIntFromInterval(-1, 1);
-}
-
-CG.normalLights = function() {
-    console.log("norm");
-    CG.redMod   =  0.05;
-    CG.greenMod =  0.00;
-    CG.blueMod  = -0.10;
 }
