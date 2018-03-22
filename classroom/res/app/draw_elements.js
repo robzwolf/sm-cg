@@ -183,30 +183,33 @@ CG.draw = {
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.wallBlue[0], CG.COLORS.wallBlue[1], CG.COLORS.wallBlue[2]);
 
         // Back part of door wall
-        CG.g_modelMatrix.setTranslate(-81.0, 0.0, -149.5);
+        // CG.g_modelMatrix.setTranslate(-81.0, 0.0, -149.5);
+        CG.g_modelMatrix.setTranslate(-81.0, 0.0, -0.5);
         CG.draw.box(gl, n, 62.0, 31.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
-        // Door wall top panel
-        CG.g_modelMatrix.setTranslate(-125.0, 31.0, -149.5);
+        // Top part of door wall
+        // CG.g_modelMatrix.setTranslate(-125.0, 31.0, -149.5);
+        CG.g_modelMatrix.setTranslate(-125.0, 31.0, -0.5);
         CG.draw.box(gl, n, 150.0, 44.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
-        // Door wall front panel
-        CG.g_modelMatrix.setTranslate(-164.0, 0.0, -149.5);
+        // Front part of door wall
+        // CG.g_modelMatrix.setTranslate(-164.0, 0.0, -149.5);
+        CG.g_modelMatrix.setTranslate(-164.0, 0.0, -0.5);
         CG.draw.box(gl, n, 72.0, 31.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
 
-        // Opposite door wall
-        CG.g_modelMatrix.setTranslate(-10, 0.0, -0.5);
-        for (var i = 0; i < 9; i++) {
-            CG.draw.box(gl, n, 20.0, 50.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-            if (i == 8) {
-                break;
-            }
-            for (var j = 0; j < 2; j++) {
-                CG.g_modelMatrix.setTranslate(-22.5 -25*i, 0 + 35*j, -0.5);
-                CG.draw.box(gl, n, 5.0, 15.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-            }
-            CG.g_modelMatrix.setTranslate(-10.0 -25*i, 0.0, -0.5);
-        }
+        // // Opposite door wall
+        // CG.g_modelMatrix.setTranslate(-10, 0.0, -0.5);
+        // for (var i = 0; i < 9; i++) {
+        //     CG.draw.box(gl, n, 20.0, 50.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        //     if (i == 8) {
+        //         break;
+        //     }
+        //     for (var j = 0; j < 2; j++) {
+        //         CG.g_modelMatrix.setTranslate(-22.5 -25*i, 0 + 35*j, -0.5);
+        //         CG.draw.box(gl, n, 5.0, 15.0, 1.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        //     }
+        //     CG.g_modelMatrix.setTranslate(-10.0 -25*i, 0.0, -0.5);
+        // }
 
         // Front wall
         CG.g_modelMatrix.setTranslate(-199.5, 0, -75.0);
@@ -278,17 +281,17 @@ CG.draw = {
 
     /* DYNAMIC ELEMENTS */
     "blinds": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix) {
-        gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
-        for (var i = 0; i < 8; i++) {
-            CG.g_modelMatrix.setTranslate(-22.5 - 25*i, 35 - CG.blindSize, -0.5);
-            CG.draw.box(gl, n, 5, CG.blindSize, 0.3, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
-        }
+        // gl.vertexAttrib3f(CG.a_Color, CG.COLORS.grey[0], CG.COLORS.grey[1], CG.COLORS.grey[2]);
+        // for (var i = 0; i < 8; i++) {
+        //     CG.g_modelMatrix.setTranslate(-22.5 - 25*i, 35 - CG.blindSize, -0.5);
+        //     CG.draw.box(gl, n, 5, CG.blindSize, 0.3, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
+        // }
     },
 
     "door": function(gl, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix, doorAngle) {
         gl.vertexAttrib3f(CG.a_Color, CG.COLORS.brown[0], CG.COLORS.brown[1], CG.COLORS.brown[2]);
         CG.g_modelMatrix.setTranslate(0, 0, 0);
-        CG.g_modelMatrix.translate(-128 + Math.cos(CG.doorAngle)*8, 0, -149.5 - Math.sin(CG.doorAngle)*8);
+        CG.g_modelMatrix.translate(-128 + Math.cos(CG.doorAngle)*8, 0, -0.5 - Math.sin(CG.doorAngle)*8);
         CG.g_modelMatrix.rotate(CG.doorAngle * 360 / (2*Math.PI), 0, 1, 0);
         CG.draw.box(gl, n, 16.0, 31, 0.7, viewProjMatrix, u_MvpMatrix, u_NormalMatrix, u_ModelMatrix);
     },

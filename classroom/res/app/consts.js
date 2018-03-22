@@ -45,9 +45,9 @@ window.CG = {
         "doorAngle": {
             "INITIAL"       : 0.4,
             "LOW_THRESHOLD" : 0.1,
-            "MIN"           : 0.0,
-            "HIGH_THRESHOLD": 3*Math.PI/4 - 0.2,
-            "MAX"           : 3*Math.PI/4 - 0.2,
+            "MIN"           : 0.05,
+            "HIGH_THRESHOLD": Math.PI - 0.9,
+            "MAX"           : Math.PI - 0.9,
             "STEP"          : 0.01
         },
         "camera": {
@@ -71,7 +71,7 @@ window.CG = {
             "orientation": {
                 "INITIAL": [ 0.0,   0.0,   0.0],
             },
-            "lookSpeed": 0.8,
+            "lookSpeed": 0.7,
             "axisRotation": {
                 "x": {
                     "INITIAL": Math.PI/2
