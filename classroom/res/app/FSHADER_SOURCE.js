@@ -47,8 +47,10 @@ CG.shaders.FSHADER_SOURCE = `
     uniform vec3 u_LightPos19;
     uniform vec3 u_LightPos20;
     uniform vec3 u_AmbientLight;
+
     uniform bool u_IsTexture;
     uniform sampler2D u_Sampler;
+    
     varying vec3 v_Normal;
     varying vec3 v_Position;
     varying vec4 v_Color;
@@ -96,18 +98,18 @@ CG.shaders.FSHADER_SOURCE = `
         float nDotL18 = 200.0*max(dot(lightDir18, normal), 0.0) / dot(u_LightPos18 - v_Position, u_LightPos18 - v_Position);
         float nDotL19 = 200.0*max(dot(lightDir19, normal), 0.0) / dot(u_LightPos19 - v_Position, u_LightPos19 - v_Position);
         float nDotL20 = 200.0*max(dot(lightDir20, normal), 0.0) / dot(u_LightPos20 - v_Position, u_LightPos20 - v_Position);
-        vec4 visableColor;
+        vec4 visibleColor;
         if(u_IsTexture)
         {
-            visableColor = texture2D(u_Sampler, v_TexCoord);
+            visibleColor = texture2D(u_Sampler, v_TexCoord);
         }
         else
         {
-            visableColor = v_Color;
+            visibleColor = v_Color;
         }
-        vec3 diffuse = visableColor.rgb * (u_LightColor1*nDotL1 + u_LightColor2*nDotL2 + u_LightColor3*nDotL3 + u_LightColor4*nDotL4 + u_LightColor5*nDotL5 + u_LightColor6*nDotL6 + u_LightColor7*nDotL7 + u_LightColor8*nDotL8 + u_LightColor9*nDotL9 + u_LightColor10*nDotL10 + u_LightColor11*nDotL11 + u_LightColor12*nDotL12 + u_LightColor13*nDotL13 + u_LightColor14*nDotL14 + u_LightColor15*nDotL15 + u_LightColor16*nDotL16 + u_LightColor17*nDotL17 + u_LightColor18*nDotL18 + u_LightColor19*nDotL19 + u_LightColor20*nDotL20);
-        vec3 ambient = u_AmbientLight * visableColor.rgb;
-        gl_FragColor = vec4(diffuse + ambient, visableColor.a);
+        vec3 diffuse = visibleColor.rgb * (u_LightColor1*nDotL1 + u_LightColor2*nDotL2 + u_LightColor3*nDotL3 + u_LightColor4*nDotL4 + u_LightColor5*nDotL5 + u_LightColor6*nDotL6 + u_LightColor7*nDotL7 + u_LightColor8*nDotL8 + u_LightColor9*nDotL9 + u_LightColor10*nDotL10 + u_LightColor11*nDotL11 + u_LightColor12*nDotL12 + u_LightColor13*nDotL13 + u_LightColor14*nDotL14 + u_LightColor15*nDotL15 + u_LightColor16*nDotL16 + u_LightColor17*nDotL17 + u_LightColor18*nDotL18 + u_LightColor19*nDotL19 + u_LightColor20*nDotL20);
+        vec3 ambient = u_AmbientLight * visibleColor.rgb;
+        gl_FragColor = vec4(diffuse + ambient, visibleColor.a);
     }
 
 `
