@@ -34,7 +34,7 @@ var FSHADER_SOURCE =
 '#endif\n' +
 'varying vec4 v_Color;\n' +
 'void main() {\n' +
-'  gl_FragColor = v_Color;\n' +
+'  gl_FragColor = vec4(0.0,0.0,1.0,1.0);\n' +
 '}\n';
 
 var modelMatrix = new Matrix4(); // The model matrix
