@@ -105,7 +105,7 @@ CG.shaders.FSHADER_SOURCE = `
         {
             visableColor = v_Color;
         }
-        vec3 diffuse = visableColor.rgb * (u_LightColor1*nDotL1 + u_LightColor2*nDotL2 + u_LightColor3*nDotL3 + u_LightColor4*nDotL4 + u_LightColor5*nDotL5 + u_LightColor6*nDotL6 + u_LightColor7*nDotL7 + u_LightColor8*nDotL8 + u_LightColor9*nDotL9 + u_LightColor10*nDotL10 + u_LightColor11*nDotL11 + u_LightColor12*nDotL12 + u_LightColor13*nDotL13 + u_LightColor14*nDotL14 + u_LightColor15*nDotL15 + u_LightColor16*nDotL16 + u_LightColor17*nDotL17 + u_LightColor18*nDotL18 + u_LightColor19*nDotL1+ u_LightColor20*nDotL20);
+        vec3 diffuse = visableColor.rgb * (u_LightColor1*nDotL1 + u_LightColor2*nDotL2 + u_LightColor3*nDotL3 + u_LightColor4*nDotL4 + u_LightColor5*nDotL5 + u_LightColor6*nDotL6 + u_LightColor7*nDotL7 + u_LightColor8*nDotL8 + u_LightColor9*nDotL9 + u_LightColor10*nDotL10 + u_LightColor11*nDotL11 + u_LightColor12*nDotL12 + u_LightColor13*nDotL13 + u_LightColor14*nDotL14 + u_LightColor15*nDotL15 + u_LightColor16*nDotL16 + u_LightColor17*nDotL17 + u_LightColor18*nDotL18 + u_LightColor19*nDotL19 + u_LightColor20*nDotL20);
         vec3 ambient = u_AmbientLight * visableColor.rgb;
         gl_FragColor = vec4(diffuse + ambient, visableColor.a);
     }
