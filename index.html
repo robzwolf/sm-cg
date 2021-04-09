@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>CG Classroom | vzbf32</title>
+        <link href="res/css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="icon" type="image/png" href="res/favicon/favicon-32x32.png" sizes="32x32" />
+        <script>
+            // Define CG globally so our scripts can append functions etc. to it
+            window.CG = {};
+        </script>
+    </head>
+
+    <body onload="main()">
+        <canvas id="classroom" class="hidden">
+            Please use a browser that supports HTML5.
+        </canvas>
+
+        <div id="loading-overlay">
+            <div>
+                <h1>Loading, please wait...</h1>
+                <h2>- vzbf32</h2>
+            </div>
+        </div>
+
+        <!-- Textures -->
+        <img class="hidden" src="res/tex/wide_sky_tiled.jpg" />
+        <img class="hidden" src="res/tex/board_grad1.jpg" />
+        <img class="hidden" src="res/tex/carpet.jpg" />
+        <img class="hidden" src="res/tex/ceiling.jpg" />
+        <img class="hidden" src="res/tex/door.jpg" />
+        <img class="hidden" src="res/tex/dark_carpet.jpg" />
+        <img class="hidden" src="res/tex/corridor_floor.jpg" />
+        <img class="hidden" src="res/tex/do_not_leave.jpg" />
+        <img class="hidden" src="res/tex/book_case_wood.jpg" />
+        <img class="hidden" src="res/tex/du.jpg" />
+
+        <!-- WebGL libraries -->
+        <script src="res/lib/webgl-utils.js"></script>
+        <script src="res/lib/webgl-debug.js"></script>
+        <script src="res/lib/cuon-utils.js"></script>
+        <script src="res/lib/cuon-matrix.js"></script>
+
+        <!-- Custom WebGL code -->
+        <script src="res/app/consts.js"></script>
+        <script src="res/app/VSHADER_SOURCE.js"></script>
+        <script src="res/app/FSHADER_SOURCE.js"></script>
+        <script src="res/app/draw_elements.js"></script>
+        <script src="res/app/main.js"></script>
+        <script src="res/app/engine.js"></script>
+        <script src="res/app/key_presses_camera_control.js"></script>
+    </body>
+</html>
